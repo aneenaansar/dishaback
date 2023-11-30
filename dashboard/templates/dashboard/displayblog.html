@@ -1,0 +1,124 @@
+{% extends 'dashboard/base.html' %}
+
+{% block title %} Rema devi | Dashboard {% endblock %}
+{% block content %}
+
+
+{% load static %}
+
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .blog-container {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 80%;
+            margin: auto;
+            padding: 20px;
+            box-sizing: border-box;
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #FFC8B9;
+            color: black;
+        }
+
+        tr:hover {
+            background-color: #f5f5f5;
+        }
+
+        .blog-actions {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+
+        .add-blog-btn {
+            padding: 10px;
+            background-color: #fcb9a7;
+            color: black;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .add-blog-btn:hover {
+            background-color: #fa9d83;
+        }
+
+        .edit-btn, .delete-btn {
+            padding: 8px;
+            background-color: rgb(255, 183, 183);
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            width: 20px;
+        }
+
+        .edit-btn:hover, .delete-btn:hover {
+            background-color: rgb(255, 131, 131);
+        }
+        .diving{
+            display: flex;
+            justify-content: space-between;
+        }
+    </style>
+
+<div class="blog-container">
+    <div class="diving">
+        <h2>Blogs</h2>
+        <div class="blog-actions">
+            <a href="{% url 'dashboard:addblog' %}"><button class="add-blog-btn">Add Blog</button></a>
+        </div>
+    </div>
+    
+    <table>
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Heading</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>2023-01-01</td>
+                <a href="{% url 'dashboard:addblog' %}"><td>Sample Blog Heading</td></a>
+                <td>
+                    <a href="{% url 'dashboard:addblog' %}"><img class="edit-btn" src="{% static 'image/edit-246.png' %}" alt=""></a>
+                    
+                    <img class="delete-btn" src="{% static 'image/3405244.png' %}" alt="">
+
+                </td>
+            </tr>
+           
+            <!-- Add more rows as needed -->
+        </tbody>
+    </table>
+
+    
+</div>
+{% endblock %}
+
+

@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %} Rema devi  {% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'output.css' %}">
+    <link rel="stylesheet" href="'https://fonts.googleapis.com/css2?family=Artifika&family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap'">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Artifika&family=Montagu+Slab:opsz,wght@16..144,200&family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'owl.carousel.css' %}">
+    <link rel="stylesheet" href="{% static 'owl.theme.default.min.css' %}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{% static 'favicon/apple-touch-icon.png' %}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'favicon/favicon-32x32.png' %}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'favicon/favicon-16x16.png' %}">
+    <link rel="manifest" href="{% static 'favicon/site.webmanifest' %}">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+</head>
+<body class="mx-20 ipad_min:mx-10 mobile:mx-6">
+    <style>
+        .slidediv {
+        width: 0%;
+        overflow: hidden;
+        transition: width 0.3s ease;
+        z-index: 99;
+      }
+      
+      .slidediv.show {
+        width: 75% !important;
+        overflow: visible !important;
+        z-index: 99;
+      }
+    </style>
+
+    <!-- header starts here -->
+    <header>
+        <div class="flex justify-between my-8">
+            <h1 class="font-artifika text-2xl nav-link"><a href="{% url 'main:index' %}">Rema Devi</a></h1>
+            <div class="hidden ipad_min:block mobile:block phone_max:block">
+                <img id="menuicon" src="{% static 'image/Menu.svg' %}" alt="">
+            </div>
+            <div class="flex gap-10 ipad_min:hidden mobile:hidden phone_max:hidden ">
+                <nav>
+                    <ul class="flex gap-7 text-lg font-montasorrat my-2">
+                        <li><a href="{% url 'main:consult' %}" class="nav-link">Consultation</a></li>
+                        <li><a href="{% url 'main:about' %}" class="nav-link">About</a></li>
+                        <li><a href="{% url 'main:blog' %}" class="nav-link">Blog</a></li>
+                    </ul>
+                </nav>
+                
+                <button class="bg-primary py-2 px-6 font-montasorrat rounded-full font-medium hover:bg-black hover:text-primary  transition ease-in-outnp duration-75" id="up">
+                    <a href="javascript:void(0)">Make an appointment</a>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- popup starts here -->
+    <div class="flex fixed left-[-500px] popup z-[9999999]" id="pop">
+        <form action="{% url 'main:appointment' %}" method="POST" id="appointment-form" class="bg-light w-[30rem] p-10 rounded-lg ipad_min:w-full mobile:w-full ">
+            {% csrf_token %}
+        
+            <label for="name" class="block text-base">Name</label>
+            {% comment %} <input type="text" >  {% endcomment %}
+            <div id="name" name="name">
+                {{ form.name }}
+            </div>
+        
+        
+            <label for="email" class="block text-base mt-3">E-mail</label>
+            {% comment %} <input type="text" id="email" name="email" class="border border-gray-800 rounded p-2 w-full"> {% endcomment %}
+            <div id="email" name="email" >
+                {{ form.email }}
+            </div> 
+            
+            <label for="contact" class="block text-base mt-3">Contact Number</label>
+            {% comment %} <input type="text" id="contact" name="contact" class="border border-gray-800 rounded p-2 w-full"> {% endcomment %}
+            <div id="contact" name="contact" value="+91">
+                {{ form.contact }}
+            </div>
+        
+            <label for="purpose" class="block text-base mt-3">Purpose</label>
+            {% comment %} <input type="text" id="purpose" name="purpose" class="border border-gray-800 rounded p-8 w-full"> {% endcomment %}
+            <div id="purpose" name="purpose">
+                {{ form.purpose }}
+            </div>
+        
+            <label for="date" class="block text-base mt-3">Date</label>
+            {% comment %} <input type="text" id="date" name="date" class="border border-gray-800 rounded p-2 w-full"> {% endcomment %}
+            <div id="date" name="date">
+                {{ form.date }}
+            </div>
+
+
+            <div class="flex justify-between gap-3">
+                {% comment %} <div class="my-12 flex justify-center">
+                    <button class="border border-black w-[10rem] h-[3rem] ipad_min:w-28 ipad_min:h-10 read mobile:h-10 mobile:w-28 close-button" id="cancelbutton">close</button>
+                </div> {% endcomment %}
+
+                <div class="my-12 flex justify-center">
+                    <button class="border border-black w-[10rem] h-[3rem] read" id="cancelbutton"><a href="javascript:void(0)">close</a></button>
+                </div>
+                <div class="my-12 flex justify-center ipad_min:hidden mobile:hidden">
+                    <button type="submit" class="border w-[10rem] h-[3rem] rounded-3xl bg-primary">Book Now</button>
+                </div>
+                <div class="my-12  justify-center hidden ipad_min:block mobile:hidden ">
+                    <button type="submit" class="border w-[10rem] h-[3rem] rounded-3xl bg-primary ipad_min:w-28 ipad_min:h-10 mobile:h-10 mobile:w-28">Book</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <!-- popup end here -->
+    <!-- menu bar starts here -->
+    <div id="slidemenu" class="slidediv py-8 items-center text-center right-0 top-0 fixed h-full bg-black z-[99]">
+        <div class="bg-black" >
+            <div class="my-20">
+                <a href="{% url 'main:index' %}"><h1 class="font-artifika text-3xl text-[2rem] text-baseprimary">Rema Devi</h1></a>
+            </div>
+            <div>
+                <nav>
+                    <ul class=" text-xl font-montserrat text-baseprimary">
+                        <a href="{% url 'main:index' %}"><li>Home</li></a>
+                        <a href="{% url 'main:consult' %}"><li class="my-6">Consultation</li></a>
+                        <a href="{% url 'main:about' %}"><li>About</li></a>
+                        <a href="{% url 'main:blog' %}"><li class="my-6">Blog</li></a>
+                    </ul>
+                </nav>
+            </div>
+            <div id="closeicon" class="flex justify-center my-20">
+                <img src="{% static 'image/xmark.svg' %}" alt="">
+            </div>
+        </div>
+    </div>
+    <!-- menu bar ends here -->
+    {% block content %}
+    {% endblock %}
+    <footer>
+        <div class="bg-black flex justify-evenly py-20 rounded-3xl my-16 ipad_min:grid ipad_min:px-6 mobile:grid mobile:px-6 phone_max:grid phone_max:px-8">
+            <div>
+                <h1 class="text-primary text-3xl font-artifika ipad_min:hidden mobile:hidden ipad:hidden">Rema Devi</h1>
+                <div class="flex my-5 gap-5 ipad_min:hidden mobile:hidden ipad:hidden">
+                    <img src="{% static 'image/instagram.svg' %}" alt="">
+                    <img src="{% static 'image/facebook.svg' %}" alt="">
+                </div>
+            </div>
+            <div>
+                <h1 class="text-primary underline font-montserrat text-xl  ">Quick Links</h1>
+                <nav>
+                    <ul class="my-5">
+                        <li class="text-baseprimary font-montserrat text-lg mb-4 hover:text-primary "><a href="{% url 'main:index' %}"></a>Home</li>
+                        <li class="text-baseprimary font-montserrat text-lg hover:text-primary "><a href="{% url 'main:consult' %}">Consultation</a></li>
+                        <li class="text-baseprimary font-montserrat text-lg my-5 hover:text-primary "><a href="{% url 'main:about' %}">About</a></li>
+                        <li class="text-baseprimary font-montserrat text-lg hover:text-primary "><a href="{% url 'main:blog' %}">Blog</a></li>
+                    </ul>
+                </nav>
+            </div>
+            <div>
+                <h1  class="text-primary underline font-montserrat text-xl ipad_min:text-xl mobile:text-xl ">How to reach us</h1>
+                <div class="flex gap-5 my-5 text-lg ipad_min:text-base mobile:text-base">
+                    <img src="{% static 'image/call.svg' %}" alt="">
+                    <p class="text-baseprimary font-montserrat hover:text-primary  ">9745640301</p>
+                    <p class="text-baseprimary font-montserrat hover:text-primary  ">9995045525</p>
+                </div>
+                <div class="flex gap-5 text-lg ipad_min:text-base mobile:text-base " >
+                    <img src="{% static 'image/Envelope.svg' %}" alt="">
+                    <p class="text-baseprimary font-montserrat hover:text-primary  ">remaagrasala18@gmail.com</p>
+                </div> 
+                <div class="flex gap-5 my-5 text-lg ipad_min:text-base mobile:text-base">
+                    <img src="{% static 'image/location.svg' %}" alt="">
+                    <p class="text-baseprimary font-montserrat hover:text-primary  ">South Nada, Kodungallur, Thrissur,
+                        Kerala-680 664</p>
+                </div>
+            </div>
+            <div>
+                <button class="bg-primary  text-black py-2 px-8 read ipad_min:hidden mobile:hidden ipad:hidden hover:bg-[#e98468]" id="uping">
+                    <a href="javascript:void(0)" class="text-xl ipad_min:text-lg mobile:text-lg">Book an appointment</a>
+                </button>
+            </div>
+             <div class="hidden ipad_min:block mobile:block">
+                <h1 class="text-primary underline font-montserrat text-xl ipad_min:text-base mobile:text-base">Social Media</h1>
+                <div class="flex my-5 gap-4 hover:text-primary ">
+                    <img src="{% static 'image/instagram.svg' %}" alt="">
+                    <img src="{% static 'image/facebook.svg' %}" alt="">
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- footer ends here -->
+
+    <script>
+        const popup = document.getElementById('pop');
+        const button = document.getElementById('up');
+        const button2 = document.getElementById('uping');
+        const button3 = document.getElementById("respo")
+        const cancelbutton = document.getElementById("cancelbutton")
+        let isLeft = true;
+
+        button.addEventListener('click', () => {
+            if (isLeft) {
+                popup.style.left = '50%';
+            }else {
+                popup.style.left = '-300px';
+            }
+            isLeft = !isLeft;
+        });
+
+        button2.addEventListener('click', () => {
+            if (isLeft) {
+                popup.style.left = '50%';
+            }else {
+                popup.style.left = '-300px';
+            }
+            isLeft = !isLeft;
+        });
+        button3.addEventListener('click', () => {
+            if (isLeft) {
+                popup.style.left = '50%';
+            }else {
+                popup.style.left = '-300px';
+            }
+            isLeft = !isLeft;
+        });
+        cancelbutton.addEventListener('click', () => {
+            if (isLeft) {
+                popup.style.left = '50%';
+            }else {
+                popup.style.left = '-300px';
+            }
+            isLeft = !isLeft;
+        });
+    </script>
+
+    <script src="https://code.jquery.com/jquery-3.7.0.js" integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM=" crossorigin="anonymous"></script>
+    <script src="{% static 'owl.carousel.min.js' %}"></script>
+    <!-- Add this script section after including owl.carousel.min.js -->
+<script>
+    $(document).ready(function(){
+      $('.owl-carousel').owlCarousel({
+        loop:true,
+        margin:10,
+        nav:true,
+        autoplay:true, // Add this line to enable autoplay
+        autoplayTimeout:4000, // Set the autoplay timeout in milliseconds (e.g., 5000 for 5 seconds)
+        responsive:{
+          0:{
+            items:1
+          },
+          600:{
+            items:1
+          },
+          1000:{
+            items:3
+          }
+        }
+      });
+    });
+  </script>
+  
+
+    <script src="{% static 'script.js' %}"></script>
+</body>
+</html>

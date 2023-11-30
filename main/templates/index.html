@@ -1,0 +1,217 @@
+{% extends 'base.html' %}
+
+{% block title %} Rema devi | Home {% endblock %}
+{% block content %}
+
+{% load static %}
+
+
+
+    <!-- menu bar starts here -->
+    <div id="slidemenu" class="slidediv py-8 items-center text-center right-0 top-0 fixed h-full bg-black z-[99]">
+        <div class="bg-black" >
+            <div class="my-20">
+                <a href="{% url 'main:index' %}"><h1 class="font-artifika text-3xl text-[2rem] text-baseprimary">Rema Devi</h1></a>
+            </div>
+            <div>
+                <nav>
+                    <ul class=" text-xl font-montserrat text-baseprimary">
+                        <a href="{% url 'main:index' %}"><li>Home</li></a>
+                        <a href="{% url 'main:consult' %}"><li class="my-6">Consultation</li></a>
+                        <a href="{% url 'main:about' %}"><li>About</li></a>
+                        <a href="{% url 'main:blog' %}"><li class="my-6">Blog</li></a>
+                    </ul>
+                </nav>
+            </div>
+            <div id="closeicon" class="flex justify-center my-20">
+                <img src="{% static 'image/xmark.svg' %}" alt="">
+            </div>
+        </div>
+    </div>
+    <!-- menu bar ends here -->
+
+    <!-- spotlight starts here -->
+    <section class="my-20 ipad_min:my-10 mobile:my-10">
+        <!-- <div class="ipad_min:flex ipad_min:block hidden ipad_min:my-4 mobile:block mobile:flex mobile:my-2  ">
+            <img src="./image/Union(1).svg" alt="">
+            <img src="./image/Union-1(1).svg" alt="">
+            <img src="./image/Union-2(1).svg" alt="">
+        </div> -->
+        <div class="flex justify-center">
+            <div class="ipad_min:hidden mobile:hidden animate__animated animate__fadeInDown"><img src="{% static 'image/Union.svg' %}" alt=""></div>
+            <div class="text-center ipad_min:text-left mobile:text-left animate__animated animate__fadeInUp">
+                <h1 class="font-montasorrat text-5xl my-6 ipad_min:text-xl ipad_min:my-0 mobile:text-xl mobile:my-0 phone_max:text-4xl">Find <span class="font-artifika">Peace of Mind</span> with</h1>
+                <h1 class="font-artifika text-5xl ipad_min:text-xl mobile:text-xl phone_max:text-4xl "> Professional Counselling <span class="font-montasorrat">Services</span></h1>
+                <p class="text-lg text-center my-6 ipad_min:text-base ipad_min:text-start mobile:text-base mobile:text-start">With over 30 years of experience in teaching and counselling, Rema Devi can help you overcome your challenges, achieve your goals, and live your best life.</p>
+            </div>
+            <div class="ipad_min:hidden mobile:hidden animate__animated animate__fadeInDown"><img src="{% static 'image/Union-1.svg' %}" alt=""></div>
+        </div>
+        <div class="hidden ipad_min:block mobile:block "><img src="{% static 'image/Union-3(1).svg' %}" alt=""></div>
+        <div class="flex justify-center animate__animated animate__fadeInUp">
+            <img src="{% static 'image/4328704_11 1.png' %}" alt="">
+        </div>
+        <div class="absolute left-[86rem] top-[34rem] ipad_min:hidden mobile:hidden animate__animated animate__fadeInUp">
+            <img src="{% static 'image/Subtract.svg' %}" alt="">
+            <img class="my-4 mx-2" src="{% static 'image/Union-2.svg' %}" alt="">
+            <img class="mx-3" src="{% static 'image/Union-3.svg' %}" alt="">
+        </div>
+        <div>
+            <button class="bg-primary rounded-full w-full py-2 font-medium hover:bg-black hover:text-primary transition ease-in-outnp duration-75 hidden ipad_min:block mobile:block phone_max:block ipad:block" id="respo">
+                <a href="javascript:void(0)">Book an appointment</a>
+            </button>
+            <button class="w-full border border-black rounded-full my-6 py-2 font-medium hover:bg-black hover:text-primary hover:border-primary transition ease-in-outnp duration-75 hidden ipad_min:block mobile:block phone_max:block ipad:block">
+                <a href="{% url 'main:consult' %}">Consultation</a>
+            </button>
+        </div>
+        
+    </section> 
+    <!-- spotlight ends here -->
+
+    <!-- grid starts here -->
+    <section class="ipad_min:hidden mobile:hidden phone_max:hidden ipad:hidden ">
+        <div class="flex flex-wrap justify-between gap-7">
+            <div class=" w-[30%] bg-primary items-start h-40 p-8 rounded-xl font-montasorrat hover:bg-baseprimary transition-transform transform hover:scale-105">
+                <h1 class="font-semibold">Pre-Marital Counselling</h1>
+                <p class="my-3">Marriage made easy with our counselling service.</p>
+            </div>
+            <div class="w-[30%] bg-baseprimary items-start h-40 p-8 rounded-xl font-montasorrat hover:bg-primary transition-transform transform hover:scale-105">
+                <h1 class="font-semibold">Family Counselling</h1>
+                <p class="my-3">Child & adolescent growth with our counselling service.</p>
+            </div>
+            
+            <div class=" w-[30%] bg-primary items-start h-40 p-8 rounded-xl font-montasorrat hover:bg-baseprimary transition-transform transform hover:scale-105 ">
+                <h1 class="font-semibold">Child & Adolescent Counselling</h1>
+                <p class="my-3">School success with our counselling service.</p>
+            </div>
+            <div class=" w-[23%] bg-baseprimary items-start h-40 p-8 rounded-xl font-montasorrat hover:bg-primary transition-transform transform hover:scale-105  ">
+                <h1 class="font-semibold">School Counselling</h1>
+                <p class="my-3">School success with our counselling service.</p>
+            </div>
+            <div class=" w-[23%] bg-primary items-start h-40 p-8 rounded-xl font-montasorrat hover:bg-baseprimary transition-transform transform hover:scale-105 ">
+                <h1 class="font-semibold">Group Counselling</h1>
+                <p class="my-3">Group support with our counselling service.</p>
+            </div>
+            <div class=" w-[23%] bg-baseprimary items-start h-40 p-8 rounded-xl font-montasorrat hover:bg-primary transition-transform transform hover:scale-105 ">
+                <h1 class="font-semibold">Grief Therapy</h1>
+                <p class="my-3">Heal from your loss with our therapy.</p>
+            </div>
+            <div class="w-[23%] bg-primary items-start h-40 p-8 rounded-xl font-montasorrat ipad:h-52 hover:bg-baseprimary transition-transform transform hover:scale-105 ">
+                <h1 class="font-semibold">Motivational Sessions</h1>
+                <p class="my-3">Boost your motivation with our motivational sessions</p>
+            </div>
+            <div class=" w-[30%] bg-baseprimary items-start h-40 p-8 rounded-xl font-montasorrat hover:bg-primary transition-transform transform hover:scale-105 ">
+                <h1 class="font-semibold">Teacher Development Programmes</h1>
+                <p class="my-3">Teach better with our programmes</p>
+            </div>
+            <div class=" w-[30%] bg-primary items-start h-40 p-8 rounded-xl font-montasorrat hover:bg-baseprimary transition-transform transform hover:scale-105 ">
+                <h1 class="font-semibold">Awareness Programs</h1>
+                <p class="my-3">Learn more about mental health with our awareness programs.</p>
+            </div>
+            <div class=" w-[30%] bg-baseprimary items-start h-40 p-8 rounded-xl font-montasorrat hover:bg-primary transition-transform transform hover:scale-105 ">
+                <h1 class="font-semibold">Career Guidance</h1>
+                <p class="my-3">Find your career path with our career guidance service.</p>
+            </div>
+        </div>
+    </section>
+    <!-- grid ends here -->
+
+    <!-- About us start here -->
+    <section>
+        <div class="flex gap-14 my-24 ipad_min:grid ipad_min:my-14 mobile:grid mobile:my-14 phone_max:grid phone_max:my-7 ipad:grid">
+            <div>
+                <div class="ipad_min:w-full mobile:w-full ipad:flex ipad:justify-center"><img src="{% static 'image/Rectangle 1549(1).png' %}" alt=""></div>
+                <div class="ipad_min:hidden mobile:hidden">
+                    <button class="bor w-[25rem] h-[3rem] my-6 ipad_min:w-full hover:bg-primary hover:border-none ipad:hidden">
+                        <a href="{% url 'main:about' %}">READ MORE</a>
+                    </button>
+                </div>
+            </div>
+            <div>
+                <h1 class="font-artifika text-4xl ipad_min:text-xl mobile:text-xl">Rema Devi A</h1>
+                <h2 class="font-montserrat text-xl my-1 text-gray-600 ipad_min:text-lg mobile:text-lg">Counselling Psychologist</h2>
+                <p class="font-montserrat text-lg my-8 ipad_min:text-sm mobile:text-sm">Hello, and welcome to my counselling centre. My name is Rema Devi, and I am a counselling psychologist with a Ph.D. degree in Counselling Psychology. I have over 30  years of experience in teaching and counselling, and I am passionate about helping  people achieve their personal and professional goals.</p>
+                <p class="font-montserrat text-lg ipad_min:hidden mobile:hidden ">I started my counselling centre at home in 2014, and since then I have been providing professional and compassionate counselling services for individuals, couples, families, and groups. I offer a range of counselling services, including pre-marital counselling, family counselling/therapy, child & adolescent counselling, school counselling, group counselling, awareness programs, motivational sessions, career guidance, teacher  development programmes, and grief therapy.</p>
+                <div class="flex gap-12 my-8">
+                    <div class="flex items-center gap-4">
+                        <div class="bg-light p-3 rounded-xl ipad_min:hidden mobile:hidden"><img src="{% static 'image/Idea.svg' %}" alt=""></div>
+                        <div>
+                            <h1 class="text-4xl font-semibold font-montserrat ipad_min:text-lg mobile:text-lg">30+</h1>
+                            <p class="font-montserrat text-lg ipad_min:text-base mobile:text-base">Years of Experience</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-4">
+                        <div class="bg-light p-3 rounded-xl ipad_min:hidden mobile:hidden"><img src="{% static 'image/Happy face.svg' %}" alt=""></div>
+                        <div>
+                            <h1 class="text-4xl font-semibold font-montserrat ipad_min:text-lg mobile:text-lg">175+</h1>
+                            <p class="font-montserrat text-lg ipad_min:text-base mobile:text-base">Happy clients</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-4">
+                        <div class="bg-light p-3 rounded-xl ipad_min:hidden mobile:hidden"><img src="{% static 'image/Medal.svg' %}" alt=""></div>
+                        <div>
+                            <h1 class="text-4xl font-semibold font-montserrat ipad_min:text-lg mobile:text-lg">3</h1>
+                            <p class="font-montserrat text-lg ipad_min:text-base mobile:text-base">Award gained</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="hidden ipad_min:block mobile:block">
+                <button class="bor w-[25rem] h-[3rem] ipad_min:my-3 ipad_min:w-full mobile:my-3 mobile:w-full ">
+                    <a href="{% url 'main:about' %}">Read more</a>
+                </button>
+            </div>
+        </div>
+    </section>
+    <!-- about us ends here -->
+
+    <!-- logo section starts here -->
+    <section>
+        <div class="bg-baseprimary flex items-center gap-6 rounded-xl px-10 py-10 ipad_min:grid mobile:grid phone_max:grid ipad_min:px-5 ipad_min:py-5 mobile:px-5 mobile:py-5 phone_max:p-7 ">
+            <div>
+                <img class="h-72 w-[50rem] phone_max:w-full phone_max:h-full ipad:w-[100rem]" src="{% static 'image/image6 1.png' %}" alt="">
+            </div>
+            <div>
+                <h1 class="font-artifika text-3xl my-2 ipad_min:text-xl mobile:text-xl">New Disha</h1>
+                <p class="font-montserrat text-lg ipad_min:text-base mobile:text-base">I started my counselling centre at home in 2014, and since then I have been providing professional and compassionate counselling services for individuals, couples, families, and groups. I offer a range of counselling services, including pre-marital counselling, family counselling/therapy, child & adolescent counselling, school counselling, group counselling, awareness programs, motivational sessions, career guidance, teacher development programmes, and grief therapy.</p>
+            </div>
+        </div>        
+    </section>
+    <!-- logo section ends here -->
+
+    <!-- cliends starts here -->
+    <section class="my-24">
+        <div class="flex justify-center items-start gap-6 ipad_min:gap-2 mobile:gap-2">
+            <div>
+                <img src="{% static 'image/“.svg' %}" alt="">
+            </div>
+            <div>
+                <h1 class="font-artifika text-4xl ipad_min:text-xl mobile:text-xl">See What Our Clients Say About Us</h1>
+            </div>
+            <div>
+                <img src="{% static 'image/“-1.svg' %}" alt="">
+            </div>
+        </div>
+        <div class="flex justify-center my-20 fitems-center gap-8 owl-carousel ipad_min:my-6 mobile:my-6">
+
+            <div>
+                <div class="p-8 self-stretch bg-baseprimary rounded-xl hover:bg-primary transition ease-in-outnp duration-100">
+                    <p class="font-montserrat text-lg ipad_min:text-base mobile:text-base">“I highly recommend Rema Devi’s counselling services to anyone who is looking for guidance and support in their personal or professional life. She is very knowledgeable, experienced, and friendly. She helped me improve my self-esteem, communication skills, and career prospects. She is truly a blessing in disguise.”</p>
+                    <h2 class="font-montserrat text-lg font-medium mt-4 ipad_min:text-base mobile:text-base">Lakshmi V</h2>
+                </div>
+            </div>
+            <div>
+                <div class="p-8  self-stretch bg-baseprimary rounded-xl hover:bg-primary">
+                    <p class="font-montserrat text-lg ipad_min:text-base mobile:text-base">“Rema Devi is an excellent counsellor with a lot of experience and expertise. She helped me and my daughter with our family and personal issues. She also conducted some awareness programmes and motivational sessions for our community, communication skills, and career prospects. She is truly a blessing in disguise..”</p>
+                    <h2 class="font-montserrat text-lg font-medium mt-4 ipad_min:text-base mobile:text-base">Rajesh M</h2>
+                </div>
+            </div>
+            <div>
+                <div class="p-8 self-stretch bg-baseprimary rounded-xl hover:bg-primary">
+                    <p class="font-montserrat text-lg ipad_min:text-base mobile:text-base">“Rema Devi helped me a lot with my stress and anxiety. She is calm, supportive, and empathetic. She taught me how to relax, meditate, and cope with my negative thoughts.communication skills, and career prospects. She is truly a blessing in disguise. She helped me and my daughter with our family and personal issues.”</p>
+                    <h2 class="font-montserrat text-lg font-medium mt-4 ipad_min:text-base mobile:text-base">Anil S</h2>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- clients ends here -->
+{% endblock %}

@@ -1,0 +1,106 @@
+
+{% extends 'dashboard/base.html' %}
+
+{% block title %} Rema devi | Dashboard {% endblock %}
+{% block content %}
+
+
+{% load static %}
+
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .patient-details {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .patient-details input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .patient-details select {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .patient-details button {
+            width: 100%;
+            padding: 10px;
+            background-color: #ff9c80;
+            color: black;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin-top: 15px;
+        }
+
+        .patient-details button:hover {
+            background-color: #b85236;
+            color: white;
+        }
+        .hello{
+            display: flex;
+            gap: 2rem;
+        }
+        .hii{
+            display: flex;
+            gap: 2rem;
+        }
+        .holaa{
+            display: flex;
+            gap: 2rem; 
+        }
+    </style>
+
+
+<div class="patient-details">
+    <h2>Patient Details</h2>
+    <form>
+        <div class="hello">
+            <input type="text" name="firstName" placeholder="First Name" required>
+            <input type="text" name="lastName" placeholder="Last Name" required>
+        </div>
+        <div class="hii">
+            <input type="date" name="dob" placeholder="Date of Birth" required>
+            <select name="gender" required>
+                <option value="" disabled selected>Select Gender</option>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+                <option value="other">Other</option>
+            </select>
+        </div>
+        <div class="holaa">
+            <input type="text" name="address" placeholder="Address" required>
+            <input type="text" name="phoneNumber" placeholder="Phone Number" required>
+        </div>
+        <div class="holaa">
+            <input type="text" name="patient id" placeholder="Patient ID" required>
+            <input type="text" name="remarks" placeholder="Remarks" required>
+        </div>
+        
+       
+        
+
+        <button type="submit">Submit</button>
+    </form>
+</div>
+{% endblock %}
+
+

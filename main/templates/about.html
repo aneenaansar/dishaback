@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+
+{% block title %} Rema devi | About {% endblock %}
+
+{% block content %}
+
+{% load static %}
+
+   
+
+    <!-- menu bar starts here -->
+    <div id="slidemenu" class="slidediv py-8 items-center text-center right-0 top-0 fixed h-full bg-black z-[9999999]">
+        <div class="bg-black" >
+            <div class="my-20">
+                <a href="{% url 'main:index' %}"><h1 class="font-artifika text-3xl text-[2rem] text-baseprimary">Rema Devi</h1></a>
+            </div>
+            <div>
+                <nav>
+                    <ul class=" text-xl font-montserrat text-baseprimary">
+                        <a href="{% url 'main:index' %}"><li>Home</li></a>
+                        <a href="{% url 'main:consult' %}"><li class="my-6">Consultation</li></a>
+                        <a href="{% url 'main:about' %}"><li>About</li></a>
+                        <a href="{% url 'main:blog' %}"><li class="my-6">Blog</li></a>
+                    </ul>
+                </nav>
+            </div>
+            <div id="closeicon" class="flex justify-center my-20">
+                <img src="{% static 'image/xmark.svg' %}" alt="">
+            </div>
+        </div>
+    </div>
+    <!-- menu bar ends here -->
+
+    <!-- about stats here -->
+    <section>
+        <div class="flex gap-8 ipad_min:grid mobile:grid phone_max:grid">
+            <div class="animate__animated animate__fadeInLeft">
+                <div><img src="{% static 'image/Rectangle 1549-1(1).png' %}" alt=""></div>
+                <div class="cor bg-baseprimary p-6 font-montasorrat my-10 ipad_min:hidden mobile:hidden phone_max:hidden">
+                    <p>My counselling approach is based on the principles of humanistic psychology, which emphasizes the inherent worth and potential of every person. I believe that everyone has the ability to grow and change, given the right environment and support. I use various techniques such as active listening, empathy, unconditional positive regard, goal setting, problem solving, cognitive restructuring, relaxation training, mindfulness meditation, and positive affirmations to help my clients cope with their challenges and achieve their goals.</p>
+                    <p class="my-4">What makes me different from other counsellors is that I treat every client as a unique individual with their own strengths and needs. I do not use a one-size-fits-all approach or a fixed set of rules or methods. Instead, I tailor my counselling sessions according to the specific situation and preferences of each client. I also respect the cultural and religious backgrounds of my clients, and do not impose my own values or beliefs on them.</p>
+                </div>
+                <div class="ipad_min:hidden mobile:hidden phone_max:hidden"><img src="{% static 'image/Frame 34523.svg' %}" alt=""></div>
+            </div>
+            <div class="animate__animated animate__fadeInDown">
+                <h1 class="font-artifika text-4xl my-2 ipad_min:text-2xl mobile:text-2xl">Rema Devi A</h1>
+                <h2 class="font-montasorrat text-xl text-gray-500 ipad_min:text-lg mobile:text-lg">Counselling Psychologist</h2>
+                <p class="font-montasorrat my-6">Hello, and welcome to my counselling centre. My name is Rema Devi, and I am a counselling psychologist with a Ph.D. degree in Counselling Psychology. I have over 30 years of experience in teaching and counselling, and I am passionate about helping people achieve their personal and professional goals.</p>
+                <p class="font-montasorrat my-6">I was born and brought up in a middle-class family in Kodungallur, Thrissur District of Kerala State. I graduated from St. Joseph’s College in Zoology, and did B.Ed. and M.Ed., for which guidance and counselling was an optional subject. I got married to Adv.A.S.R.Nair [who is a practicing lawyer now in the Kerala High Court], shifted to Belgaum District of Karnataka, and from there to Mumbai. During my life in Mumbai for about 20 years, I worked as a high school teacher in Maths and Science. Along with my profession, I could do a School Counsellor’s Course, M.Sc Psychology, and an International Commonwealth Diploma in ‘Youth in Development’. I won the ‘Best Teacher Award’ thrice. Due to personal reasons, I returned to Kerala and settled here in 2008. From the same week, I continued my profession as Principal in Charge and Professor in Educational Psychology in a B.Ed College for 10 years. During this period, I did M.Sc in Counselling and Family Therapy and M.Phil in Counselling Psychology. I was blessed to have an opportunity to work as an Assistant Professor for P.G classes in St.Joseph’s College Irinjalakuda for one year</p>
+                <div class="flex my-6 ipad_min:grid mobile:grid mobile:w-full ipad:grid">
+                    <img src="{% static 'image/Rectangle 1549-2(1).png' %}" alt="">
+                    <img src="{% static 'image/Rectangle 1549-3(1).png' %}" alt="">
+                </div>
+                <p class="font-montasorrat my-10">I started my counselling centre at home in 2014, and since then I have been providing professional and compassionate counselling services for individuals, couples, families, and groups. I offer a range of counselling services, including pre-marital counselling, family counselling/therapy, child & adolescent counselling, school counselling, group counselling, awareness programs, motivational sessions, career guidance, teacher development programmes, and grief therapy.</p>
+                <div class="cor bg-baseprimary p-6 font-montasorrat my-10 hidden ipad_min:block mobile:block">
+                    <p>My counselling approach is based on the principles of humanistic psychology, which emphasizes the inherent worth and potential of every person. I believe that everyone has the ability to grow and change, given the right environment and support. I use various techniques such as active listening, empathy, unconditional positive regard, goal setting, problem solving, cognitive restructuring, relaxation training, mindfulness meditation, and positive affirmations to help my clients cope with their challenges and achieve their goals.</p>
+                    <p class="my-4">What makes me different from other counsellors is that I treat every client as a unique individual with their own strengths and needs. I do not use a one-size-fits-all approach or a fixed set of rules or methods. Instead, I tailor my counselling sessions according to the specific situation and preferences of each client. I also respect the cultural and religious backgrounds of my clients, and do not impose my own values or beliefs on them.</p>
+                </div>
+                <div class="flex gap-6 ipad_min:grid mobile:grid ipad:grid">
+                    <img src="{% static 'image/Rectangle 1549-4(1).png' %}" alt="">
+                    <div class="font-montasorrat">
+                        <p class="my-5">My mission is to help you find peace and happiness in your life. Whether you are struggling with stress, anxiety, depression, relationship issues, or any other psychological problem, I am here to help you. You do not have to suffer alone or feel hopeless or helpless. You can reach out to me anytime for a free consultation or book an appointment online or offline for a counselling session. I will listen to you attentively, understand you deeply, and support you wholeheartedly.</p>
+                        <p>I look forward to hearing from you soon.</p> 
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- <div class="hidden ipad_min:block ipad_min:mr-7"><img src="./image/Frame 34523.svg" alt=""></div> -->
+    </section>
+    <!-- about ends here -->
+
+{% endblock %}

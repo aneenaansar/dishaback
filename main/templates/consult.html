@@ -1,0 +1,92 @@
+{% extends 'base.html' %}
+
+{% block title %} Rema devi | Consult {% endblock %}
+{% block content %}
+
+{% load static %}
+
+    
+
+    <!-- menu bar starts here -->
+    <div id="slidemenu" class="slidediv py-8 items-center text-center right-0 top-0 fixed h-full bg-black z-[9999999]">
+        <div class="bg-black" >
+            <div class="my-20">
+                <a href="{% url 'main:index' %}"><h1 class="font-artifika text-3xl text-[2rem] text-baseprimary">Rema Devi</h1></a>
+            </div>
+            <div>
+                <nav>
+                    <ul class=" text-xl font-montserrat text-baseprimary">
+                        <a href="{% url 'main:index' %}"><li>Home</li></a>
+                        <a href="{% url 'main:consult' %}"><li class="my-6">Consultation</li></a>
+                        <a href="{% url 'main:about' %}"><li>About</li></a>
+                        <a href="{% url 'main:blog' %}"><li class="my-6">Blog</li></a>
+                    </ul>
+                </nav>
+            </div>
+            <div id="closeicon" class="flex justify-center my-20">
+                <img src="{% static 'image/xmark.svg' %}" alt="">
+            </div>
+        </div>
+    </div>
+    <!-- menu bar ends here -->
+
+    <!-- grid starts here-->
+    <section>
+        <div class="flex flex-wrap gap-8 font-montasorrat my-20 ipad_min:grid mobile:grid phone_max:grid animate__animated animate__pulse">
+            <div class="clr p-8 w-[30%] ipad_min:w-full mobile:w-full phone_max:w-full ipad:w-[50%]">
+                <img src="{% static 'image/couple-01 1.svg' %}" alt="">
+                <h1 class="font-semibold">Pre-Marital Counselling</h1>
+                <p class="my-4">Prepare for a successful and fulfilling marriage with our pre-marital counselling service. We will help you and your partner understand each other better, communicate effectively, resolve conflicts, and plan for your future together.</p>
+            </div> 
+            <div class="clr-2 p-8 w-[30%] ipad_min:w-full mobile:w-full phone_max:w-full ipad:w-[45%]">
+                <img src="{% static 'image/Group 20.svg' %}" alt="">
+                <h1 class="font-semibold">Family Counselling</h1>
+                <p class="my-4">Strengthen your family bonds and overcome your challenges with our family counselling/therapy service. We will help you and your family members improve your relationships, cope with stress, deal with transitions, and support each other.</p>
+            </div>
+            <div class="clr p-8 w-[30%] ipad_min:w-full mobile:w-full phone_max:w-full ipad:w-[50%]">
+                <img src="{% static 'image/Group 18.svg' %}" alt="">
+                <h1 class="font-semibold">Child & Adolescent Counselling</h1>
+                <p class="my-4">Help your child or adolescent grow and thrive with our child & adolescent counselling service. We will help them cope with their developmental, emotional, behavioral, or academic issues, and provide them with guidance and support.</p>
+            </div>
+            <div class="clr-2 p-8 w-[23%] ipad_min:w-full mobile:w-full phone_max:w-full ipad:w-[45%]">
+                <img src="{% static 'image/Group 35.svg' %}" alt="">
+                <h1 class="font-semibold">School Counselling</h1>
+                <p class="my-4">Enhance your school experience and performance with our school counselling service. We will help you with your academic, career, personal, or social needs, and provide you with resources and opportunities.</p>
+            </div>
+            <div class="clr p-8 w-[23%] ipad_min:w-full mobile:w-full phone_max:w-full ipad:w-[50%]">
+                <img src="{% static 'image/Group 23.svg' %}" alt="">
+                <h1 class="font-semibold">Career Guidance</h1>
+                <p class="my-4">Find your passion and purpose with our career guidance service. We will help you explore your interests, skills, values, and personality, and match them with suitable career options.</p>
+            </div>
+            <div class="clr-2 p-8 w-[23%] ipad_min:w-full mobile:w-full phone_max:w-full ipad:w-[45%]">
+                <img src="{% static 'image/Group 26.svg' %}" alt="">
+                <h1 class="font-semibold">Grief Therapy</h1>
+                <p class="my-4">Heal from your loss and find meaning in life again with our grief therapy service. We will help you process your emotions, cope with your pain, and move forward with hope.</p>
+            </div>
+            <div class="clr p-8 w-[23%] ipad_min:w-full mobile:w-full phone_max:w-full ipad:w-[50%]">
+                <img src="{% static 'image/Group 24.svg' %}" alt="">
+                <h1 class="font-semibold">Motivational Sessions</h1>
+                <p class="my-4">Boost your confidence and motivation with our motivational sessions. We will inspire you to pursue your dreams, overcome your challenges, and achieve your potential.</p>
+            </div>
+            <div class="clr-2 p-8 w-[30%] ipad_min:w-full mobile:w-full phone_max:w-full ipad:w-[45%]">
+                <img src="{% static 'image/Group 21.svg' %}" alt="">
+                <h1 class="font-semibold">Teacher Development Programmes</h1>
+                <p class="my-4">Improve your teaching skills and knowledge with our teacher development programmes. We will help you enhance your pedagogy, curriculum design, assessment methods, classroom management, and professional growth.</p>
+            </div>
+            <div class="clr p-8 w-[30%] ipad_min:w-full mobile:w-full phone_max:w-full ipad:w-[50%]">
+                <img src="{% static 'image/Group 25.svg' %}" alt="">
+                <h1 class="font-semibold">Awareness Programs</h1>
+                <p class="my-4">Learn more about various topics related to mental health and well-being with our awareness programs. We will provide you with information, insights, and tips on how to cope with stress, anxiety, depression, and other psychological issues.</p>
+            </div>
+            <div class="clr-2 p-8 w-[30%] ipad_min:w-full mobile:w-full phone_max:w-full ipad:w-[45%]">
+                <img src="{% static 'image/Group 33.svg' %}" alt="">
+                <h1 class="font-semibold">Group Counselling</h1>
+                <p class="my-4">Benefit from the power of group dynamics with our group counselling service. We will help you connect with others who share similar experiences or goals, learn from each other, and receive feedback and support.</p>
+            </div>
+        </div>
+    </section>
+    <!-- grid ends here -->
+
+{% endblock %}
+
+    

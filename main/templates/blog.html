@@ -1,0 +1,123 @@
+{% extends 'base.html' %}
+
+{% block title %} Rema devi | Blog {% endblock %}
+{% block content %}
+
+{% load static %}
+
+
+    
+
+    <!-- menu bar starts here -->
+    <div id="slidemenu" class="slidediv py-8 items-center text-center right-0 top-0 fixed h-full bg-black z-[9999999]">
+        <div class="bg-black" >
+            <div class="my-20">
+                <a href="{% url 'main:index' %}"><h1 class="font-artifika text-3xl text-[2rem] text-baseprimary">Rema Devi</h1></a>
+            </div>
+            <div>
+                <nav>
+                    <ul class=" text-xl font-montserrat text-baseprimary">
+                        <a href="{% url 'main:index' %}"><li>Home</li></a>
+                        <a href="{% url 'main:consult' %}"><li class="my-6">Consultation</li></a>
+                        <a href="{% url 'main:about' %}"><li>About</li></a>
+                        <a href="{% url 'main:blog' %}"><li class="my-6">Blog</li></a>
+                    </ul>
+                </nav>
+            </div>
+            <div id="closeicon" class="flex justify-center my-20">
+                <img src="{% static 'image/xmark.svg' %}" alt="">
+            </div>
+        </div>
+    </div>
+    <!-- menu bar ends here -->
+
+    <!-- spotlight section starts here -->
+   <section>
+    <div>
+        <div class="ipad_min:w-full mobile:w-full">
+            <a href=""><img class="w-full ipad_min:hidden mobile:block" src="{% static 'image/Frame 34547.png' %}" alt=""></a>
+            <a href=""><img class="hidden ipad_min:block mobile:hidden" src="{% static 'image/Frame 34547(12).svg' %}" alt=""></a>
+        </div>
+        <div class="absolute top-[20%] p-32 ipad_min:p-8 ipad_min:top-[35%] mobile:p-7 mobile:top-[15%] phone_max:top-[15%] phone_max:p-7 ipad:p-7 ipad:top-28">
+            <h5 class="font-montserrat text-base my-8 text-white ipad_min:my-3 mobile:my-3">Featured</h5>
+            <h1 class="font-montserrat text-4xl font-semibold text-white ipad_min:text-sm mobile:text-sm phone_max:text-xl">What is INNER CHILD, and the what is the </h1>
+            <h1 class="font-montserrat text-4xl font-semibold text-white ipad_min:text-sm mobile:text-sm phone_max:text-xl ">role of INNER CHILD in us presently?</h1>
+            <div class="flex justify-between gap-20 my-8 ">
+                <p class="font-montserrat text-white ipad_min:hidden mobile:hidden phone_max:hidden ipad:hidden">The concept of the inner child has gained popularity in recent years, especially in the field of psychology. The inner child refers to the emotional, sensitive, and vulnerable part of ourselves that we carry with us from childhood.</p>
+                <a href=""><img src="{% static 'image/Arrow.svg' %}" alt=""></a>
+            </div>
+        </div>
+    </div>
+   </section>
+   <!-- spotlight section ends here -->
+
+    <!-- grid section starts here -->
+   <section>
+    <h1 class="my-8 font-artifika text-4xl">Recent blog posts</h1>
+    <div class="flex flex-wrap gap-16 ipad_min:grid mobile:grid">
+        {% for blog in blogs %}
+        <div class=" w-[30%] font-montserrat ipad_min:w-full mobile:w-full phone_max:w-full ipad:w-[45%]">
+            <a href="{% url 'main:single' blog.pk %}"><img class="mb-4 transition-transform transform hover:scale-105" src="{{ blog.image.url }}" alt=""></a>
+            <a href="{% url 'main:single' blog.pk %}"><h1 class="font-semibold ">{{ blog.heading }}</h1></a>
+            <a href="{% url 'main:single' blog.pk %}"><p class="my-4">{{ blog.paragraph }}</p></a>
+            <a href="{% url 'main:single' blog.pk %}"><h2>{{ blog.date }}</h2></a>
+        </div>
+        {% endfor %}
+        {% comment %} <div class=" w-[30%] font-montserra ipad_min:w-full mobile:w-full phone_max:w-full ipad:w-[45%] ">
+            <img class="mb-4 transition-transform transform hover:scale-105" src="./image/Rectangle 1549-1.png" alt="">
+            <h1 class="font-semibold">What is INNER CHILD, and the what is the role of INNER CHILD in us presently.?</h1>
+            <p class="my-4">The concept of the inner child has gained popularity in recent years, especially in the field of psychology. The inner child refers to the emotional, sensitive, and vulnerable part of ourselves that we carry with us from childhood.</p>
+            <h2>31 Dec 2023</h2>
+        </div>
+        <div class=" w-[30%] font-montserrat ipad_min:w-full mobile:w-full phone_max:w-full ipad:w-[45%]">
+            <img class="mb-4 transition-transform transform hover:scale-105" src="./image/Rectangle 1549-2.png" alt="">
+            <h1 class="font-semibold">What is a Toxic relationship and how we sticks with it?</h1>
+            <p class="my-4">Toxic relationships can be detrimental to our mental health and well-being, yet many of us find ourselves caught in them. These relationships are characterized by behaviors such as manipulation, control, jealousy, and emotional or physical abuse.</p>
+            <h2>31 Dec 2023</h2>
+        </div>
+        <div class=" w-[30%] font-montserrat ipad_min:w-full mobile:w-full phone_max:w-full ipad:w-[45%]">
+            <img class="mb-4 transition-transform transform hover:scale-105" src="./image/Rectangle 1549-3.png" alt="">
+            <h1 class="font-semibold">Unknown Fear and it’s Remedies</h1>
+            <p class="my-4">In my clinical experience I usually meets clients with unknown fear. Cases are different from person to person but commonly I can explain the reasons, symptoms and its remedies.</p>
+            <h2>31 Dec 2023</h2>
+        </div>
+        <div class=" w-[30%] font-montserrat ipad_min:w-full mobile:w-full phone_max:w-full ipad:w-[45%]">
+            <img class="mb-4 transition-transform transform hover:scale-105" src="./image/Rectangle 1549-2.png" alt="">
+            <h1 class="font-semibold">What is a Toxic relationship and how we sticks with it?</h1>
+            <p class="my-4">Toxic relationships can be detrimental to our mental health and well-being, yet many of us find ourselves caught in them. These relationships are characterized by behaviors such as manipulation, control, jealousy, and emotional or physical abuse.</p>
+            <h2>31 Dec 2023</h2>
+        </div>
+        <div class=" w-[30%] font-montserrat ipad_min:w-full mobile:w-full phone_max:w-full ipad:w-[45%]">
+            <img class="mb-4 transition-transform transform hover:scale-105" src="./image/Rectangle 1549-5.png" alt="">
+            <h1 class="font-semibold">EFT: The Art of Emotional Healing – Unleashing the Symphony Within</h1>
+            <p class="my-4">Toxic relationships can be detrimental to our mental health and well-being, yet many of us find ourselves caught in them. These relationships are characterized by behaviors such as manipulation, control, jealousy, and emotional or physical abuse.</p>
+            <h2>31 Dec 2023</h2>
+        </div>
+        <div class=" w-[30%] font-montserrat ipad_min:w-full mobile:w-full phone_max:w-full ipad:w-[45%] ">
+            <img class="mb-4 transition-transform transform hover:scale-105" src="./image/Rectangle 1549-5.png" alt="">
+            <h1 class="font-semibold">EFT: The Art of Emotional Healing – Unleashing the Symphony Within</h1>
+            <p class="my-4">Toxic relationships can be detrimental to our mental health and well-being, yet many of us find ourselves caught in them. These relationships are characterized by behaviors such as manipulation, control, jealousy, and emotional or physical abuse.</p>
+            <h2>31 Dec 2023</h2>
+        </div>
+        <div class=" w-[30%] font-montserrat ipad_min:w-full mobile:w-full phone_max:w-full ipad:w-[45%] ">
+            <img class="mb-4 transition-transform transform hover:scale-105" src="./image/Rectangle 1549-7.png" alt="">
+            <h1 class="font-semibold">Mental Health of a Pregnant Women</h1>
+            <p class="my-4">Pregnancy can be an exciting and joyous time for many women, but it can also be a challenging time for a woman’s mental health. Some common mental health difficulties experienced by pregnant women include depression, anxiety, stress, and insomnia.</p>
+            <h2>31 Dec 2023</h2>
+        </div>
+        <div class=" w-[30%] font-montserrat ipad_min:w-full mobile:w-full phone_max:w-full ipad:w-[45%] ">
+            <img class="mb-4 transition-transform transform hover:scale-105" src="./image/Rectangle 1549-2.png" alt="">
+            <h1 class="font-semibold">What is a Toxic relationship and how we sticks with it?</h1>
+            <p class="my-4">Toxic relationships can be detrimental to our mental health and well-being, yet many of us find ourselves caught in them. These relationships are characterized by behaviors such as manipulation, control, jealousy, and emotional or physical abuse.</p>
+            <h2>31 Dec 2023</h2>
+        </div> {% endcomment %}
+    </div>
+    <div class="my-12 flex justify-center">
+        <button class="border border-black w-[25rem] h-[3rem] read">
+            <a href="#">load more ...</a>
+        </button>
+    </div>
+   </section>
+   <!-- grid ends here -->
+
+{% endblock %}
