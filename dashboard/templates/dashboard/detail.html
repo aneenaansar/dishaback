@@ -21,7 +21,7 @@
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
 
-        .patient-details input {
+        .patient-details {
             width: 100%;
             padding: 10px;
             margin: 10px 0;
@@ -31,7 +31,7 @@
         }
 
         .patient-details select {
-            width: 100%;
+            width: 45%;
             padding: 10px;
             margin: 10px 0;
             box-sizing: border-box;
@@ -40,7 +40,7 @@
         }
 
         .patient-details button {
-            width: 100%;
+            width: 10%;
             padding: 10px;
             background-color: #ff9c80;
             color: black;
@@ -67,6 +67,17 @@
             display: flex;
             gap: 2rem; 
         }
+        .how{
+            display: flex;
+            flex-wrap: wrap;  
+            gap: 2rem;
+        }
+        .textarea1{
+            width: 38.5%;
+        }
+        .hehe{
+            height:3rem;
+        }
     </style>
 
 
@@ -74,12 +85,12 @@
     <h2>Patient Details</h2>
     <form>
         <div class="hello">
-            <input type="text" name="firstName" placeholder="First Name" required>
-            <input type="text" name="lastName" placeholder="Last Name" required>
+            <input type="text" name="firstName" placeholder="First Name" class="patient-details" required>
+            <input type="text" name="lastName" placeholder="Last Name" class="patient-details" required>
         </div>
         <div class="hii">
-            <input type="date" name="dob" placeholder="Date of Birth" required>
-            <select name="gender" required>
+            <input type="text" name="patient id" placeholder="Patient ID" class="patient-details" style="width: 49%;" required>
+            <select name="gender" required style="width: 49%;">
                 <option value="" disabled selected>Select Gender</option>
                 <option value="male">Male</option>
                 <option value="female">Female</option>
@@ -87,19 +98,43 @@
             </select>
         </div>
         <div class="holaa">
-            <input type="text" name="address" placeholder="Address" required>
-            <input type="text" name="phoneNumber" placeholder="Phone Number" required>
+            <input type="text" name="address" placeholder="Address" class="patient-details" required>
+            <input type="text" name="phoneNumber" placeholder="Phone Number" class="patient-details" required>
         </div>
-        <div class="holaa">
-            <input type="text" name="patient id" placeholder="Patient ID" required>
-            <input type="text" name="remarks" placeholder="Remarks" required>
+        <!-- <div class="holaa">
+            <input type="date" name="dob" placeholder="Date of Birth" required>
+            
+            <textarea type="text" name="remarks" placeholder="Remarks"></textarea>
+        </div> -->
+        <div id="image-upload-container" class="how">
+            <input type="date" name="Date" class="hehe"  multiple>
+            <textarea name="Remarks" placeholder="Remarks" rows="5" class="textarea1"></textarea>
         </div>
-        
-       
-        
-
+        <button type="button" onclick="addImageField()">Add</button>
         <button type="submit">Submit</button>
     </form>
+        
+    <script>
+        function addImageField() {
+            var container = document.getElementById('image-upload-container');
+    
+            // Create a new input element for date
+            var dateInput = document.createElement('input');
+            dateInput.type = 'date';
+            dateInput.name = 'Date';
+            dateInput.classList.add('hehe');
+            container.appendChild(dateInput);
+    
+            // Create a new textarea element for remarks
+            var remarksTextarea = document.createElement('textarea');
+            remarksTextarea.name = 'Remarks';
+            remarksTextarea.placeholder = 'Remarks';
+            remarksTextarea.rows = 5; // Set the 'rows' attribute to 5
+            remarksTextarea.classList.add('textarea1');
+            container.appendChild(remarksTextarea);
+        }
+    </script>
+        
 </div>
 {% endblock %}
 
