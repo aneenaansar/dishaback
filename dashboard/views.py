@@ -2,6 +2,12 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login as auth_login  # Rename login to avoid conflicts
 from main.models import *
 
+from django.shortcuts import render, get_object_or_404
+from django.views import View
+
+from django.urls import reverse
+from django.http import HttpResponseRedirect
+
 def login(request):
     if request.method == 'POST':
         username = request.POST.get('username')
@@ -15,6 +21,27 @@ def login(request):
             # Handle invalid login credentials
             return render(request, 'dashboard/login.html', {'error': 'Invalid username or password'})
     return render(request, 'dashboard/login.html')
+
+class BlogEditView(View):
+    def get(self, request, pk):
+        blog = get_object_or_404(Blog, pk=pk)
+        return render(request, 'dashboard/blog_edit.html', {'blog': blog})
+
+    def post(self, request, pk):
+        # Handle form submission to update the blog
+        # This will depend on your specific form implementation
+        # Update the blog object and save it
+        return HttpResponseRedirect(reverse('dashboard:blog_list'))
+
+class BlogDeleteView(View):
+    def get(self, request, pk):
+        blog = get_object_or_404(Blog, pk=pk)
+        return render(request, 'dashboard/blog_delete.html', {'blog': blog})
+
+    def post(self, request, pk):
+        # Handle form submission to delete the blog
+        # Delete the blog object
+        return HttpResponseRedirect(reverse('dashboard:blog_list'))
 
 def index(request):
     return render(request,'dashboard/index.html')

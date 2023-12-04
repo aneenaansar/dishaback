@@ -109,10 +109,12 @@
                         <td>{{ blog.date }}</td>
                         <td><a href="#">{{ blog.heading }}</a></td>
                         <td>
-                            <a href="#">
-                                <img class="edit-btn" src="{% static 'image/edit-246.png' %}" alt="">
+                            <a href="{% url 'dashboard:edit_blog' blog.id %}">
+                                <img class="edit-btn" src="{% static 'image/edit-246.png' %}" alt="Edit">
                             </a>
-                            <img class="delete-btn" src="{% static 'image/3405244.png' %}" alt="">
+                            <a href="{% url 'dashboard:delete_blog' blog.id %}">
+                                <img class="delete-btn" src="{% static 'image/3405244.png' %}" alt="Delete">
+                            </a>
                         </td>
                     </tr>
                 {% endfor %}
