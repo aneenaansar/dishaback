@@ -4,9 +4,10 @@ from main.models import *
 
 from django.shortcuts import render, get_object_or_404
 from django.views import View
-
+from .forms import *
 from django.urls import reverse
 from django.http import HttpResponseRedirect
+from django.http import HttpResponse
 
 def login(request):
     if request.method == 'POST':
@@ -23,17 +24,26 @@ def login(request):
     return render(request, 'dashboard/login.html')
 
 class BlogEditView(View):
+    template_name = 'dashboard/edit.html'
+
     def get(self, request, pk):
         blog = get_object_or_404(Blog, pk=pk)
-        return render(request, 'dashboard/edit.html', {'blog': blog})
-    
+        return render(request, self.template_name, {'blog': blog})
 
     def post(self, request, pk):
-        # Handle form submission to update the blog
-        # This will depend on your specific form implementation
-        # Update the blog object and save it
-        return HttpResponseRedirect(reverse('dashboard:displayblog.html'))
+        blog = get_object_or_404(Blog, pk=pk)
 
+        # Create a form instance and populate it with data from the request
+        form = BlogForm(request.POST, request.FILES, instance=blog)
+
+        # Check if the form is valid
+        if form.is_valid():
+            # Save the form to update the blog
+            form.save()
+            return redirect('dashboard:displayblog')
+        else:
+            # If the form is not valid, re-render the page with the form and errors
+            return render(request, self.template_name, {'blog': blog, 'form': form})
 class BlogDeleteView(View):
     def get(self, request, pk):
         blog = get_object_or_404(Blog, pk=pk)

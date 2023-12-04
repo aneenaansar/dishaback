@@ -52,26 +52,25 @@
     </style>
 
 <div class="dashboard-form">
-    <form>
-        <h2>Add Blog</h2>
-        <input type="date" name="date" required>
-        <input type="text" name="heading" placeholder="Heading" required>
-        <textarea name="paragraph" placeholder="Paragraph" required></textarea>
-        <input type="file" name="image" accept="image/*" required>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <h2>Edit Blog</h2>
+        <img src="{{ blog.image.url }}" alt="Blog Image" style="height:10rem;width:15rem;"> <!-- Display the image -->
+        <input type="date" name="date" value="{{ blog.date }}" required>
+        <input type="text" name="heading" value="{{ blog.heading }}" placeholder="Heading" required>
+        <textarea name="paragraph" placeholder="Paragraph" required>{{ blog.paragraph }}</textarea>
+        <input type="file" name="image" accept="image/*"> <!-- Allow users to update the image -->
 
         <h3>Additional Content</h3>
 
-        <input type="text" name="h1" placeholder="Heading 1">
-        <textarea name="p1" placeholder="Paragraph 1"></textarea>
+        <input type="text" name="h1" value="{{ blog.h1 }}" placeholder="Heading 1">
+        <textarea name="p1" placeholder="Paragraph 1">{{ blog.p1 }}</textarea>
 
-        <input type="text" name="h2" placeholder="Heading 2">
-        <textarea name="p2" placeholder="Paragraph 2"></textarea>
+        <input type="text" name="h2" value="{{ blog.h2 }}" placeholder="Heading 2">
+        <textarea name="p2" placeholder="Paragraph 2">{{ blog.p2 }}</textarea>
 
-        <input type="text" name="h3" placeholder="Heading 3">
-        <textarea name="p3" placeholder="Paragraph 3"></textarea>
-
-        <input type="text" name="h4" placeholder="Heading 4">
-        <textarea name="p4" placeholder="Paragraph 4"></textarea>
+        <input type="text" name="h3" value="{{ blog.h3 }}" placeholder="Heading 3">
+        <textarea name="p3" placeholder="Paragraph 3">{{ blog.p3 }}</textarea>
 
         <!-- Add fields h4 to p9 as needed -->
 
