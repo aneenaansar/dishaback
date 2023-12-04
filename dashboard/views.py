@@ -25,13 +25,14 @@ def login(request):
 class BlogEditView(View):
     def get(self, request, pk):
         blog = get_object_or_404(Blog, pk=pk)
-        return render(request, 'dashboard/blog_edit.html', {'blog': blog})
+        return render(request, 'dashboard/edit.html', {'blog': blog})
+    
 
     def post(self, request, pk):
         # Handle form submission to update the blog
         # This will depend on your specific form implementation
         # Update the blog object and save it
-        return HttpResponseRedirect(reverse('dashboard:blog_list'))
+        return HttpResponseRedirect(reverse('dashboard:displayblog.html'))
 
 class BlogDeleteView(View):
     def get(self, request, pk):
