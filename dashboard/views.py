@@ -2,7 +2,6 @@ from django.shortcuts import render
 from django.contrib.auth.decorators import user_passes_test
 from .forms import LoginForm
 
-# Create your views here.
 def login(request):
     form = LoginForm()
     return render(request,'dashboard/login.html', {'form': form})
@@ -20,7 +19,8 @@ def appoinments(request):
     return render(request,'dashboard/appoinments.html')
 
 def displayblog(request):
-    return render(request,'dashboard/displayblog.html')
+    blogs=Blog.objects.all()
+    return render(request,'dashboard/displayblog.html',{'blogs':blogs})
 
 def patient(request):
     return render(request,'dashboard/patient.html')

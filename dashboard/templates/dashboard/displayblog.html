@@ -87,40 +87,38 @@
         }
     </style>
 
-<div class="blog-container">
-    <div class="diving">
-        <h2>Blogs</h2>
-        <div class="blog-actions">
-            <a href="{% url 'dashboard:addblog' %}"><button class="add-blog-btn">Add Blog</button></a>
+    <div class="blog-container">
+        <div class="diving">
+            <h2>Blogs</h2>
+            <div class="blog-actions">
+                <a href="{% url 'dashboard:addblog' %}"><button class="add-blog-btn">Add Blog</button></a>
+            </div>
         </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Heading</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for blog in blogs %}
+                    <tr>
+                        <td>{{ blog.date }}</td>
+                        <td><a href="#">{{ blog.heading }}</a></td>
+                        <td>
+                            <a href="#">
+                                <img class="edit-btn" src="{% static 'image/edit-246.png' %}" alt="">
+                            </a>
+                            <img class="delete-btn" src="{% static 'image/3405244.png' %}" alt="">
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
     </div>
-    
-    <table>
-        <thead>
-            <tr>
-                <th>Date</th>
-                <th>Heading</th>
-                <th>Action</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>2023-01-01</td>
-                <a href="{% url 'dashboard:addblog' %}"><td>Sample Blog Heading</td></a>
-                <td>
-                    <a href="{% url 'dashboard:addblog' %}"><img class="edit-btn" src="{% static 'image/edit-246.png' %}" alt=""></a>
-                    
-                    <img class="delete-btn" src="{% static 'image/3405244.png' %}" alt="">
-
-                </td>
-            </tr>
-           
-            <!-- Add more rows as needed -->
-        </tbody>
-    </table>
-
-    
-</div>
 {% endblock %}
 
 
