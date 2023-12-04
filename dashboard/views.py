@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login as auth_login  # Rename login to avoid conflicts
+from main.models import *
 
 def login(request):
     if request.method == 'POST':
@@ -28,7 +29,8 @@ def appoinments(request):
     return render(request,'dashboard/appoinments.html')
 
 def displayblog(request):
-    return render(request,'dashboard/displayblog.html')
+    blogs=Blog.objects.all()
+    return render(request,'dashboard/displayblog.html',{'blogs':blogs})
 
 def patient(request):
     return render(request,'dashboard/patient.html')
