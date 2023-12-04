@@ -4,7 +4,7 @@ from main.models import *
 
 from django.shortcuts import render, get_object_or_404
 from django.views import View
-from .models import Blog
+
 from django.urls import reverse
 from django.http import HttpResponseRedirect
 
