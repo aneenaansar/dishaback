@@ -19,4 +19,5 @@ urlpatterns = [
 
     path('blogs/<int:pk>/edit/', BlogEditView.as_view(), name='edit_blog'),
     path('blogs/<int:pk>/delete/', BlogDeleteView.as_view(), name='delete_blog'),
+     path('logout/', views.logout_view, name='logout'),
 ]

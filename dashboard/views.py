@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login as auth_login  # Rename login to avoid conflicts
 from main.models import *
+from django.contrib.auth import logout
+from django.shortcuts import redirect
 
 from django.shortcuts import render, get_object_or_404
 from django.views import View
@@ -72,3 +74,9 @@ def displayblog(request):
 
 def patient(request):
     return render(request,'dashboard/patient.html')
+
+
+def logout_view(request):
+    logout(request)
+    # Redirect to a specific URL after logout, or to the homepage
+    return redirect('dashboard:login')    
