@@ -12,4 +12,5 @@ urlpatterns = [
     path('blog/',views.blog, name='blog'),
     path('single/<int:pk>/',views.single, name='single'),
     path('appointment/', views.appointment, name='appointment'),
+    
 ]

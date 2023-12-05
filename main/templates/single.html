@@ -36,35 +36,52 @@
     <section>
         <div class="p-10 ipad_min:p-2 mobile:p-2">
             <h2 class="font-montasorrat text-center text-lg">{{ blog.date }}</h2>
-            <h1 class="font-semibold font-montasorrat text-4xl my-8 ipad_min:text-xl mobile:text-xl" >{{ blog.heading }}</h1>
-            <p class="font-montasorrat  text-lg ipad_min:text-base mobile:text-base">{{ blog.paragraph }}.</p>
+            <h1 class="font-semibold font-montasorrat text-4xl my-8 ipad_min:text-xl mobile:text-xl" >{{ blog.title }}</h1>
             <img class="w-full  my-8 ipad_min:hidden mobile:hidden" src="{{ blog.image.url }}" alt="">
             <img class="hidden ipad_min:block mobile:block" src="{{ blog.image.url }}" alt="">
-            <h1 class="italic font-medium font-montasorrat  text-xl my-8 ">{{ blog.h1 }}</h1>
-            <p class="font-montasorrat text-lg ipad_min:text-base mobile:text-base">{{ blog.p1 }}</p>
-            <h1 class="italic font-medium font-montasorrat  text-xl my-8 ">{{ blog.h2 }}</h1>
-            <p class="font-montasorrat  text-lg ipad_min:text-base mobile:text-base">{{ blog.p2 }}</p>
-            <h1 class="italic font-medium font-montasorrat  text-xl my-8 ">{{ blog.h3 }}</h1>
-            <p class="font-montasorrat  text-lg">{{ blog.p3 }}</p>
-            <p class="font-montasorrat text-lg my-4 ">{{ blog.p4 }}.</p>
-            <p class="font-montasorrat text-lg  ">{{ blog.p5 }}</p>
-            <p class="font-montasorrat text-lg my-4 ">{{ blog.p6 }}</p>
-            <p class="font-montasorrat text-lg ">{{ blog.p7}}</p>
-            <p class="font-montasorrat text-lg my-4 ">{{ blog.p8 }}</p>
-            <p class="font-montasorrat text-lg ">{{ blog.p9}}</p>
+            
+            <p class="font-montasorrat  text-lg ipad_min:text-base mobile:text-base">{{blog.content | safe}}.</p>
+            
+            
+          
         </div>
         <div class="flex justify-center gap-8 my-8 ipad_min:hidden mobile:hidden">
             <div class="flex gap-4">
-                <img src="{% static 'image/heart.svg' %}" alt="">
-                <p class="font-montasorrat text-lg">400 LIKES</p>
+                <button onclick="likeBlog({{ blog.id }})">
+                    <img src="{% static 'image/heart.svg' %}" alt=""> Like
+                </button>
+                <p class="font-montasorrat text-lg" id="like-count">{{ blog.likes }} LIKES</p>
             </div>
             <div class="flex gap-4">
-                <img src="{% static 'image/Share.svg' %}" alt="">
-                <p class="font-montasorrat text-lg">SHARE</p>
+                <button onclick="shareBlog({{ blog.id }})">
+                    <img src="{% static 'image/Share.svg' %}" alt=""> Share
+                </button>
+                <p class="font-montasorrat text-lg" id="share-count">{{ blog.shares }} SHARES</p>
             </div>
-            
         </div>
+    </div>
     </section>
+    <!-- spotlight section ends here -->
+    
+    <script>
+        function likeBlog(blogId) {
+            // Make an AJAX request to handle the like action
+            // Update the like count on success
+            // Example using jQuery
+            $.post('{% url "main:single" blog.id %}', { action: 'like' }, function (data) {
+                $('#like-count').text(data.likes + ' LIKES');
+            });
+        }
+    
+        function shareBlog(blogId) {
+            // Make an AJAX request to handle the share action
+            // Update the share count on success
+            // Example using jQuery
+            $.post('{% url "main:single" blog.id %}', { action: 'share' }, function (data) {
+                $('#share-count').text(data.shares + ' SHARES');
+            });
+        }
+    </script>
     <!-- spotlight section ends here -->
 
     <!-- recent blog starts here -->
@@ -92,5 +109,7 @@
             </div> {% endcomment %}
         </div>
     </section>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
     <!-- recent blog section starts here -->
 {% endblock %}

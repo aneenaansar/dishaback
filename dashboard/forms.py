@@ -6,7 +6,7 @@ from main.models import Blog
 class BlogForm(forms.ModelForm):
     class Meta:
         model = Blog
-        fields = ['date', 'heading', 'paragraph', 'image', 'h1', 'p1', 'h2', 'p2', 'h3', 'p3', 'p4', 'p5']
+        fields = ['title','content','image','date']
 
 
 class LoginForm(forms.Form):

@@ -1,8 +1,8 @@
 from django.shortcuts import render,redirect, get_object_or_404
-from .models import Blog 
+from .models import Blog
 from . forms import AppointmentForm
 from django.contrib import messages
-
+from django.http import JsonResponse
 # Create your views here.
 
 def index(request):
@@ -28,6 +28,15 @@ def single(request,pk):
     form=AppointmentForm()
     # blog =Singleblog.objects.get(pk=pk)
     blog=Blog.objects.get(pk=pk)
+    if request.method == 'POST':
+        action = request.POST.get('action')
+
+        if action == 'like':
+            blog.likes += 1
+            blog.save()
+
+            return JsonResponse({'likes': blog.likes})
+
     return render(request, 'single.html',{'form':form,
         'blog' : blog,
         # 'blogs':blogs
