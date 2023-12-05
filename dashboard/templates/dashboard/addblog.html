@@ -52,29 +52,16 @@
     </style>
 
 <div class="dashboard-form">
-    <form>
+    <form method="post" enctype="multipart/form-data">
         <h2>Add Blog</h2>
         <input type="date" name="date" required>
+        {{form.date}}
         <input type="text" name="heading" placeholder="Heading" required>
+        {{form.title}}
         <textarea name="paragraph" placeholder="Paragraph" required></textarea>
+        {{form.content}}
         <input type="file" name="image" accept="image/*" required>
-
-        <h3>Additional Content</h3>
-
-        <input type="text" name="h1" placeholder="Heading 1">
-        <textarea name="p1" placeholder="Paragraph 1"></textarea>
-
-        <input type="text" name="h2" placeholder="Heading 2">
-        <textarea name="p2" placeholder="Paragraph 2"></textarea>
-
-        <input type="text" name="h3" placeholder="Heading 3">
-        <textarea name="p3" placeholder="Paragraph 3"></textarea>
-
-        <input type="text" name="h4" placeholder="Heading 4">
-        <textarea name="p4" placeholder="Paragraph 4"></textarea>
-
-        <!-- Add fields h4 to p9 as needed -->
-
+        {{form.image}}
         <button type="submit">Submit</button>
     </form>
 </div>

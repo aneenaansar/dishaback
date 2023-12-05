@@ -36,8 +36,8 @@ class Appointment(models.Model):
     
 
 class Blog(models.Model):
-        title=models.CharField(max_length=200)
-        content= RichTextField()
+        title=models.CharField(max_length=200,null=True)
+        content= RichTextField(null=True)
         image=models.ImageField(upload_to='item_images')
         date=models.DateField()
 

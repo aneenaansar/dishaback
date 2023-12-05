@@ -10,6 +10,7 @@ from .forms import *
 from django.urls import reverse
 from django.http import HttpResponseRedirect
 from django.http import HttpResponse
+from django.urls import reverse_lazy
 
 def login(request):
     if request.method == 'POST':
@@ -24,6 +25,23 @@ def login(request):
             # Handle invalid login credentials
             return render(request, 'dashboard/login.html', {'error': 'Invalid username or password'})
     return render(request, 'dashboard/login.html')
+
+class BlogCreateView(View):
+    template_name = 'dashboard/addblog.html'
+
+    form_class = BlogForm
+
+    def form_valid(self, form):
+        # This method is called when valid form data has been POSTed.
+        # It should return an HttpResponse.
+
+        self.object = form.save()  # Save the main object (Blog)
+
+        return super(BlogCreateView, self).form_valid(form)
+
+    def get_success_url(self):
+        return reverse_lazy('dashboard:blog')
+    
 
 class BlogEditView(View):
     template_name = 'dashboard/edit.html'
