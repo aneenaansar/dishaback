@@ -53,15 +53,12 @@
 
 <div class="dashboard-form">
     <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
         <h2>Add Blog</h2>
-        <input type="date" name="date" required>
-        {{form.date}}
-        <input type="text" name="heading" placeholder="Heading" required>
-        {{form.title}}
-        <textarea name="paragraph" placeholder="Paragraph" required></textarea>
-        {{form.content}}
-        <input type="file" name="image" accept="image/*" required>
-        {{form.image}}
+        {{ form.date }}
+        {{ form.title }}
+        {{ form.content }}
+        {{ form.image }}
         <button type="submit">Submit</button>
     </form>
 </div>

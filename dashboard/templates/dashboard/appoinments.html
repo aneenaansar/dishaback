@@ -57,13 +57,14 @@
             </tr>
         </thead>
         <tbody>
+            {% for appoinment in appoinments %}
             <tr>
-                <td>2023-01-01</td>
-                <td>10:00 AM</td>
-                <td>John Doe</td>
-                <td>Confirmed</td>
+                <td>{{ appoinment.name }}</td>
+                <td>{{ appoinment.email }}</td>
+                <td>{{ appoinment.contact }}</td>
+                <td>{{ appoinment.purpose }}</td>
             </tr>
-            <tr>
+            {% comment %} <tr>
                 <td>2023-01-02</td>
                 <td>02:30 PM</td>
                 <td>Jane Smith</td>
@@ -80,10 +81,27 @@
                 <td>02:30 PM</td>
                 <td>Jane Smith</td>
                 <td>Pending</td>
-            </tr>
+            </tr> {% endcomment %}
             <!-- Add more rows as needed -->
         </tbody>
     </table>
+</div>
+<div class="pagination">
+    <span class="step-links">
+        {% if tasks.has_previous %}
+            <a href="?page=1">&laquo; first</a>
+            <a href="?page={{ tasks.previous_page_number }}" class="pagination-link">previous</a>
+        {% endif %}
+    
+        <span class="current-page">
+            Page {{ tasks.number }} of {{ tasks.paginator.num_pages }}.
+        </span>
+        
+        {% if tasks.has_next %}
+            <a href="?page={{ tasks.next_page_number }}" class="pagination-link">next</a>
+            <a href="?page={{ tasks.paginator.num_pages }}">last &raquo;</a>
+        {% endif %}
+    </span>
 </div>
 {% endblock %}
 

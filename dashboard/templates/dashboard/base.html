@@ -47,7 +47,7 @@
 </header>
 {% if user.is_superuser %}
 <nav>
-    <a href="{% url 'dashboard:displayblog' %}">Blog</a>
+    <a href="{% url 'dashboard:bloglist' %}">Blog</a>
     <a href="{% url 'dashboard:patient' %}">Patient Details</a>
     <a href="{% url 'dashboard:appoinments' %}">Appointments</a>
     <a href="{% url 'dashboard:logout' %}">Logout</a>

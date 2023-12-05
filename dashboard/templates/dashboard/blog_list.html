@@ -121,6 +121,23 @@
             </tbody>
         </table>
     </div>
+    <div class="pagination">
+        <span class="step-links">
+            {% if blogs.has_previous %}
+                <a href="?page=1">&laquo; first</a>
+                <a href="?page={{ blogs.previous_page_number }}" class="pagination-link">previous</a>
+            {% endif %}
+        
+            <span class="current-page">
+                Page {{ blogs.number }} of {{ blogs.paginator.num_pages }}.
+            </span>
+            
+            {% if blogs.has_next %}
+                <a href="?page={{ blogs.next_page_number }}" class="pagination-link">next</a>
+                <a href="?page={{ blogs.paginator.num_pages }}">last &raquo;</a>
+            {% endif %}
+        </span>
+    </div>
 {% endblock %}
 
 

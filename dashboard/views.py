@@ -7,10 +7,7 @@ from django.shortcuts import redirect
 from django.shortcuts import render, get_object_or_404
 from django.views import View
 from .forms import *
-from django.urls import reverse
-from django.http import HttpResponseRedirect
-from django.http import HttpResponse
-from django.urls import reverse_lazy
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 def login(request):
     if request.method == 'POST':
@@ -26,22 +23,21 @@ def login(request):
             return render(request, 'dashboard/login.html', {'error': 'Invalid username or password'})
     return render(request, 'dashboard/login.html')
 
-class BlogCreateView(View):
+class BlogAddView(View):
     template_name = 'dashboard/addblog.html'
 
-    form_class = BlogForm
+    def get(self, request):
+        form = BlogForm()
+        return render(request, self.template_name, {'form': form})
 
-    def form_valid(self, form):
-        # This method is called when valid form data has been POSTed.
-        # It should return an HttpResponse.
+    def post(self, request):
+        form = BlogForm(request.POST, request.FILES)
 
-        self.object = form.save()  # Save the main object (Blog)
-
-        return super(BlogCreateView, self).form_valid(form)
-
-    def get_success_url(self):
-        return reverse_lazy('dashboard:blog')
-    
+        if form.is_valid():
+            form.save()
+            return redirect('dashboard:bloglist')  # Adjust the URL name as needed
+        else:
+            return render(request, self.template_name, {'form': form})
 
 class BlogEditView(View):
     template_name = 'dashboard/edit.html'
@@ -60,19 +56,15 @@ class BlogEditView(View):
         if form.is_valid():
             # Save the form to update the blog
             form.save()
-            return redirect('dashboard:displayblog')
+            return redirect('dashboard:bloglist')
         else:
             # If the form is not valid, re-render the page with the form and errors
             return render(request, self.template_name, {'blog': blog, 'form': form})
 class BlogDeleteView(View):
     def get(self, request, pk):
         blog = get_object_or_404(Blog, pk=pk)
-        return render(request, 'dashboard/blog_delete.html', {'blog': blog})
-
-    def post(self, request, pk):
-        # Handle form submission to delete the blog
-        # Delete the blog object
-        return HttpResponseRedirect(reverse('dashboard:blog_list'))
+        blog.delete()
+        return redirect('dashboard:bloglist')
 
 def index(request):
     return render(request,'dashboard/index.html')
@@ -84,11 +76,21 @@ def detail(request):
     return render(request,'dashboard/detail.html')
 
 def appoinments(request):
-    return render(request,'dashboard/appoinments.html')
+    appoinments=Appointment.objects.all()
+    return render(request,'dashboard/appoinments.html',{'appiontments':appoinments})
 
 def displayblog(request):
     blogs=Blog.objects.all()
-    return render(request,'dashboard/displayblog.html',{'blogs':blogs})
+    page = request.GET.get('page')
+    paginator = Paginator(blogs, 10)  # Show 10 tasks per page
+
+    try:
+        blogs = paginator.page(page)
+    except PageNotAnInteger:
+        blogs = paginator.page(1)
+    except EmptyPage:
+        blogs = paginator.page(paginator.num_pages)
+    return render(request,'dashboard/blog_list.html',{'blogs':blogs})
 
 def patient(request):
     return render(request,'dashboard/patient.html')
