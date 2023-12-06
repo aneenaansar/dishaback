@@ -55,6 +55,10 @@
                 <th>Email</th>
                 <th>Phone</th>
                 <th>Purpose</th>
+                <th>Date</th>
+                <th>Time</th>
+                <th>Status</th>
+                <th>Action</th>
             </tr>
         </thead>
         <tbody>
@@ -64,6 +68,9 @@
                 <td>{{ appoinment.email }}</td>
                 <td>{{ appoinment.contact }}</td>
                 <td>{{ appoinment.purpose }}</td>
+                <td>{{ appoinment.date }}</td>
+                <td>{{ appoinment.time }}</td>
+                {% comment %} <td>{{ appoinment. }}</td> {% endcomment %}
             </tr>
             {% endfor %}
             {% comment %} <tr>
@@ -99,16 +106,17 @@
             Page {{ tasks.number }} of {{ tasks.paginator.num_pages }}.
         </span>
         
-            <span class="current-page">
-                Page {{ tasks.number }} of {{ tasks.paginator.num_pages }}.
-            </span>
-            
-            {% if tasks.has_next %}
-                <a href="?page={{ tasks.next_page_number }}" class="pagination-link">next</a>
-                <a href="?page={{ tasks.paginator.num_pages }}">last &raquo;</a>
-            {% endif %}
+        <span class="current-page">
+            Page {{ tasks.number }} of {{ tasks.paginator.num_pages }}.
         </span>
-    </div>
+        
+        {% if tasks.has_next %}
+            <a href="?page={{ tasks.next_page_number }}" class="pagination-link">next</a>
+            <a href="?page={{ tasks.paginator.num_pages }}">last &raquo;</a>
+        {% endif %}
+        
+    </span>    
+</div>
     
 {% endblock %}
 

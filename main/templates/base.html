@@ -34,6 +34,10 @@
         overflow: visible !important;
         z-index: 99;
       }
+
+      .col-md-6{
+        margin-top: 20px;
+      }
     </style>
 
     <!-- header starts here -->
@@ -89,25 +93,49 @@
                 {{ form.purpose }}
             </div>
         
-            <label for="date" class="block text-base mt-3">Date</label>
-            {% comment %} <input type="text" id="date" name="date" class="border border-gray-800 rounded p-2 w-full"> {% endcomment %}
-            <div id="date" name="date">
-                {{ form.date }}
-            </div>
-
-
+            <!-- <div class="tym">
+                <label for="date" class="block text-base mt-3">Date</label>
+                {% comment %} <input type="text" id="date" name="date" class="border border-gray-800 rounded p-2 w-full"> {% endcomment %}
+                <div id="date" name="date">
+                    {{ form.date }}
+                </div>
+    
+                <label for="time" class="block text-base mt-3">Time</label>
+                {% comment %} <input type="text" id="date" name="date" class="border border-gray-800 rounded p-2 w-full"> {% endcomment %}
+                <div id="time" name="time">
+                    {{ form.time }}
+                </div>
+            </div> -->
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="appointment_date" class="text-black">Date</label>
+                        <div class="y_1">
+                            {{ form.date }}
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="appointment_time" class="text-black">Time</label>
+                        <div class="y_1">
+                            {{ form.time }}
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div class="flex justify-between gap-3">
-                {% comment %} <div class="my-12 flex justify-center">
+                {% comment %} <div class=" flex justify-center">
                     <button class="border border-black w-[10rem] h-[3rem] ipad_min:w-28 ipad_min:h-10 read mobile:h-10 mobile:w-28 close-button" id="cancelbutton">close</button>
                 </div> {% endcomment %}
 
-                <div class="my-12 flex justify-center">
+                <div class=" flex justify-center">
                     <button class="border border-black w-[10rem] h-[3rem] read" id="cancelbutton"><a href="javascript:void(0)">close</a></button>
                 </div>
-                <div class="my-12 flex justify-center ipad_min:hidden mobile:hidden">
+                <div class=" flex justify-center ipad_min:hidden mobile:hidden">
                     <button type="submit" class="border w-[10rem] h-[3rem] rounded-3xl bg-primary">Book Now</button>
                 </div>
-                <div class="my-12  justify-center hidden ipad_min:block mobile:hidden ">
+                <div class=" justify-center hidden ipad_min:block mobile:hidden ">
                     <button type="submit" class="border w-[10rem] h-[3rem] rounded-3xl bg-primary ipad_min:w-28 ipad_min:h-10 mobile:h-10 mobile:w-28">Book</button>
                 </div>
             </div>
