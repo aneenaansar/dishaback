@@ -54,26 +54,11 @@
 <div class="dashboard-form">
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
-        <h2>Edit Blog</h2>
-        <img src="{{ blog.image.url }}" alt="Blog Image" style="height:10rem;width:15rem;"> <!-- Display the image -->
-        <input type="date" name="date" value="{{ blog.date }}" required>
-        <input type="text" name="heading" value="{{ blog.heading }}" placeholder="Heading" required>
-        <textarea name="paragraph" placeholder="Paragraph" required>{{ blog.paragraph }}</textarea>
-        <input type="file" name="image" accept="image/*"> <!-- Allow users to update the image -->
-
-        <h3>Additional Content</h3>
-
-        <input type="text" name="h1" value="{{ blog.h1 }}" placeholder="Heading 1">
-        <textarea name="p1" placeholder="Paragraph 1">{{ blog.p1 }}</textarea>
-
-        <input type="text" name="h2" value="{{ blog.h2 }}" placeholder="Heading 2">
-        <textarea name="p2" placeholder="Paragraph 2">{{ blog.p2 }}</textarea>
-
-        <input type="text" name="h3" value="{{ blog.h3 }}" placeholder="Heading 3">
-        <textarea name="p3" placeholder="Paragraph 3">{{ blog.p3 }}</textarea>
-
-        <!-- Add fields h4 to p9 as needed -->
-
+        <h2>Add Blog</h2>
+        {{ form.date }}
+        {{ form.title }}
+        {{ form.content }}
+        {{ form.image }}
         <button type="submit">Submit</button>
     </form>
 </div>
@@ -82,3 +67,4 @@
 </html>
 
 {% endblock %}
+
