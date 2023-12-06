@@ -50,10 +50,10 @@
     <table>
         <thead>
             <tr>
-                <th>Date</th>
-                <th>Time</th>
                 <th>Patient Name</th>
-                <th>Status</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Purpose</th>
             </tr>
         </thead>
         <tbody>
@@ -64,6 +64,7 @@
                 <td>{{ appoinment.contact }}</td>
                 <td>{{ appoinment.purpose }}</td>
             </tr>
+            {% endfor %}
             {% comment %} <tr>
                 <td>2023-01-02</td>
                 <td>02:30 PM</td>

@@ -77,7 +77,7 @@ def detail(request):
 
 def appoinments(request):
     appoinments=Appointment.objects.all()
-    return render(request,'dashboard/appoinments.html',{'appiontments':appoinments})
+    return render(request,'dashboard/appoinments.html',{'appoinments':appoinments})
 
 def displayblog(request):
     blogs=Blog.objects.all()
