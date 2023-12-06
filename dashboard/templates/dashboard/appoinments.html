@@ -1,6 +1,7 @@
 {% extends 'dashboard/base.html' %}
 
 {% block title %} Rema devi | Dashboard {% endblock %}
+
 {% block content %}
 
 
@@ -98,11 +99,16 @@
             Page {{ tasks.number }} of {{ tasks.paginator.num_pages }}.
         </span>
         
-        {% if tasks.has_next %}
-            <a href="?page={{ tasks.next_page_number }}" class="pagination-link">next</a>
-            <a href="?page={{ tasks.paginator.num_pages }}">last &raquo;</a>
-        {% endif %}
-    </span>
-</div>
+            <span class="current-page">
+                Page {{ tasks.number }} of {{ tasks.paginator.num_pages }}.
+            </span>
+            
+            {% if tasks.has_next %}
+                <a href="?page={{ tasks.next_page_number }}" class="pagination-link">next</a>
+                <a href="?page={{ tasks.paginator.num_pages }}">last &raquo;</a>
+            {% endif %}
+        </span>
+    </div>
+    
 {% endblock %}
 
