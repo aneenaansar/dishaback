@@ -40,6 +40,9 @@ INSTALLED_APPS = [
     'main',
     'dashboard',
     'ckeditor',
+    
+
+    
 ]
 
 MIDDLEWARE = [

@@ -3,7 +3,7 @@ from django.contrib.auth import authenticate, login as auth_login  # Rename logi
 from main.models import *
 from django.contrib.auth import logout
 from django.shortcuts import redirect
-
+from .models import *
 from django.shortcuts import render, get_object_or_404
 from django.views import View
 from .forms import *
@@ -57,15 +57,35 @@ class BlogEditView(View):
             # Save the form to update the blog
             form.save()
             return redirect('dashboard:bloglist')
-        else:
-            # If the form is not valid, re-render the page with the form and errors
-            return render(request, self.template_name, {'blog': blog, 'form': form})
+        
+        # If the form is not valid, re-render the page with the form and errors
+        return render(request, self.template_name, {'blog': blog, 'form': form})
+    
+
 class BlogDeleteView(View):
     def get(self, request, pk):
         blog = get_object_or_404(Blog, pk=pk)
         blog.delete()
         return redirect('dashboard:bloglist')
 
+
+class PatientListView(View):
+    template_name = 'dashboard/patient.html'
+
+    def get(self, request):
+        search_id = request.GET.get('search_id', '')
+        search_name = request.GET.get('search_name', '')
+
+        patients = Patient.objects.all()
+
+        if search_id:
+            patients = patients.filter(patient_id__icontains=search_id)
+
+        if search_name:
+            patients = patients.filter(name__icontains=search_name)
+
+        return render(request, self.template_name, {'patients': patients})
+    
 def index(request):
     return render(request,'dashboard/index.html')
 

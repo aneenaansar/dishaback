@@ -50,19 +50,19 @@
             color: white;
         }
     </style>
+    {{ form.media }}
 
-<div class="dashboard-form">
-    <form method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-        <h2>Add Blog</h2>
-        {{ form.date }}
-        {{ form.title }}
-        {{ form.content }}
-        {{ form.image }}
-        <button type="submit">Submit</button>
-    </form>
-</div>
-
+    <div class="dashboard-form">
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <h2>Add Blog</h2>
+            {{ form.date }}
+            {{ form.title }}
+            {{ form.content }}
+            {{ form.image }}
+            <button type="submit">Submit</button>
+        </form>
+    </div>
 </body>
 </html>
 

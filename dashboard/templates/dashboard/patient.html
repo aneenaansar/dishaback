@@ -91,6 +91,11 @@
     <div class="display">
         <h2>Patient Details</h2>
         <div class="patient-actions">
+            <form method="get" action="{% url 'dashboard:patient' %}">
+                <input type="text" name="search_id" placeholder="Search by ID">
+                <input type="text" name="search_name" placeholder="Search by Name">
+                <button type="submit" class="add-details-btn">Search</button>
+            </form>
             <a href="{% url 'dashboard:detail' %}"><button class="add-details-btn">Add Details</button></a>
         </div>
     </div>

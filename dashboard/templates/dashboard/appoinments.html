@@ -97,22 +97,22 @@
 </div>
 <div class="pagination">
     <span class="step-links">
-        {% if tasks.has_previous %}
+        {% if appoinments.has_previous %}
             <a href="?page=1">&laquo; first</a>
-            <a href="?page={{ tasks.previous_page_number }}" class="pagination-link">previous</a>
+            <a href="?page={{ appoinments.previous_page_number }}" class="pagination-link">previous</a>
         {% endif %}
     
         <span class="current-page">
-            Page {{ tasks.number }} of {{ tasks.paginator.num_pages }}.
+            Page {{ appoinments.number }} of {{ appoinments.paginator.num_pages }}.
         </span>
         
         <span class="current-page">
-            Page {{ tasks.number }} of {{ tasks.paginator.num_pages }}.
+            Page {{ appoinments.number }} of {{ appoinments.paginator.num_pages }}.
         </span>
         
         {% if tasks.has_next %}
-            <a href="?page={{ tasks.next_page_number }}" class="pagination-link">next</a>
-            <a href="?page={{ tasks.paginator.num_pages }}">last &raquo;</a>
+            <a href="?page={{ appoinments.next_page_number }}" class="pagination-link">next</a>
+            <a href="?page={{ appoinments.paginator.num_pages }}">last &raquo;</a>
         {% endif %}
         
     </span>    
