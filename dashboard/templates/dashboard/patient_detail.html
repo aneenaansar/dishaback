@@ -83,7 +83,8 @@
 
 <div class="patient-details">
     <h2>Patient Details</h2>
-    <form>
+    <form method="post" action="{% url 'dashboard:patient_details' %}">
+        {% csrf_token %}
         <div class="hello">
             <input type="text" name="firstName" placeholder="First Name" class="patient-details" required>
             <input type="text" name="lastName" placeholder="Last Name" class="patient-details" required>

@@ -56,9 +56,13 @@
         <form method="post" enctype="multipart/form-data">
             {% csrf_token %}
             <h2>Add Blog</h2>
+            <label>Date</label>
             {{ form.date }}
+            <label>Title</label>
             {{ form.title }}
-            {{ form.content }}
+            <label>Content</label><br><br>
+            {{ form.content }}<br><br>
+            <label>Image</label>
             {{ form.image }}
             <button type="submit">Submit</button>
         </form>

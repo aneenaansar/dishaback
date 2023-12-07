@@ -52,22 +52,25 @@
     </style>
     {{ form.media }}
 
-<div class="dashboard-form">
-    <form method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-        <h2>Edit Blog</h2>
-        {% comment %} <img src="{{ blog.image.url }}" alt="Blog Image" style="height:10rem;width:15rem;"> <!-- Display the existing image --> {% endcomment %}
-        {{ form.date }}
-        {{ form.title }}
-        {{ form.content }}
-        {{ form.image }}
-        <button type="submit">Submit</button>
-    </form>
-</div>
+    <div class="dashboard-form">
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <h2>Edit Blog</h2>
+            <label>Date</label>
+            {{ form.date }}
+            <label>Title</label>
+            {{ form.title }}
+            <label>Content</label><br><br>
+            {{ form.content }}<br><br>
+            <label>Image</label>
+            {{ form.image }}
+            <button type="submit">Submit</button>
+        </form>
+    </div>
 
 
 </body>
 </html>
-
+<script src="https://cdn.ckeditor.com/4.16.0/standard/ckeditor.js"></script>
 {% endblock %}
 

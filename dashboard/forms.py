@@ -1,6 +1,7 @@
 from django import forms
 from main.models import Blog
 from ckeditor.fields import RichTextField
+from . models import *
 
 class BlogForm(forms.ModelForm):
     date = forms.DateField(
@@ -13,6 +14,11 @@ class BlogForm(forms.ModelForm):
             'content': forms.Textarea(attrs={'class': 'ckeditor'}),
             
         }
+
+class PatientForm(forms.ModelForm):
+    class Meta:
+        model = Patient
+        fields = ['first_name', 'last_name', 'patient_id', 'gender', 'address', 'phone_number', 'date', 'remarks']        
       
 
 class LoginForm(forms.Form):

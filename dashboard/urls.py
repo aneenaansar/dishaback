@@ -11,7 +11,7 @@ urlpatterns = [
     path('',views.login,name='login'),
     path('index/',views.index, name='index'),
    
-    path('detail/',views.detail, name='detail'),
+    path('patient_details/', PatientDetailsView.as_view(), name='patient_details'),
     path('appoinments/',views.appoinments, name='appoinments'),
     path('bloglist/',views.displayblog, name='bloglist'),
     path('patient_list/', PatientListView.as_view(), name='patient'),

@@ -45,14 +45,14 @@
 <header>
     <h1>DISHA</h1>
 </header>
-{% if user.is_superuser %}
+
 <nav>
     <a href="{% url 'dashboard:bloglist' %}">Blog</a>
     <a href="{% url 'dashboard:patient' %}">Patient Details</a>
     <a href="{% url 'dashboard:appoinments' %}">Appointments</a>
     <a href="{% url 'dashboard:logout' %}">Logout</a>
 </nav>
-{% endif %}
+
 <!-- Your dashboard content goes here -->
 {% block content %}
 {% endblock %}

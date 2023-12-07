@@ -43,8 +43,9 @@ class BlogEditView(View):
     template_name = 'dashboard/edit.html'
 
     def get(self, request, pk):
-        blog = get_object_or_404(Blog, pk=pk)
-        return render(request, self.template_name, {'blog': blog})
+        form = BlogForm()
+       
+        return render(request, self.template_name, {'form': form})
 
     def post(self, request, pk):
         blog = get_object_or_404(Blog, pk=pk)
@@ -85,7 +86,19 @@ class PatientListView(View):
             patients = patients.filter(name__icontains=search_name)
 
         return render(request, self.template_name, {'patients': patients})
-    
+class PatientDetailsView(View):
+    template_name = 'dashboard/patient_details.html'
+
+    def get(self, request):
+        form = PatientForm()
+        return render(request, self.template_name, {'form': form})
+
+    def post(self, request):
+        form = PatientForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('dashboard:patient_list')  # Redirect to the patient list view
+        return render(request, self.template_name, {'form': form})    
 def index(request):
     return render(request,'dashboard/index.html')
 
