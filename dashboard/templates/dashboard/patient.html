@@ -50,6 +50,7 @@
             justify-content: space-between;
             align-items: center;
             margin-top: 20px;
+            gap: 1rem;
         }
 
         .add-details-btn {
@@ -96,7 +97,7 @@
                 <input type="text" name="search_name" placeholder="Search by Name">
                 <button type="submit" class="add-details-btn">Search</button>
             </form>
-            <a href="{% url 'dashboard:detail' %}"><button class="add-details-btn">Add Details</button></a>
+            <a href="{% url 'dashboard:patient_details' %}"><button class="add-details-btn">Add Details</button></a>
         </div>
     </div>
     
@@ -121,7 +122,7 @@
                 <td>123 Main St, City</td>
                 <td>123-456-7890</td>
                 <td>
-                    <a href="{% url 'dashboard:detail' %}"><img class="edit-btn" src="{% static 'image/edit-246.png' %}" alt=""></a>
+                    <a href="{% url 'dashboard:patient_details' %}"><img class="edit-btn" src="{% static 'image/edit-246.png' %}" alt=""></a>
                     
                     <img class="delete-btn" src="{% static 'image/3405244.png' %}" alt="">
 

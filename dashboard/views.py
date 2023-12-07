@@ -87,7 +87,7 @@ class PatientListView(View):
 
         return render(request, self.template_name, {'patients': patients})
 class PatientDetailsView(View):
-    template_name = 'dashboard/patient_details.html'
+    template_name = 'dashboard/patient_detail.html'
 
     def get(self, request):
         form = PatientForm()
@@ -106,7 +106,7 @@ def addblog(request):
     return render(request,'dashboard/addblog.html')
 
 def detail(request):
-    return render(request,'dashboard/detail.html')
+    return render(request,'dashboard/patient_detail.html')
 
 def appoinments(request):
     appoinments=Appointment.objects.all()
