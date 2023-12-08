@@ -98,18 +98,12 @@
             <input type="text" name="phoneNumber" placeholder="Phone Number" required>
         </div>
         <div class="input-group">
-        <!-- <div class="holaa">
             <input type="date" name="dob" placeholder="Date of Birth" required>
             <input type="number" name="age" placeholder="Age" required>
         </div>
         <div class="date-remarks-group">
             <input type="date" name="Date">
             <textarea name="Remarks" placeholder="Remarks" rows="5"></textarea>
-            <textarea type="text" name="remarks" placeholder="Remarks"></textarea>
-        </div> -->
-        <div id="image-upload-container" class="how">
-            <input type="date" name="Date" class="hehe"  multiple>
-            <textarea name="Remarks" placeholder="Remarks" rows="5" class="textarea1"></textarea>
         </div>
 
         <div class="button-group">
@@ -118,7 +112,23 @@
         </div>
     </form>
 
-    
+    <div class="pagination">
+        <span class="step-links">
+            {% if tasks.has_previous %}
+                <a href="?page=1">&laquo; first</a>
+                <a href="?page={{ tasks.previous_page_number }}" class="pagination-link">previous</a>
+            {% endif %}
+
+            <span class="current-page">
+                Page {{ tasks.number }} of {{ tasks.paginator.num_pages }}.
+            </span>
+
+            {% if tasks.has_next %}
+                <a href="?page={{ tasks.next_page_number }}" class="pagination-link">next</a>
+                <a href="?page={{ tasks.paginator.num_pages }}">last &raquo;</a>
+            {% endif %}
+        </span>
+    </div>
 </div>
 
 <script>
