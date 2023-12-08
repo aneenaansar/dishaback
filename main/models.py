@@ -22,7 +22,7 @@ class Appointment(models.Model):
     date = models.DateField()
     status = models.CharField(max_length=50, choices=STATUS, default='Pending', blank=True, null=True)
     time = models.CharField(max_length=50, blank=True, null=True)
-    approval = models.CharField(max_length=50, choices=APPROVAL, default='Pending')
+    # approval = models.CharField(max_length=50, choices=APPROVAL, default='Pending')
 
     def __str__(self):
         return self.name

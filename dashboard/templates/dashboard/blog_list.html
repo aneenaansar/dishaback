@@ -109,7 +109,7 @@
                         <td>{{ blog.date }}</td>
                         <td><a href="#">{{ blog.title }}</a></td>
                         <td>
-                            <a href="{% url 'dashboard:edit_blog' blog.id %}">
+                            <a href="{% url 'dashboard:blog_edit' blog.id %}">
                                 <img class="edit-btn" src="{% static 'image/edit-246.png' %}" alt="Edit">
                             </a>
                             <a href="{% url 'dashboard:delete_blog' blog.id %}">
