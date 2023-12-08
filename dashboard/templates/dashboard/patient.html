@@ -192,7 +192,7 @@
                         <td>{{ patient.address }}</td>
                         <td>{{ patient.phone_number }}</td>
                         <td>
-                            <a href="{% url 'dashboard:patient_details' %}">
+                            <a href="{% url 'dashboard:patient_edit' patient.id %}">
                                 <img class="edit-btn" src="{% static 'image/edit-246.png' %}" alt="">
                             </a>
                             <a href="{% url 'dashboard:delete_patient' patient.id %}">

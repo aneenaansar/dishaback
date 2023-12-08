@@ -24,6 +24,12 @@ class RemarkForm(forms.ModelForm):
         model = Remark
         fields = ['date','remarks']
       
+class PatientEditForm(forms.ModelForm):
+    class Meta:
+        model = Patient
+        fields = '__all__'
+
+
 class AppointmentEditForm(forms.ModelForm):
     TIME_CHOICES = [
         ('morning', 'Morning'),
