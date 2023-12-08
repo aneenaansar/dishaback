@@ -44,26 +44,15 @@ def single(request,pk):
 
 
 def appointment(request):
-   
     if request.method == 'POST':
-
         form = AppointmentForm(request.POST)
-
         if form.is_valid():
-            
             form.save()
-            messages.success(request, 'Your Appointment request has been send.')
-
-            return redirect('main:index')
-
+            messages.success(request, 'Your Appointment request has been sent.')
         else:
-             messages.error(request, 'Sorry, Your Appointment request has some error')
-
-             return redirect('main:index')
-
+            messages.error(request, 'Sorry, Your Appointment request has some errors')
     else:
-        form=AppointmentForm()
+        form = AppointmentForm()
 
-    return redirect('main:index')
-
+    return render(request, 'index.html', {'form': form})
 

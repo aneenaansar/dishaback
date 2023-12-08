@@ -62,36 +62,37 @@
             </tr>
         </thead>
         <tbody>
-            {% for appoinment in appoinments %}
+            {% for appointment in appoinments %}
             <tr>
-                <td>{{ appoinment.name }}</td>
-                <td>{{ appoinment.email }}</td>
-                <td>{{ appoinment.contact }}</td>
-                <td>{{ appoinment.purpose }}</td>
-                <td>{{ appoinment.date }}</td>
-                <td>{{ appoinment.time }}</td>
-                {% comment %} <td>{{ appoinment. }}</td> {% endcomment %}
+                <td>{{ appointment.name }}</td>
+                <td>{{ appointment.email }}</td>
+                <td>{{ appointment.contact }}</td>
+                <td>{{ appointment.purpose }}</td>
+                <td>{{ appointment.date }}</td>
+                <td>{{ appointment.time }}</td>
+                <td>
+                    {% if appointment.status == 'Pending' %}
+                        <span class="status-pending">{{ appointment.status }}</span>
+                    {% elif appointment.status == 'Approved' %}
+                        <span class="status-approved">{{ appointment.status }}</span>
+                    {% elif appointment.status == 'Canceled' %}
+                        <span class="status-canceled">{{ appointment.status }}</span>
+                    {% else %}
+                        <span class="status-unknown">{{ appointment.status }}</span>
+                    {% endif %}
+                    <div>
+                        {% if appointment.status == 'Pending' %}
+                            <button class="action-btn" onclick="approveAppointment({{ appointment.id }})">Approve</button>
+                            <button class="action-btn" onclick="rejectAppointment({{ appointment.id }})">Reject</button>
+                        {% elif appointment.status == 'Approved' %}
+                            <button class="action-btn" onclick="completeAppointment({{ appointment.id }})">Complete</button>
+                        {% else %}
+                            <!-- Display some other action for other statuses -->
+                        {% endif %}
+                    </div>
+                </td>
             </tr>
             {% endfor %}
-            {% comment %} <tr>
-                <td>2023-01-02</td>
-                <td>02:30 PM</td>
-                <td>Jane Smith</td>
-                <td>Pending</td>
-            </tr>
-            <tr>
-                <td>2023-01-02</td>
-                <td>02:30 PM</td>
-                <td>Jane Smith</td>
-                <td>Pending</td>
-            </tr>
-            <tr>
-                <td>2023-01-02</td>
-                <td>02:30 PM</td>
-                <td>Jane Smith</td>
-                <td>Pending</td>
-            </tr> {% endcomment %}
-            <!-- Add more rows as needed -->
         </tbody>
     </table>
 </div>

@@ -14,11 +14,15 @@ class BlogForm(forms.ModelForm):
             'content': forms.Textarea(attrs={'class': 'ckeditor'}),
             
         }
-
 class PatientForm(forms.ModelForm):
     class Meta:
         model = Patient
-        fields = ['first_name', 'last_name', 'patient_id', 'gender', 'address', 'phone_number', 'date', 'remarks']        
+        fields = '__all__'
+
+class RemarkForm(forms.ModelForm):
+    class Meta:
+        model = Remark
+        fields = ['date','remarks']
       
 
 class LoginForm(forms.Form):

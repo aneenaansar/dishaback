@@ -84,72 +84,140 @@
             display: flex;
             justify-content: space-between;
         }
+        .pagination {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+    
+        .step-links {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+    
+        .pagination-link {
+            padding: 5px 10px;
+            background-color: #fcb9a7;
+            color: black;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+    
+        .pagination-link:hover {
+            background-color: #f3a28c;
+        }
+    
+        .current-page {
+            margin: 0 10px;
+            font-weight: bold;
+        }
+        .search-form {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 20px;
+        }
+    
+        .search-field {
+            margin-right: 10px;
+        }
+    
+        .search-form input {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            width: 200px; /* Adjust the width as needed */
+        }
+    
+        .add-details-btn {
+            padding: 12px;
+            background-color: #fcb9a7;
+            color: black;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+    
+        .add-details-btn:hover {
+            background-color: #f3a28c;
+        }
     </style>
-
-
-<div class="patient-container">
-    <div class="display">
-        <h2>Patient Details</h2>
-        <div class="patient-actions">
-            <form method="get" action="{% url 'dashboard:patient' %}">
-                <input type="text" name="search_id" placeholder="Search by ID">
-                <input type="text" name="search_name" placeholder="Search by Name">
-                <button type="submit" class="add-details-btn">Search</button>
-            </form>
-            <a href="{% url 'dashboard:detail' %}"><button class="add-details-btn">Add Details</button></a>
-        </div>
+    <div style="display:flex;justify-content:right;width:90%;margin-top:3rem;">
+        <a href="{% url 'dashboard:patient_details' %}">
+            <button class="add-details-btn">Add Details</button>
+        </a>
     </div>
-    
-    <table>
-        <thead>
-            <tr>
-                <th>Patient ID</th>
-                <th>Name</th>
-                <th>Date of Birth</th>
-                <th>Gender</th>
-                <th>Address</th>
-                <th>Phone Number</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>P12345</td>
-                <td>John Doe</td>
-                <td>1990-01-01</td>
-                <td>Male</td>
-                <td>123 Main St, City</td>
-                <td>123-456-7890</td>
-                <td>
-                    <a href="{% url 'dashboard:detail' %}"><img class="edit-btn" src="{% static 'image/edit-246.png' %}" alt=""></a>
-                    
-                    <img class="delete-btn" src="{% static 'image/3405244.png' %}" alt="">
 
-                </td>
-            </tr>
-            <!-- Add more rows as needed -->
-        </tbody>
-    </table>
+    <div class="patient-container">
+        <div class="display">
+            <h2>Patient Details</h2>
+            <div class="patient-actions">
+                <form method="get" action="{% url 'dashboard:patient' %}" class="search-form">
+                    <div class="search-field">
+                        <input type="text" name="search" placeholder="Search by ID,Name or Phone">
+                    </div>
+                    <button type="submit" class="add-details-btn">Search</button>
+                </form>
+                
+            </div>
+            
+        </div>
 
+        <table>
+            <thead>
+                <tr>
+                    <th>Patient ID</th>
+                    <th>Name</th>
+                    <th>Date of Birth</th>
+                    <th>Gender</th>
+                    <th>Address</th>
+                    <th>Phone Number</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for patient in patients %}
+                    <tr>
+                        <td>{{ patient.patient_id }}</td>
+                        <td>{{ patient.first_name }} {{ patient.last_name }}</td>
+                        <td>{{ patient.date_of_birth }}</td>
+                        <td>{{ patient.gender }}</td>
+                        <td>{{ patient.address }}</td>
+                        <td>{{ patient.phone_number }}</td>
+                        <td>
+                            <a href="{% url 'dashboard:patient_details' %}">
+                                <img class="edit-btn" src="{% static 'image/edit-246.png' %}" alt="">
+                            </a>
+                            <a href="{% url 'dashboard:delete_patient' patient.id %}">
+                                <img class="delete-btn" src="{% static 'image/3405244.png' %}" alt="Delete">
+                            </a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <div class="pagination">
+        <span class="step-links">
+            {% if patients.has_previous %}
+                <a href="?page=1" class="pagination-link">&laquo; first</a>
+                <a href="?page={{ patients.previous_page_number }}" class="pagination-link">previous</a>
+            {% endif %}
     
-</div>
-<div class="pagination">
-    <span class="step-links">
-        {% if tasks.has_previous %}
-            <a href="?page=1">&laquo; first</a>
-            <a href="?page={{ tasks.previous_page_number }}" class="pagination-link">previous</a>
-        {% endif %}
+            <span class="current-page">
+                Page {{ patients.number }} of {{ patients.paginator.num_pages }}.
+            </span>
     
-        <span class="current-page">
-            Page {{ tasks.number }} of {{ tasks.paginator.num_pages }}.
+            {% if patients.has_next %}
+                <a href="?page={{ patients.next_page_number }}" class="pagination-link">next</a>
+                <a href="?page={{ patients.paginator.num_pages }}" class="pagination-link">last &raquo;</a>
+            {% endif %}
         </span>
-        
-        {% if tasks.has_next %}
-            <a href="?page={{ tasks.next_page_number }}" class="pagination-link">next</a>
-            <a href="?page={{ tasks.paginator.num_pages }}">last &raquo;</a>
-        {% endif %}
-    </span>
-</div>
+    </div>
 {% endblock %}
 
 

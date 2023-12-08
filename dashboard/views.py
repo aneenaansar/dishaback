@@ -8,6 +8,7 @@ from django.shortcuts import render, get_object_or_404
 from django.views import View
 from .forms import *
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.db.models import Q
 
 def login(request):
     if request.method == 'POST':
@@ -69,25 +70,44 @@ class BlogDeleteView(View):
         blog.delete()
         return redirect('dashboard:bloglist')
 
-
+class PatientDeleteView(View):
+    def get(self, request, pk):
+        patient = get_object_or_404(Patient, pk=pk)
+        patient.delete()
+        return redirect('dashboard:patient')
+    
 class PatientListView(View):
     template_name = 'dashboard/patient.html'
 
     def get(self, request):
-        search_id = request.GET.get('search_id', '')
-        search_name = request.GET.get('search_name', '')
-
+        search_term = request.GET.get('search', '')
         patients = Patient.objects.all()
 
-        if search_id:
-            patients = patients.filter(patient_id__icontains=search_id)
+        if search_term:
+            patients = patients.filter(
+                Q(patient_id__icontains=search_term) |
+                Q(first_name__icontains=search_term) |
+                Q(last_name__icontains=search_term) |
+                Q(phone_number__icontains=search_term)
+            )
 
-        if search_name:
-            patients = patients.filter(name__icontains=search_name)
+        # Pagination
+        page = request.GET.get('page')
+        paginator = Paginator(patients, 10)  # Show 10 patients per page
 
-        return render(request, self.template_name, {'patients': patients})
+        try:
+            patients = paginator.page(page)
+        except PageNotAnInteger:
+            patients = paginator.page(1)
+        except EmptyPage:
+            patients = paginator.page(paginator.num_pages)
+
+        context = {'patients': patients}
+        return render(request, self.template_name, context)
+
+    
 class PatientDetailsView(View):
-    template_name = 'dashboard/patient_details.html'
+    template_name = 'dashboard/patient_detail.html'
 
     def get(self, request):
         form = PatientForm()
@@ -96,9 +116,18 @@ class PatientDetailsView(View):
     def post(self, request):
         form = PatientForm(request.POST)
         if form.is_valid():
-            form.save()
-            return redirect('dashboard:patient_list')  # Redirect to the patient list view
-        return render(request, self.template_name, {'form': form})    
+            patient = form.save()
+
+            # Handling dynamic date and remarks fields
+            dates = request.POST.getlist('Date')
+            remarks_list = request.POST.getlist('Remarks')
+
+            for date, remarks in zip(dates, remarks_list):
+                Remark.objects.create(patient=patient, date=date, remarks=remarks)
+
+            return redirect('dashboard:patient_list')  # Adjust the URL name as needed
+        return render(request, self.template_name,{'form':form})
+
 def index(request):
     return render(request,'dashboard/index.html')
 
@@ -125,8 +154,6 @@ def displayblog(request):
         blogs = paginator.page(paginator.num_pages)
     return render(request,'dashboard/blog_list.html',{'blogs':blogs})
 
-def patient(request):
-    return render(request,'dashboard/patient.html')
 
 
 def logout_view(request):
