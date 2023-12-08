@@ -135,7 +135,7 @@ def addblog(request):
     return render(request,'dashboard/addblog.html')
 
 def detail(request):
-    return render(request,'dashboard/detail.html')
+    return render(request,'dashboard/patient_detail.html')
 
 def appoinments(request):
     appoinments=Appointment.objects.all()
