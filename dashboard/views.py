@@ -105,27 +105,105 @@ class PatientListView(View):
 class PatientDetailsView(View):
     template_name = 'dashboard/patient_detail.html'
 
-    def get(self, request):
-        form = PatientForm()
-        return render(request, self.template_name, {'form': form})
+    def get(self, request, *args, **kwargs):
+        return render(request, self.template_name)
 
-    def post(self, request):
-        form = PatientForm(request.POST)
+    def post(self, request, *args, **kwargs):
+        # Process the main patient details
+        first_name = request.POST.get('firstName')
+        last_name = request.POST.get('lastName')
+        patient_id = request.POST.get('patientId')
+        gender = request.POST.get('gender')
+        address = request.POST.get('address')
+        phone_number = request.POST.get('phoneNumber')
+        date_of_birth = request.POST.get('dob')
+        date = request.POST.get('date')
+        remarks = request.POST.get('remarks')
+
+        # Create Patient instance
+        patient = Patient.objects.create(
+            first_name=first_name,
+            last_name=last_name,
+            patient_id=patient_id,
+            gender=gender,
+            address=address,
+            phone_number=phone_number,
+            date_of_birth=date_of_birth,
+        )
+
+        # Create Remark instance
+        Remark.objects.create(
+            patient=patient,
+            date=date,
+            remarks=remarks,
+        )
+
+        # Process dynamic fields
+        dynamic_dates = request.POST.getlist('Date')
+        dynamic_remarks = request.POST.getlist('Remarks')
+
+        for dynamic_date, dynamic_remark in zip(dynamic_dates, dynamic_remarks):
+            Remark.objects.create(
+                patient=patient,
+                date=dynamic_date,
+                remarks=dynamic_remark,
+            )
+
+        return redirect('dashboard:patient')
+class PatientEditView(View):
+    template_name = 'dashboard/patient_edit.html'
+
+    def get(self, request, patient_id, *args, **kwargs):
+        patient = get_object_or_404(Patient, pk=patient_id)
+        remarks = Remark.objects.filter(patient=patient)
+
+        context = {
+            'patient': patient,
+            'remarks': remarks,
+        }
+
+        return render(request, self.template_name, context)
+
+    def post(self, request, patient_id, *args, **kwargs):
+        patient = get_object_or_404(Patient, pk=patient_id)
+        remarks = Remark.objects.filter(patient=patient)
+
+        form = PatientEditForm(request.POST, instance=patient)
+
         if form.is_valid():
-            patient = form.save()
+            print("Form is valid")  # Add this line for debugging
+            form.save()
 
-            # Handling dynamic date and remarks fields
-            dates = request.POST.getlist('Date')
-            remarks_list = request.POST.getlist('Remarks')
+            # Update remarks
+            for remark in remarks:
+                remark.date = request.POST.get(f'date_{remark.id}')
+                remark.remarks = request.POST.get(f'remarks_{remark.id}')
+                remark.save()
 
-            for date, remarks in zip(dates, remarks_list):
-                Remark.objects.create(patient=patient, date=date, remarks=remarks)
+            print("Redirecting...")  # Add this line for debugging
+            return redirect('dashboard:patient')
 
-            return redirect('dashboard:patient_list')  # Adjust the URL name as needed
-        return render(request, self.template_name,{'form':form})
+        print("Form is not valid")  # Add this line for debugging
+        context = {
+            'patient': patient,
+            'remarks': remarks,
+            'form': form,
+        }
+
+        return render(request, self.template_name, context)
 
 def index(request):
-    return render(request,'dashboard/index.html')
+     # Retrieve counts
+    appointment_count = Appointment.objects.count()
+    patient_count = Patient.objects.count()
+    blog_count = Blog.objects.count()
+
+    context = {
+        'appointment_count': appointment_count,
+        'patient_count': patient_count,
+        'blog_count': blog_count,
+    }
+    return render(request,'dashboard/index.html',context)
 
 def addblog(request):
     return render(request,'dashboard/addblog.html')
@@ -150,12 +228,15 @@ class AppointmentEditView(View):
 
         if form.is_valid():
             form.save()
-            return redirect('dashboard:appoinments')  # Correct the redirect URL
+            return redirect('dashboard:appointments')  # Correct the redirect URL
         else:
-            # Print form errors to the console for debugging
-            print(form.errors)
+            # Print form errors and data to the console for debugging
+            print("Form errors:", form.errors)
+            print("Form data:", request.POST)
 
         return render(request, self.template_name, {'appointment': appointment, 'form': form})
+    
+
 class AppointmentDeleteView(View):
     def get(self, request, pk):
         patient = get_object_or_404(Appointment, pk=pk)
@@ -181,3 +262,5 @@ def logout_view(request):
     logout(request)
     # Redirect to a specific URL after logout, or to the homepage
     return redirect('dashboard:login')    
+
+

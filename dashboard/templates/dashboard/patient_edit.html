@@ -1,9 +1,8 @@
 {% extends 'dashboard/base.html' %}
 
-{% block title %} Rema devi | Dashboard {% endblock %}
-{% block content %}
+{% block title %} Edit Patient Details {% endblock %}
 
-{% load static %}
+{% block content %}
 
 <style>
     body {
@@ -105,76 +104,94 @@
         color: white;
     }
 </style>
-
 <div class="patient-details">
-    <h2>Patient Details</h2>
-    <form method="post" action="{% url 'dashboard:patient_details' %}">
+    <h2>Edit Patient Details</h2>
+    <form method="post" action="{% url 'dashboard:patient_edit' patient.id %}">
         {% csrf_token %}
+        
         <div class="input-group">
-            <div style="display: flex; gap: 15px;">
-                <div style="flex: 1;">
-                    <label for="firstName">First Name:</label>
-                    <input type="text" id="firstName" name="firstName" required>
-                </div>
-                <div style="flex: 1;">
-                    <label for="lastName">Last Name:</label>
-                    <input type="text" id="lastName" name="lastName" required>
-                </div>
+        <div style="display: flex; gap: 15px;">
+            <div style="flex: 1;">
+                <label for="firstName">First Name:</label>
+                <input type="text" id="firstName" name="firstName" value="{{ patient.first_name }}" required>
+            </div>
+            <div style="flex: 1;">
+                <label for="lastName">Last Name:</label>
+                <input type="text" id="lastName" name="lastName" value="{{ patient.last_name }}" required>
             </div>
         </div>
+        </div>
+        
         <div class="input-group">
-            <div style="display: flex; gap: 15px;">
-                <div style="flex: 1;">
-                    <label for="patientId">Patient ID:</label>
-                    <input type="text" id="patientId" name="patientId" required>
-                </div>
-                <div style="flex: 1;">
-                    <label for="gender">Gender:</label>
-                    <select id="gender" name="gender" required>
-                        <option value="" disabled selected>Select Gender</option>
-                        <option value="male">Male</option>
-                        <option value="female">Female</option>
-                        <option value="other">Other</option>
-                    </select>
-                </div>
+        <div style="display: flex; gap: 15px;">
+            <div style="flex: 1;">
+                <label for="patientId">Patient ID:</label>
+                <input type="text" id="patientId" name="patientId" value="{{ patient.patient_id }}" required>
+            </div>
+            <div style="flex: 1;">
+                <label for="gender">Gender:</label>
+                <select id="gender" name="gender" required>
+                    <option value="male" {% if patient.gender == 'male' %}selected{% endif %}>Male</option>
+                    <option value="female" {% if patient.gender == 'female' %}selected{% endif %}>Female</option>
+                    <option value="other" {% if patient.gender == 'other' %}selected{% endif %}>Other</option>
+                </select>
             </div>
         </div>
+        </div>
+        
         <div class="input-group">
             <label for="address">Address:</label>
-            <textarea type="text" id="address" name="address" style="height: 8rem;"></textarea>
+            <textarea type="text" id="address" name="address" style="height: 8rem;" required>{{ patient.address }}</textarea>
         </div>
+        
         <div class="input-group">
             <div style="display: flex; gap: 15px;">
                 <div style="flex: 1;">
                     <label for="phoneNumber">Phone Number:</label>
-                    <input type="text" id="phoneNumber" name="phoneNumber" required>
+                    <input type="text" id="phoneNumber" name="phoneNumber" value="{{ patient.phone_number }}" required>
                 </div>
                 <div style="flex: 1;">
                     <label for="dob">Date of Birth:</label>
-                    <input type="date" id="dob" name="dob" required>
+                    {% with dob=patient.date_of_birth|date:"Y-m-d" %}
+                    <input type="text" id="dob" name="dob" value="{% if dob %}{{ dob }}{% endif %}" required>
+                    {% endwith %}
                 </div>
             </div>
         </div>
-        <div class="date-remarks-group">
+        {% comment %} <div class="date-remarks-group">
             <div>
                 <label for="date">Date:</label>
-                <input type="date" id="date" name="date">
+                <input type="date" id="date" name="date" value="{% if patient.date %}{{ patient.date|date:'Y-m-d' }}{% endif %}">
             </div>
             <div>
                 <label for="remarks">Remarks:</label>
-                <textarea id="remarks" name="remarks" rows="5"></textarea>
+                <textarea id="remarks" name="remarks" rows="5">{{ patient.remarks }}</textarea>
+            </div>
+        </div> {% endcomment %}
+
+        <h3>Additional Remarks</h3>
+        {% for remark in remarks %}
+        <div class="date-remarks-group">
+            <div>
+                <label for="date_{{ remark.id }}">Date:</label>
+                <input type="date" id="date_{{ remark.id }}" name="date_{{ remark.id }}" value="{% if remark.date %}{{ remark.date|date:'Y-m-d' }}{% endif %}">
+            </div>
+            <div>
+                <label for="remarks_{{ remark.id }}">Remarks:</label>
+                <textarea id="remarks_{{ remark.id }}" name="remarks_{{ remark.id }}" rows="5">{{ remark.remarks }}</textarea>
             </div>
         </div>
+        {% endfor %}
+
         <div class="dynamic-fields" id="dynamicFieldsContainer"></div>
         <div class="button-group">
-            <button type="submit">Submit</button>
+            <button type="submit">Save Changes</button>
             <button type="button" onclick="addImageField()">Add</button>
         </div>
     </form>
-</div>
 
-<script>
-    function addImageField() {
+    <script>
+        function addImageField() {
         var container = document.getElementById('dynamicFieldsContainer');
 
         // Create a new input element for date
@@ -191,7 +208,7 @@
         remarksTextarea.rows = 5;
         remarksTextarea.classList.add('textarea1');
         container.appendChild(remarksTextarea);
-    }
-</script>
-
+        }
+    </script>
+</div> 
 {% endblock %}
