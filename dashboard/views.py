@@ -9,6 +9,7 @@ from django.views import View
 from .forms import *
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.db.models import Q
+from main.forms import *
 
 def login(request):
     if request.method == 'POST':
@@ -44,23 +45,18 @@ class BlogEditView(View):
     template_name = 'dashboard/edit.html'
 
     def get(self, request, pk):
-        form = BlogForm()
-       
-        return render(request, self.template_name, {'form': form})
+        blog = get_object_or_404(Blog, pk=pk)
+        form = BlogForm(instance=blog)
+        return render(request, self.template_name, {'form': form, 'blog': blog})
 
     def post(self, request, pk):
         blog = get_object_or_404(Blog, pk=pk)
-
-        # Create a form instance and populate it with data from the request
         form = BlogForm(request.POST, request.FILES, instance=blog)
 
-        # Check if the form is valid
         if form.is_valid():
-            # Save the form to update the blog
             form.save()
             return redirect('dashboard:bloglist')
         
-        # If the form is not valid, re-render the page with the form and errors
         return render(request, self.template_name, {'blog': blog, 'form': form})
     
 
@@ -140,7 +136,32 @@ def detail(request):
 def appoinments(request):
     appoinments=Appointment.objects.all()
     return render(request,'dashboard/appoinments.html',{'appoinments':appoinments})
+class AppointmentEditView(View):
+    template_name = 'dashboard/appointmentedit.html'
 
+    def get(self, request, pk):
+        appointment = get_object_or_404(Appointment, pk=pk)
+        form = AppointmentEditForm(instance=appointment)
+        return render(request, self.template_name, {'appointment': appointment, 'form': form})
+
+    def post(self, request, pk):
+        appointment = get_object_or_404(Appointment, pk=pk)
+        form = AppointmentEditForm(request.POST, instance=appointment)
+
+        if form.is_valid():
+            form.save()
+            return redirect('dashboard:appoinments')  # Correct the redirect URL
+        else:
+            # Print form errors to the console for debugging
+            print(form.errors)
+
+        return render(request, self.template_name, {'appointment': appointment, 'form': form})
+class AppointmentDeleteView(View):
+    def get(self, request, pk):
+        patient = get_object_or_404(Appointment, pk=pk)
+        patient.delete()
+        return redirect('dashboard:appoinments')    
+    
 def displayblog(request):
     blogs=Blog.objects.all()
     page = request.GET.get('page')
