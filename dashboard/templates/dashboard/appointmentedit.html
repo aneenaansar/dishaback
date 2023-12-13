@@ -3,7 +3,6 @@
 {% block title %} Rema devi | Dashboard {% endblock %}
 {% block content %}
 
-
 {% load static %}
 {{ form.media }}  {# Add this line to include form media #}
 
@@ -17,7 +16,7 @@
 
     .col {
         background-color: #fff;
-        padding: 10px;
+        padding: 20px;
         margin-bottom: 20px;
         border-radius: 8px;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -37,13 +36,29 @@
     }
 
     div.form-group {
-        margin: 10px 0;
+        margin-bottom: 15px;
     }
 
     label {
-        margin-bottom: 2px;
         display: block;
+        margin-bottom: 5px;
         color: #555;
+    }
+
+    p {
+        width: 100%;
+        padding: 10px;
+        box-sizing: border-box;
+        border: 1px solid #f9f8f8;
+        border-radius: 4px;
+        margin: 0; /* Remove default margin */
+    }
+
+    .p-styled {
+        /* Add your styles for the p tags here */
+        background-color: #f1ecece9;
+        color: #333;
+        /* Add any other styles you want to apply */
     }
 
     input[type="text"],
@@ -53,13 +68,14 @@
     select {
         width: 100%;
         padding: 10px;
-        margin: 5px 0;
+        margin-bottom: 10px;
         box-sizing: border-box;
         border: 1px solid #ccc;
         border-radius: 4px;
     }
 
-    input[type="submit"] {
+    input[type="submit"],
+    button[type="submit"] {
         width: 100%;
         padding: 10px;
         background-color: #ff9c80;
@@ -71,69 +87,56 @@
         margin-top: 15px;
     }
 
-    input[type="submit"]:hover {
+    input[type="submit"]:hover,
+    button[type="submit"]:hover {
         background-color: #b85236;
         color: white;
     }
-    button[type="submit"] {
-      width: 100%;
-      padding: 10px;
-      background-color: #ff9c80;
-      color: black;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-      transition: background-color 0.3s;
-      margin-top: 15px;
-  }
-
-  button[type="submit"]:hover {
-      background-color: #b85236;
-      color: white;
-  }
 </style>
 
 <div class="col">
-  <h1 class="page-header-title">Appointment</h1>
+    <h1 class="page-header-title">Appointment</h1>
 </div>
 
 <form method="post" enctype="multipart/form-data" style="margin-bottom: 4rem;">
-  {% csrf_token %}
+    {% csrf_token %}
   
-  <div class="form-group">
-      <label for="id_name">Name:</label>
-      {{ form.name }}
-  </div>
+    <div class="form-group">
+        <label for="id_name">Name:</label>
+        <p class="p-styled">{{ appointment.name }}</p>
+    </div>
 
-  <div class="form-group">
-      <label for="id_email">Email:</label>
-      {{ form.email }}
-  </div>
+    <div class="form-group">
+        <label for="id_contact">Phone:</label>
+        <p class="p-styled">{{ appointment.contact }}</p>
+    </div>
 
-  <div class="form-group">
-      <label for="id_purpose">Purpose:</label>
-      {{ form.purpose }}
-  </div>
+    <div class="form-group">
+        <label for="id_email">Email:</label>
+        <p class="p-styled">{{ appointment.email }}</p>
+    </div>
 
-  <div class="form-group">
-      <label for="id_date">Date:</label>
-      {{ form.date }}
-  </div>
+    <div class="form-group">
+        <label for="id_purpose">Purpose:</label>
+        <p class="p-styled">{{ appointment.purpose }}</p>
+    </div>
 
-  <div class="form-group">
-      <label for="id_time">Time:</label>
-      {{ form.time }}
-  </div>
+    <div class="form-group">
+        <label for="id_date">Date:</label>
+        <p class="p-styled">{{ appointment.date }}</p>
+    </div>
 
-  <div class="form-group">
-      <label for="id_status">Status:</label>
-      {{ form.status }}
-  </div>
+    <div class="form-group">
+        <label for="id_time">Time:</label>
+        <p class="p-styled">{{ appointment.time }}</p>
+    </div>
 
-  <button type="submit" class="btn btn-primary">Submit</button>
+    <div class="form-group">
+        <label for="id_status">Status:</label>
+        {{ form.status }}
+    </div> 
+
+    <button type="submit" class="btn btn-primary">Submit</button>
 </form>
-
-
-
 
 {% endblock %}

@@ -150,44 +150,66 @@ class PatientDetailsView(View):
             )
 
         return redirect('dashboard:patient')
+    
 class PatientEditView(View):
     template_name = 'dashboard/patient_edit.html'
 
     def get(self, request, patient_id, *args, **kwargs):
         patient = get_object_or_404(Patient, pk=patient_id)
-        remarks = Remark.objects.filter(patient=patient)
+        remarks_list = Remark.objects.filter(patient=patient).order_by('-date')
+
+        # Pagination
+        page = request.GET.get('page', 1)
+        paginator = Paginator(remarks_list, 2)  # Show 5 remarks per page
+        try:
+            remarks = paginator.page(page)
+        except PageNotAnInteger:
+            remarks = paginator.page(1)
+        except EmptyPage:
+            remarks = paginator.page(paginator.num_pages)
+
+        form = PatientEditForm(instance=patient)
+        remark_forms = [RemarkForm(instance=remark, prefix=str(remark.id)) for remark in remarks_list]
 
         context = {
             'patient': patient,
             'remarks': remarks,
+            'form': form,
+            'remark_forms': remark_forms,
         }
 
         return render(request, self.template_name, context)
 
     def post(self, request, patient_id, *args, **kwargs):
         patient = get_object_or_404(Patient, pk=patient_id)
-        remarks = Remark.objects.filter(patient=patient)
-
         form = PatientEditForm(request.POST, instance=patient)
+        remark_forms = [RemarkForm(request.POST, instance=remark, prefix=str(remark.id)) for remark in Remark.objects.filter(patient=patient)]
 
-        if form.is_valid():
-            print("Form is valid")  # Add this line for debugging
+        # Handle dynamic fields
+        dynamic_dates = request.POST.getlist('dynamic_dates')
+        dynamic_remarks = request.POST.getlist('dynamic_remarks')
+
+        # Validate the forms
+        if form.is_valid() and all(remark_form.is_valid() for remark_form in remark_forms):
             form.save()
 
-            # Update remarks
-            for remark in remarks:
-                remark.date = request.POST.get(f'date_{remark.id}')
-                remark.remarks = request.POST.get(f'remarks_{remark.id}')
-                remark.save()
+            for remark_form in remark_forms:
+                remark_form.save()
 
-            print("Redirecting...")  # Add this line for debugging
+            # Save dynamic dates and remarks
+            for date, remark_text in zip(dynamic_dates, dynamic_remarks):
+                Remark.objects.create(patient=patient, date=date, remarks=remark_text)
+
             return redirect('dashboard:patient')
+        
+        # If the form is not valid, handle this case appropriately
+        print("Form errors:", form.errors)
 
-        print("Form is not valid")  # Add this line for debugging
         context = {
             'patient': patient,
-            'remarks': remarks,
+            'remarks': Remark.objects.filter(patient=patient),
             'form': form,
+            'remark_forms': remark_forms,
         }
 
         return render(request, self.template_name, context)
@@ -214,6 +236,7 @@ def detail(request):
 def appoinments(request):
     appoinments=Appointment.objects.all()
     return render(request,'dashboard/appoinments.html',{'appoinments':appoinments})
+
 class AppointmentEditView(View):
     template_name = 'dashboard/appointmentedit.html'
 
@@ -226,15 +249,19 @@ class AppointmentEditView(View):
         appointment = get_object_or_404(Appointment, pk=pk)
         form = AppointmentEditForm(request.POST, instance=appointment)
 
+        print("Form data received:", request.POST)  # Add this line for debugging
+
         if form.is_valid():
-            form.save()
-            return redirect('dashboard:appointments')  # Correct the redirect URL
+            instance = form.save(commit=False)
+            # Do any additional processing if needed
+            instance.save()
+            print("Appointment updated successfully.")
+            return redirect('dashboard:appoinments')
         else:
-            # Print form errors and data to the console for debugging
             print("Form errors:", form.errors)
-            print("Form data:", request.POST)
 
         return render(request, self.template_name, {'appointment': appointment, 'form': form})
+
     
 
 class AppointmentDeleteView(View):
