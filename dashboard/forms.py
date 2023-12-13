@@ -23,11 +23,12 @@ class RemarkForm(forms.ModelForm):
     class Meta:
         model = Remark
         fields = ['date','remarks']
+# RemarkFormSet = forms.modelformset_factory(Remark, form=RemarkForm, extra=1)    
       
 class PatientEditForm(forms.ModelForm):
     class Meta:
-        model = Patient
-        fields = '__all__'
+        model = Remark
+        fields = ['date','remarks']
 
 
 class AppointmentEditForm(forms.ModelForm):

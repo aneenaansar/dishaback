@@ -10,6 +10,7 @@ from .forms import *
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.db.models import Q
 from main.forms import *
+from django.forms import modelformset_factory
 
 def login(request):
     if request.method == 'POST':
@@ -155,12 +156,23 @@ class PatientEditView(View):
     template_name = 'dashboard/patient_edit.html'
 
     def get(self, request, patient_id, *args, **kwargs):
+        search_month = request.GET.get('month', '')
+        search_day = request.GET.get('day', '')
+        search_year = request.GET.get('year', '')
         patient = get_object_or_404(Patient, pk=patient_id)
         remarks_list = Remark.objects.filter(patient=patient).order_by('-date')
 
+        if search_month and search_day and search_year:
+            # Filter remarks by month, day, and year
+            remarks_list = remarks_list.filter(
+                date__month=search_month,
+                date__day=search_day,
+                date__year=search_year
+            )
+
         # Pagination
         page = request.GET.get('page', 1)
-        paginator = Paginator(remarks_list, 2)  # Show 5 remarks per page
+        paginator = Paginator(remarks_list, 3)  # Show 3 remarks per page
         try:
             remarks = paginator.page(page)
         except PageNotAnInteger:
@@ -169,7 +181,8 @@ class PatientEditView(View):
             remarks = paginator.page(paginator.num_pages)
 
         form = PatientEditForm(instance=patient)
-        remark_forms = [RemarkForm(instance=remark, prefix=str(remark.id)) for remark in remarks_list]
+        RemarkFormSet = modelformset_factory(Remark, form=RemarkForm, extra=1, can_delete=True)
+        remark_forms = RemarkFormSet(queryset=remarks_list, prefix='remarks')
 
         context = {
             'patient': patient,
@@ -183,27 +196,29 @@ class PatientEditView(View):
     def post(self, request, patient_id, *args, **kwargs):
         patient = get_object_or_404(Patient, pk=patient_id)
         form = PatientEditForm(request.POST, instance=patient)
-        remark_forms = [RemarkForm(request.POST, instance=remark, prefix=str(remark.id)) for remark in Remark.objects.filter(patient=patient)]
+        RemarkFormSet = modelformset_factory(Remark, form=RemarkForm, extra=1, can_delete=True)
+        remark_forms = RemarkFormSet(request.POST, queryset=Remark.objects.filter(patient=patient), prefix='remarks')
 
         # Handle dynamic fields
         dynamic_dates = request.POST.getlist('dynamic_dates')
         dynamic_remarks = request.POST.getlist('dynamic_remarks')
 
         # Validate the forms
-        if form.is_valid() and all(remark_form.is_valid() for remark_form in remark_forms):
+        if form.is_valid() and remark_forms.is_valid():
             form.save()
 
             for remark_form in remark_forms:
+                remark_form.instance.patient = patient
                 remark_form.save()
 
             # Save dynamic dates and remarks
             for date, remark_text in zip(dynamic_dates, dynamic_remarks):
                 Remark.objects.create(patient=patient, date=date, remarks=remark_text)
 
-            return redirect('dashboard:patient')
-        
+            return redirect('dashboard:patient_list')
+
         # If the form is not valid, handle this case appropriately
-        print("Form errors:", form.errors)
+        print("Form errors:", form.errors, remark_forms.errors)
 
         context = {
             'patient': patient,
