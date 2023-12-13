@@ -14,6 +14,8 @@
         }
 
         header {
+            display:flex;
+            justify-content:space-around;
             background-color: #FFC8B9;
             color: black;
             padding: 15px;
@@ -22,8 +24,10 @@
 
         nav {
             display: flex;
-            justify-content: space-around;
-            background-color: #FFF0EC;
+            justify-content: center;
+            gap:3rem;
+            align-items:center;
+            {% comment %} background-color: #FFF0EC; {% endcomment %}
             padding: 10px;
         }
 
@@ -32,26 +36,33 @@
             color: black;
             padding: 10px;
             border-radius: 5px;
+            height:1rem;
             transition: background-color 0.3s;
         }
 
         nav a:hover {
-            background-color: #FFC8B9;
+            background-color: #FFF0EC;
+            height:1rem;
+        }
+        .img{
+            height:6rem;
+            width:6rem;
         }
     </style>
 </head>
 <body>
 
-<header>
-    <h1>DISHA</h1>
-</header>
 
-<nav>
-    <a href="{% url 'dashboard:bloglist' %}">Blog</a>
-    <a href="{% url 'dashboard:patient' %}">Patient Details</a>
-    <a href="{% url 'dashboard:appoinments' %}">Appointments</a>
-    <a href="{% url 'dashboard:logout' %}">Logout</a>
-</nav>
+    <header>
+        <img src="{% static 'image/image6 1.png' %}" class="img">
+        {% comment %} <h1>DISHA</h1> {% endcomment %}
+        <nav>
+            <a href="{% url 'dashboard:bloglist' %}">Blog</a>
+            <a href="{% url 'dashboard:patient' %}">Patient Details</a>
+            <a href="{% url 'dashboard:appoinments' %}">Appointments</a>
+            <a href="{% url 'dashboard:logout' %}">Logout</a>
+        </nav>
+    </header>
 
 <!-- Your dashboard content goes here -->
 {% block content %}

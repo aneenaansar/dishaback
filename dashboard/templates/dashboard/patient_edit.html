@@ -21,6 +21,7 @@
         display: grid;
         gap: 15px;
         grid-template-columns: 1fr; /* Updated to a single column */
+        margin-top:3rem;
     }
 
     .patient-details h2 {
@@ -103,6 +104,84 @@
         background-color: #b85236;
         color: white;
     }
+    .search-field {
+        margin-bottom: 15px;
+    }
+    .search-field {
+        width: 20%;
+        padding: 10px;
+        box-sizing: border-box;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
+
+    .search-label {
+        margin-bottom: 5px;
+        display: block;
+        color: #555;
+        font-weight: bold;
+    }
+     .pagination {
+        display: flex;
+        justify-content: center;
+        margin-top: 20px;
+    }
+
+    .pagination a {
+        color: black;
+        background-color: #ff9c80;
+        border: 1px solid #ff9c80;
+        padding: 8px 16px;
+        text-decoration: none;
+        transition: background-color 0.3s;
+    }
+
+    .pagination a:hover {
+        background-color: #ff9c80;
+    }
+
+    .pagination .active {
+        background-color:#ff9c80;
+    }
+
+    .pagination .disabled {
+        color: black;
+        pointer-events: none;
+    }
+    .patient-actions {
+        display: flex;
+        align-items: center;
+        margin-bottom: 20px;
+    }
+
+    .search-form {
+        display: flex;
+        gap: 10px;
+    }
+
+    .search-field input {
+        {% comment %} width: 20%; {% endcomment %}
+        padding: 8px;
+        box-sizing: border-box;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        font-size: 12px;
+    }
+
+    .add-details-btn {
+        padding: 8px;
+        background-color: #ff9c80;
+        color: black;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+        font-size: 12px;
+    }
+
+    .add-details-btn:hover {
+        background-color: #0056b3;
+    }
 </style>
 <div class="patient-details">
     <h2>Edit Patient Details</h2>
@@ -170,45 +249,82 @@
         </div> {% endcomment %}
 
         <h3>Additional Remarks</h3>
-        {% for remark in remarks %}
-        <div class="date-remarks-group">
-            <div>
-                <label for="date_{{ remark.id }}">Date:</label>
-                <input type="date" id="date_{{ remark.id }}" name="date_{{ remark.id }}" value="{% if remark.date %}{{ remark.date|date:'Y-m-d' }}{% endif %}">
-            </div>
-            <div>
-                <label for="remarks_{{ remark.id }}">Remarks:</label>
-                <textarea id="remarks_{{ remark.id }}" name="remarks_{{ remark.id }}" rows="5">{{ remark.remarks }}</textarea>
-            </div>
+        <div class="patient-actions">
+            <form method="get" action="{% url 'dashboard:patient_edit' patient.id %}" class="search-form">
+                <input type="date" name="dateSearch" class="search-field" placeholder="Search by Date">
+                <button type="submit" class="add-details-btn" style="margin-left:1rem;height:3rem;margin-top:-1rem;">Search</button>
+            </form>
         </div>
+        
+        <!-- Style the search field -->
+        {% comment %} <input type="date" id="dateSearch" class="search-field" placeholder="Search by Date"> {% endcomment %}
+        {% for remark in remarks %}
+            <div class="date-remarks-group">
+                <h3>Appointment: {{ forloop.counter }}</h3>
+                <div>
+                    <label for="date_{{ remark.id }}">Date:</label>
+                    <input type="date" id="date_{{ remark.id }}" name="date_{{ remark.id }}" value="{% if remark.date %}{{ remark.date|date:'Y-m-d' }}{% endif %}">
+                </div>
+                <div>
+                    <label for="remarks_{{ remark.id }}">Remarks:</label>
+                    <textarea id="remarks_{{ remark.id }}" name="remarks_{{ remark.id }}" rows="10">{{ remark.remarks }}</textarea>
+                </div>
+            </div>
         {% endfor %}
 
-        <div class="dynamic-fields" id="dynamicFieldsContainer"></div>
+        {% if remarks.paginator.num_pages > 1 %}
+            <div class="pagination">
+                <span class="step-links">
+                    {% if remarks.has_previous %}
+                        <a href="?page=1">&laquo; first</a>
+                        <a href="?page={{ remarks.previous_page_number }}">previous</a>
+                    {% endif %}
+            
+                    {% comment %} <span class="current">
+                        Page {{ remarks.number }} of {{ remarks.paginator.num_pages }}.
+                    </span> {% endcomment %}
+            
+                    {% if remarks.has_next %}
+                        <a href="?page={{ remarks.next_page_number }}">next</a>
+                        <a href="?page={{ remarks.paginator.num_pages }}">last &raquo;</a>
+                    {% endif %}
+                </span>
+            </div>
+        
+        {% endif %}
+
+        <div class="dynamic-fields" id="dynamicFieldsContainer">
+            <!-- Fields for dynamically added dates and remarks will be inserted here -->
+        </div>
         <div class="button-group">
             <button type="submit">Save Changes</button>
-            <button type="button" onclick="addImageField()">Add</button>
+            <button type="button" onclick="addDynamicFields()">Add</button>
         </div>
     </form>
 
     <script>
-        function addImageField() {
-        var container = document.getElementById('dynamicFieldsContainer');
-
-        // Create a new input element for date
-        var dateInput = document.createElement('input');
-        dateInput.type = 'date';
-        dateInput.name = 'Date';
-        dateInput.classList.add('hehe');
-        container.appendChild(dateInput);
-
-        // Create a new textarea element for remarks
-        var remarksTextarea = document.createElement('textarea');
-        remarksTextarea.name = 'Remarks';
-        remarksTextarea.placeholder = 'Remarks';
-        remarksTextarea.rows = 5;
-        remarksTextarea.classList.add('textarea1');
-        container.appendChild(remarksTextarea);
+        function addDynamicFields() {
+            var container = document.getElementById('dynamicFieldsContainer');
+            
+            // Incremental index to ensure unique names for each dynamic field
+            var index = container.children.length / 2 + 1;
+    
+            // Create a new input element for date
+            var dateInput = document.createElement('input');
+            dateInput.type = 'date';
+            dateInput.name = 'dynamic_dates_' + index;
+            dateInput.classList.add('hehe');
+            container.appendChild(dateInput);
+    
+            // Create a new textarea element for remarks
+            var remarksTextarea = document.createElement('textarea');
+            remarksTextarea.name = 'dynamic_remarks_' + index;
+            remarksTextarea.placeholder = 'Remarks';
+            remarksTextarea.rows = 5;
+            remarksTextarea.classList.add('textarea1');
+            container.appendChild(remarksTextarea);
         }
     </script>
+    
 </div> 
 {% endblock %}
