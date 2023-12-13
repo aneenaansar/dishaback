@@ -26,7 +26,7 @@ class RemarkForm(forms.ModelForm):
       
 class PatientEditForm(forms.ModelForm):
     class Meta:
-        model = Remark
+        model = Patient
         fields = '__all__'
 
 
