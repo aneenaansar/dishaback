@@ -64,7 +64,7 @@
     </header>
 
     <!-- popup starts here -->
-    <div class="flex fixed left-[-500px] popup z-[9999999]" id="pop">
+    <div class="flex fixed left-[-500px] popup z-[9999999]" id="pop" style="margin-top:-5rem;">
         <form action="{% url 'main:appointment' %}" method="POST" id="appointment-form" class="bg-light w-[30rem] p-10 rounded-lg ipad_min:w-full mobile:w-full ">
             {% csrf_token %}
         
@@ -123,14 +123,11 @@
                         </div>
                     </div>
                 </div>
-=           </div>
-            <div class="flex justify-between gap-3">
-                {% comment %} <div class=" flex justify-center">
-                    <button class="border border-black w-[10rem] h-[3rem] ipad_min:w-28 ipad_min:h-10 read mobile:h-10 mobile:w-28 close-button" id="cancelbutton">close</button>
-                </div> {% endcomment %}
-
-                <div class=" flex justify-center">
-                    <button class="border border-black w-[10rem] h-[3rem] read" id="cancelbutton"><a href="javascript:void(0)">close</a></button>
+            </div>
+            <div class="flex justify-between gap-3" style="margin-top:2rem;">
+               
+                <div class="flex justify-center">
+                    <button type="button" class="border border-black w-[10rem] h-[3rem] read" id="closeButton">Close</button>
                 </div>
                 <div class=" flex justify-center ipad_min:hidden mobile:hidden">
                     <button type="submit" class="border w-[10rem] h-[3rem] rounded-3xl bg-primary">Book Now</button>
@@ -190,18 +187,20 @@
                 <h1  class="text-primary underline font-montserrat text-xl ipad_min:text-xl mobile:text-xl ">How to reach us</h1>
                 <div class="flex gap-5 my-5 text-lg ipad_min:text-base mobile:text-base">
                     <img src="{% static 'image/call.svg' %}" alt="">
-                    <p class="text-baseprimary font-montserrat hover:text-primary  ">9745640301</p>
-                    <p class="text-baseprimary font-montserrat hover:text-primary  ">9995045525</p>
+                    <a href="tel:+9745640301" class="text-baseprimary font-montserrat hover:text-primary">9745 640 301</a>
+                    <a href="tel:+9995045525" class="text-baseprimary font-montserrat hover:text-primary">9995 045 525</a>
                 </div>
-                <div class="flex gap-5 text-lg ipad_min:text-base mobile:text-base " >
+                
+                <div class="flex gap-5 text-lg ipad_min:text-base mobile:text-base">
                     <img src="{% static 'image/Envelope.svg' %}" alt="">
-                    <p class="text-baseprimary font-montserrat hover:text-primary  ">remaagrasala18@gmail.com</p>
-                </div> 
+                    <a href="mailto:remaagrasala18@gmail.com" class="text-baseprimary font-montserrat hover:text-primary">remaagrasala18@gmail.com</a>
+                </div>
+                
                 <div class="flex gap-5 my-5 text-lg ipad_min:text-base mobile:text-base">
                     <img src="{% static 'image/location.svg' %}" alt="">
-                    <p class="text-baseprimary font-montserrat hover:text-primary  ">South Nada, Kodungallur, Thrissur,
-                        Kerala-680 664</p>
+                    <a href="https://www.google.com/maps/place/South+Nada, Kodungallur, Thrissur, Kerala-680 664" target="_blank" class="text-baseprimary font-montserrat hover:text-primary">South Nada, Kodungallur, Thrissur, Kerala-680 664</a>
                 </div>
+                
             </div>
             <div>
                 <button class="bg-primary  text-black py-2 px-8 read ipad_min:hidden mobile:hidden ipad:hidden hover:bg-[#e98468]" id="uping">
@@ -218,8 +217,44 @@
         </div>
     </footer>
     <!-- footer ends here -->
+    <!-- ... other script tags ... -->
 
     <script>
+        const popup = document.getElementById('pop');
+        const openButton = document.getElementById('up');
+        const footerButton = document.getElementById('uping');
+        const closeButton = document.getElementById('closeButton');
+        const appointmentPopup = document.getElementById('respo');
+    
+
+        let isLeft = true;
+
+        openButton.addEventListener('click', () => {
+            togglePopup();
+        });
+
+        footerButton.addEventListener('click', () => {
+            togglePopup();
+        });
+
+        closeButton.addEventListener('click', () => {
+            togglePopup();
+        });
+        appointmentPopup.addEventListener('click', () => {
+            togglePopup();
+        });
+
+        function togglePopup() {
+            if (isLeft) {
+                popup.style.left = '50%';
+            } else {
+                popup.style.left = '-300px';
+            }
+            isLeft = !isLeft;
+        }
+    </script>
+
+    {% comment %} <script>
         const popup = document.getElementById('pop');
         const button = document.getElementById('up');
         const button2 = document.getElementById('uping');
@@ -260,7 +295,7 @@
             }
             isLeft = !isLeft;
         });
-    </script>
+    </script> {% endcomment %}
 
     <script src="https://code.jquery.com/jquery-3.7.0.js" integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM=" crossorigin="anonymous"></script>
     <script src="{% static 'owl.carousel.min.js' %}"></script>
@@ -272,7 +307,7 @@
         margin:10,
         nav:true,
         autoplay:true, // Add this line to enable autoplay
-        autoplayTimeout:4000, // Set the autoplay timeout in milliseconds (e.g., 5000 for 5 seconds)
+        autoplayTimeout:10000, // Set the autoplay timeout in milliseconds (e.g., 5000 for 5 seconds)
         responsive:{
           0:{
             items:1

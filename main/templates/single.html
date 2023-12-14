@@ -45,7 +45,7 @@
             
           
         </div>
-        <div class="flex justify-center gap-8 my-8 ipad_min:hidden mobile:hidden">
+        {% comment %} <div class="flex justify-center gap-8 my-8 ipad_min:hidden mobile:hidden">
             <div class="flex gap-4">
                 <button onclick="likeBlog({{ blog.id }})">
                     <img src="{% static 'image/heart.svg' %}" alt=""> Like
@@ -58,30 +58,26 @@
                 </button>
                 <p class="font-montasorrat text-lg" id="share-count">{{ blog.shares }} SHARES</p>
             </div>
-        </div>
+        </div> {% endcomment %}
+        
     </div>
     </section>
     <!-- spotlight section ends here -->
     
     <script>
         function likeBlog(blogId) {
-            // Make an AJAX request to handle the like action
-            // Update the like count on success
-            // Example using jQuery
             $.post('{% url "main:single" blog.id %}', { action: 'like' }, function (data) {
                 $('#like-count').text(data.likes + ' LIKES');
             });
         }
     
         function shareBlog(blogId) {
-            // Make an AJAX request to handle the share action
-            // Update the share count on success
-            // Example using jQuery
             $.post('{% url "main:single" blog.id %}', { action: 'share' }, function (data) {
                 $('#share-count').text(data.shares + ' SHARES');
             });
         }
     </script>
+    
     <!-- spotlight section ends here -->
 
     <!-- recent blog starts here -->

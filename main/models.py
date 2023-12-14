@@ -1,5 +1,6 @@
 from django.db import models
 from ckeditor.fields import RichTextField
+# from django.contrib.auth.models import User
 
 APPROVAL = (
     ('Approved','Approved'),
@@ -34,9 +35,8 @@ class Blog(models.Model):
         date=models.DateField()
 
 
-        likes = models.IntegerField(default=0)
-        shares = models.IntegerField(default=0)
-
+        likes = models.PositiveIntegerField(default=0)
+        shares = models.PositiveIntegerField(default=0)
 
         def __str__(self):
             return self.title

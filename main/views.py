@@ -33,9 +33,13 @@ def single(request,pk):
 
         if action == 'like':
             blog.likes += 1
-            blog.save()
+        elif action == 'share':
+            blog.shares += 1
 
-            return JsonResponse({'likes': blog.likes})
+        blog.save()
+
+        # Return updated counts as JSON
+        return JsonResponse({'likes': blog.likes, 'shares': blog.shares})
 
     return render(request, 'single.html',{'form':form,
         'blog' : blog,
