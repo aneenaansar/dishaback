@@ -1,13 +1,15 @@
 from django.shortcuts import render,redirect, get_object_or_404
-from .models import Blog
+from .models import *
 from . forms import AppointmentForm
 from django.contrib import messages
 from django.http import JsonResponse
 # Create your views here.
 
 def index(request):
+    reviews=Review.objects.all()
+    
     form=AppointmentForm()
-    return render(request,'index.html', {'form':form})
+    return render(request,'index.html', {'form':form,'reviews':reviews})
 
 def consult(request):
     form=AppointmentForm()
@@ -18,13 +20,16 @@ def about(request):
     return render(request, 'about.html',{'form':form})
 
 def blog(request):
+    featured_blog = Blog.objects.filter(is_featured=True).first()
     form=AppointmentForm()
     blogs = Blog.objects.order_by('-date')[:6]
     return render(request, 'blog.html',{'form':form,
         'blogs' : blogs,
+        'featured_blog': featured_blog
     })
 
 def single(request,pk):
+    
     form=AppointmentForm()
     # blog =Singleblog.objects.get(pk=pk)
     blog=Blog.objects.get(pk=pk)
@@ -52,7 +57,8 @@ def appointment(request):
         form = AppointmentForm(request.POST)
         if form.is_valid():
             form.save()
-            messages.success(request, 'Your Appointment request has been sent.')
+            messages.success(request, 'Your appointment has been scheduled successfully!')
+
         else:
             messages.error(request, 'Sorry, Your Appointment request has some errors')
     else:

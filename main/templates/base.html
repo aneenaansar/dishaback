@@ -38,6 +38,62 @@
       .col-md-6{
         margin-top: 20px;
       }
+      .messages {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        padding: 20px 20px;
+        box-sizing: border-box;
+        z-index: 1000;
+        background-color: #333; /* Add your desired background color */
+        color: white; /* Add your desired text color */
+        border-radius:1rem;
+    }
+
+    .close-btn {
+        background-color: #555; /* Add your desired background color for the close button */
+        color: white; /* Add your desired text color for the close button */
+        border: none;
+        padding: 5px 10px;
+        cursor: pointer;
+        float: right;
+    }
+
+    .close-btn:hover {
+        background-color: #777; /* Add your desired background color for the close button on hover */
+    }
+    #message-container {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 21rem;
+        height:10rem; /* Adjust the width as needed */
+        padding: 2rem 2rem;
+        box-sizing: border-box;
+        z-index: 1000;
+        background-color: #ff9c80; /* Add your desired background color */
+        color:black; /* Add your desired text color */
+        text-align: center;
+        display: none; /* Hide the container by default */
+    }
+
+    #close-message {
+        background-color: #f1ae9c;
+        color: rgb(94, 93, 93);
+        border: none;
+        padding: 8px 20px;
+        cursor: pointer;
+        margin-top: 10px;
+        border-radius:1rem;
+      
+    }
+
+    #close-message:hover {
+        background-color: #f8d9d9;
+    }
+    
     </style>
 
     <!-- header starts here -->
@@ -62,9 +118,25 @@
             </div>
         </div>
     </header>
-
+    {% if messages %}
+        <div id="message-container" class="messages">
+            {% for message in messages %}
+            <div class="{% if message.tags %}{{ message.tags }}{% else %}info{% endif %}">
+                {{ message }}
+            </div>
+            <div id="message-content"></div>
+            <div>
+                <button id="close-message" class="close-btn">Close</button>
+            </div>
+            
+            {% endfor %}
+        </div>
+    {% endif %}
     <!-- popup starts here -->
     <div class="flex fixed left-[-500px] popup z-[9999999]" id="pop" style="margin-top:-5rem;">
+        <div id="message-container">
+            <!-- Messages will be displayed here -->
+        </div>
         <form action="{% url 'main:appointment' %}" method="POST" id="appointment-form" class="bg-light w-[30rem] p-10 rounded-lg ipad_min:w-full mobile:w-full ">
             {% csrf_token %}
         
@@ -253,50 +325,38 @@
             isLeft = !isLeft;
         }
     </script>
-
-    {% comment %} <script>
-        const popup = document.getElementById('pop');
-        const button = document.getElementById('up');
-        const button2 = document.getElementById('uping');
-        const button3 = document.getElementById("respo")
-        const cancelbutton = document.getElementById("cancelbutton")
-        let isLeft = true;
-
-        button.addEventListener('click', () => {
-            if (isLeft) {
-                popup.style.left = '50%';
-            }else {
-                popup.style.left = '-300px';
-            }
-            isLeft = !isLeft;
+    <script>
+        // Function to display a message
+        function showMessage(message) {
+            document.getElementById('message-content').innerHTML = message;
+            document.getElementById('message-container').style.display = 'block';
+        }
+    
+        // Function to close the message
+        function closeMessage() {
+            document.getElementById('message-container').style.display = 'none';
+        }
+    
+        // Function to clear the form
+        function clearForm() {
+            document.getElementById('appointment-form').reset();
+        }
+    
+        // Example: Show a message when the page loads
+        document.addEventListener('DOMContentLoaded', function () {
+            showMessage('');
         });
-
-        button2.addEventListener('click', () => {
-            if (isLeft) {
-                popup.style.left = '50%';
-            }else {
-                popup.style.left = '-300px';
-            }
-            isLeft = !isLeft;
+    
+        // Example: Close the message when the close button is clicked
+        document.getElementById('close-message').addEventListener('click', function () {
+            closeMessage();
         });
-        button3.addEventListener('click', () => {
-            if (isLeft) {
-                popup.style.left = '50%';
-            }else {
-                popup.style.left = '-300px';
-            }
-            isLeft = !isLeft;
+    
+        // Add this part to clear the form after successful submission
+        document.getElementById('appointment-form').addEventListener('submit', function () {
+            clearForm();
         });
-        cancelbutton.addEventListener('click', () => {
-            if (isLeft) {
-                popup.style.left = '50%';
-            }else {
-                popup.style.left = '-300px';
-            }
-            isLeft = !isLeft;
-        });
-    </script> {% endcomment %}
-
+    </script>
     <script src="https://code.jquery.com/jquery-3.7.0.js" integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM=" crossorigin="anonymous"></script>
     <script src="{% static 'owl.carousel.min.js' %}"></script>
     <!-- Add this script section after including owl.carousel.min.js -->

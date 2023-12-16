@@ -28,6 +28,9 @@ urlpatterns = [
     path('blog/edit/<int:pk>/', BlogEditView.as_view(), name='blog_edit'),
     path('blogs/<int:pk>/delete/', BlogDeleteView.as_view(), name='delete_blog'),
 
+    path('review/',views.review, name='review'),
+
+
     
     
     

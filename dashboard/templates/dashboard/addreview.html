@@ -53,30 +53,20 @@
             width:3rem;
         }
     </style>
-    {{ form.media }}
+    {% comment %} {{ form.media }} {% endcomment %}
 
     <div class="dashboard-form">
-        <form method="post">
+        <form method="post" enctype="multipart/form-data">
             {% csrf_token %}
-            <h2>Edit Blog</h2>
-            <label>Date</label>
-            {{ form.date }}
-            <label>Title</label>
-            {{ form.title }}
-            <label>Content</label><br><br>
-            {{ form.content }}<br><br>
-            <label>Image</label>
-            {{ form.image }}
-            <label>Featured</label>
-            {{ form.is_featured }}
-            
+            <h2>Review</h2>
+            <label>Review</label>
+            {{ form.review }}
+            <label>Name</label>
+            {{ form.name }}
             <button type="submit">Submit</button>
         </form>
     </div>
-
-
 </body>
 </html>
-<script src="https://cdn.ckeditor.com/4.16.0/standard/ckeditor.js"></script>
-{% endblock %}
 
+{% endblock %}

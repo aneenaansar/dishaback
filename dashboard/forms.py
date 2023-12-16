@@ -9,7 +9,7 @@ class BlogForm(forms.ModelForm):
     )
     class Meta:
         model = Blog
-        fields = ['date', 'title', 'content', 'image']
+        fields = ['date', 'title', 'content', 'image','is_featured']
         widgets = {
             'content': forms.Textarea(attrs={'class': 'ckeditor'}),
             

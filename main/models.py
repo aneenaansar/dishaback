@@ -29,17 +29,20 @@ class Appointment(models.Model):
         return self.name
 
 class Blog(models.Model):
-        title=models.CharField(max_length=200,null=True)
-        content= RichTextField(null=True)
-        image=models.ImageField(upload_to='item_images')
-        date=models.DateField()
+    title=models.CharField(max_length=200,null=True)
+    content= RichTextField(null=True)
+    image=models.ImageField(upload_to='item_images')
+    date=models.DateField()
+    is_featured=models.BooleanField(default=False)
+
+    def __str__(self):
+        return self.title
+
+class Review(models.Model):
+    review=models.CharField(max_length=500)
+    name = models.CharField(max_length=100)
 
 
-        likes = models.PositiveIntegerField(default=0)
-        shares = models.PositiveIntegerField(default=0)
-
-        def __str__(self):
-            return self.title
-
-
+    def __str__(self):
+        return self.name
            

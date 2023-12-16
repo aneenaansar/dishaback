@@ -49,6 +49,9 @@
             background-color: #b85236;
             color: white;
         }
+        .dashboard-form input[type="checkbox"]{
+            width:3rem;
+        }
     </style>
     {{ form.media }}
 
@@ -64,6 +67,8 @@
             {{ form.content }}<br><br>
             <label>Image</label>
             {{ form.image }}
+            <label>Featured</label>
+            {{ form.is_featured }}
             <button type="submit">Submit</button>
         </form>
     </div>

@@ -192,14 +192,15 @@
             </div>
         </div>
         <div class="flex justify-center my-20 fitems-center gap-8 owl-carousel ipad_min:my-6 mobile:my-6">
-
+            {% for review in reviews %}
             <div>
-                <div class="p-8 self-stretch bg-baseprimary rounded-xl hover:bg-primary transition ease-in-outnp duration-100">
-                    <p class="font-montserrat text-lg ipad_min:text-base mobile:text-base">“I highly recommend Rema Devi’s counselling services to anyone who is looking for guidance and support in their personal or professional life. She is very knowledgeable, experienced, and friendly. She helped me improve my self-esteem, communication skills, and career prospects. She is truly a blessing in disguise.”</p>
-                    <h2 class="font-montserrat text-lg font-medium mt-4 ipad_min:text-base mobile:text-base">Lakshmi V</h2>
+                <div class="p-8 self-stretch bg-baseprimary rounded-xl hover:bg-primary transition ease-in-outnp duration-100" style="height: 20rem;">
+                    <p class="font-montserrat text-lg ipad_min:text-base mobile:text-base">“{{ review.review }}”</p>
+                    <h2 class="font-montserrat text-lg font-medium mt-4 ipad_min:text-base mobile:text-base">{{ review.name }}</h2>
                 </div>
             </div>
-            <div>
+            {% endfor %}
+            {% comment %} <div>
                 <div class="p-8  self-stretch bg-baseprimary rounded-xl hover:bg-primary">
                     <p class="font-montserrat text-lg ipad_min:text-base mobile:text-base">“Rema Devi is an excellent counsellor with a lot of experience and expertise. She helped me and my daughter with our family and personal issues. She also conducted some awareness programmes and motivational sessions for our community, communication skills, and career prospects. She is truly a blessing in disguise..”</p>
                     <h2 class="font-montserrat text-lg font-medium mt-4 ipad_min:text-base mobile:text-base">Rajesh M</h2>
@@ -210,7 +211,7 @@
                     <p class="font-montserrat text-lg ipad_min:text-base mobile:text-base">“Rema Devi helped me a lot with my stress and anxiety. She is calm, supportive, and empathetic. She taught me how to relax, meditate, and cope with my negative thoughts.communication skills, and career prospects. She is truly a blessing in disguise. She helped me and my daughter with our family and personal issues.”</p>
                     <h2 class="font-montserrat text-lg font-medium mt-4 ipad_min:text-base mobile:text-base">Anil S</h2>
                 </div>
-            </div>
+            </div> {% endcomment %}
         </div>
     </section>
     <!-- clients ends here -->

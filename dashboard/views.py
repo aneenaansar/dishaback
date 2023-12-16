@@ -298,7 +298,9 @@ def displayblog(request):
         blogs = paginator.page(paginator.num_pages)
     return render(request,'dashboard/blog_list.html',{'blogs':blogs})
 
-
+def review(request):
+    reviews = Review.objects.all()
+    return render(request, 'dashboard/review.html', {'reviews': reviews})
 
 def logout_view(request):
     logout(request)
