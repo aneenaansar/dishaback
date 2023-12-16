@@ -90,7 +90,7 @@ class PatientListView(View):
 
         # Pagination
         page = request.GET.get('page')
-        paginator = Paginator(patients, 10)  # Show 10 patients per page
+        paginator = Paginator(patients, 2)  # Show 10 patients per page
 
         try:
             patients = paginator.page(page)
@@ -234,11 +234,18 @@ def index(request):
     appointment_count = Appointment.objects.count()
     patient_count = Patient.objects.count()
     blog_count = Blog.objects.count()
+    pending_appointments = Appointment.objects.filter(status='Pending').count()
+    scheduled_appointments = Appointment.objects.filter(status='Scheduled').count()
+    review_count = Review.objects.count()
+
 
     context = {
         'appointment_count': appointment_count,
         'patient_count': patient_count,
         'blog_count': blog_count,
+        'pending_appointments': pending_appointments,
+        'scheduled_appointments': scheduled_appointments,
+        'review_count':review_count,
     }
     return render(request,'dashboard/index.html',context)
 
@@ -300,7 +307,22 @@ def displayblog(request):
 
 def review(request):
     reviews = Review.objects.all()
+    page = request.GET.get('page')
+    paginator = Paginator(reviews, 10)  # Show 10 tasks per page
+
+    try:
+        reviews = paginator.page(page)
+    except PageNotAnInteger:
+        reviews = paginator.page(1)
+    except EmptyPage:
+        reviews = paginator.page(paginator.num_pages)
     return render(request, 'dashboard/review.html', {'reviews': reviews})
+
+class ReviewDeleteView(View):
+    def get(self, request, pk):
+        review = get_object_or_404(Review, pk=pk)
+        review.delete()
+        return redirect('dashboard:review')
 
 def logout_view(request):
     logout(request)

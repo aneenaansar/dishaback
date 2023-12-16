@@ -48,7 +48,10 @@
 
     <div class="count-box">
         <h2>Number of Appointments: {{ appointment_count }}</h2>
+        <h4>Pending Appointments: {{ pending_appointments }}</h4>
+        <h4>Scheduled Appointments: {{ scheduled_appointments }}</h4>
     </div>
+   
 
     <div class="count-box">
         <h2>Number of Patients: {{ patient_count }}</h2>
@@ -57,6 +60,11 @@
     <div class="count-box">
         <h2>Number of Blogs: {{ blog_count }}</h2>
     </div>
+    <div class="count-box">
+        <h2>Number of Reviews: {{ review_count }}</h2>
+    </div>
+
+
 </div>
 
 {% endblock %}

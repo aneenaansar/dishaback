@@ -1,5 +1,5 @@
 from django import forms
-from .models import Appointment
+from .models import *
 
 class AppointmentForm(forms.ModelForm):
     TIME_CHOICES = [
@@ -20,3 +20,7 @@ class AppointmentForm(forms.ModelForm):
         model = Appointment
         fields = ['name', 'email', 'contact', 'purpose', 'date', 'time']
 
+class ReviewForm(forms.ModelForm):
+    class Meta:
+        model = Review
+        fields = ['name', 'review']

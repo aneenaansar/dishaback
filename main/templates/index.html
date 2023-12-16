@@ -5,7 +5,36 @@
 
 {% load static %}
 
+<style>
+    /* Add custom styles for the review section */
+    .review-section {
+        max-width: 600px;
+        margin: auto;
+        background-color: #f1ae9c;
+        border-radius: 10px;
+        padding: 20px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
 
+    .review-form label {
+        display: block;
+        margin-bottom: 8px;
+        font-size: 16px;
+        font-weight: bold;
+    }
+
+    .review-form input,
+    .review-form textarea {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 16px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        font-size: 16px;
+    }
+
+    
+</style>
 
     <!-- menu bar starts here -->
     <div id="slidemenu" class="slidediv py-8 items-center text-center right-0 top-0 fixed h-full bg-black z-[99]">
@@ -213,6 +242,23 @@
                 </div>
             </div> {% endcomment %}
         </div>
+    </section>
+    <section class="my-8 review-section">
+        <h2 class="font-artifika text-2xl mb-4">Write a Review</h2>
+        <form method="post" class="review-form" action="{% url 'main:review' %}">
+            {% csrf_token %}
+            <div class="mb-3">
+                <label for="name">Your Name:</label>
+                <input type="text" id="name" name="name">
+            </div>
+            <div class="mb-3">
+                <label for="review">Your Review:</label>
+                <textarea id="review" name="review" rows="3"></textarea>
+            </div>
+            <button type="submit" class="bg-primary rounded-full py-2 px-6 font-medium hover:bg-black hover:text-primary transition ease-in-out duration-75">
+                Submit Review
+            </button>
+        </form>
     </section>
     <!-- clients ends here -->
 {% endblock %}

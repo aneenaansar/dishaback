@@ -1,6 +1,6 @@
 from django.shortcuts import render,redirect, get_object_or_404
 from .models import *
-from . forms import AppointmentForm
+from . forms import *
 from django.contrib import messages
 from django.http import JsonResponse
 # Create your views here.
@@ -26,6 +26,14 @@ def blog(request):
     return render(request, 'blog.html',{'form':form,
         'blogs' : blogs,
         'featured_blog': featured_blog
+    })
+
+def blogs(request):
+    form=AppointmentForm()
+    blogs = Blog.objects.all()
+    return render(request, 'blogs.html',{'form':form,
+        'blogs' : blogs,
+        
     })
 
 def single(request,pk):
@@ -66,3 +74,15 @@ def appointment(request):
 
     return render(request, 'index.html', {'form': form})
 
+def review(request):
+    if request.method == 'POST':
+        form = ReviewForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('main:index')  # Redirect to your desired page after saving
+    else:
+        form = ReviewForm()
+
+    reviews = Review.objects.all()  # Fetch all reviews
+
+    return render(request, 'your_template.html', {'form': form, 'reviews': reviews})

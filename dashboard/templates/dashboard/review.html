@@ -84,6 +84,30 @@
         display: flex;
         justify-content: space-between;
     }
+    .pagination {
+        display: flex;
+        justify-content: center;
+        margin-top: 20px;
+    }
+
+    .step-links {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+    }
+
+    .pagination-link {
+        padding: 5px 10px;
+        background-color: #fcb9a7;
+        color: black;
+        text-decoration: none;
+        border-radius: 4px;
+        transition: background-color 0.3s;
+    }
+
+    .pagination-link:hover {
+        background-color: #f3a28c;
+    }
 
 </style>
 <div class="blog-container">
@@ -108,10 +132,8 @@
                     <td style="width:6rem">{{ review.name }}</td>
                     <td>{{ review.review }}</td>
                     <td>
-                        <a href="#">
-                            <img class="edit-btn" src="{% static 'image/edit-246.png' %}" alt="Edit">
-                        </a>
-                        <a href="#">
+                       
+                        <a href="{% url 'dashboard:delete_review' review.id %}">
                             <img class="delete-btn" src="{% static 'image/3405244.png' %}" alt="Delete">
                         </a>
                     </td>
@@ -122,6 +144,23 @@
     {% else %}
         <p>No reviews available.</p>
     {% endif %}
+</div>
+<div class="pagination" style="margin-bottom:2rem;">
+    <span class="step-links">
+        {% if reviews.has_previous %}
+            <a href="?page=1" class="pagination-link">&laquo; first</a>
+            <a href="?page={{ reviews.previous_page_number }}" class="pagination-link">previous</a>
+        {% endif %}
+
+        <span class="current-page">
+            Page {{ reviews.number }} of {{ reviews.paginator.num_pages }}.
+        </span>
+
+        {% if reviews.has_next %}
+            <a href="?page={{ reviews.next_page_number }}" class="pagination-link">next</a>
+            <a href="?page={{ reviews.paginator.num_pages }}" class="pagination-link">last &raquo;</a>
+        {% endif %}
+    </span>
 </div>
 
 {% endblock %}
