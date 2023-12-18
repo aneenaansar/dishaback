@@ -58,28 +58,29 @@
         background-color: rgb(255, 131, 131);
     }
     .pagination {
-        display: flex;
-        justify-content: center;
-        margin-top: 20px;
-    }
-    .step-links {
-        display: flex;
-        gap: 10px;
-        align-items: center;
-    }
-
-    .pagination-link {
-        padding: 5px 10px;
-        background-color: #fcb9a7;
-        color: black;
-        text-decoration: none;
-        border-radius: 4px;
-        transition: background-color 0.3s;
-    }
-
-    .pagination-link:hover {
-        background-color: #f3a28c;
-    }
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+    
+        .step-links {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+    
+        .pagination-link {
+            padding: 5px 10px;
+            background-color: #fcb9a7;
+            color: black;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+    
+        .pagination-link:hover {
+            background-color: #f3a28c;
+        }
 </style>
 
 <div class="appointments-table">
@@ -125,7 +126,7 @@
 <div class="pagination">
     <span class="step-links">
         {% if appoinments.has_previous %}
-            <a href="?page=1">&laquo; first</a>
+            <a href="?page=1" class="pagination-link">&laquo; first</a>
             <a href="?page={{ appoinments.previous_page_number }}" class="pagination-link">previous</a>
         {% endif %}
 
@@ -135,7 +136,7 @@
 
         {% if appoinments.has_next %}
             <a href="?page={{ appoinments.next_page_number }}" class="pagination-link">next</a>
-            <a href="?page={{ appoinments.paginator.num_pages }}">last &raquo;</a>
+            <a href="?page={{ appoinments.paginator.num_pages }}" class="pagination-link">last &raquo;</a>
         {% endif %}
     </span>
 </div>

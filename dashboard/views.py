@@ -90,7 +90,7 @@ class PatientListView(View):
 
         # Pagination
         page = request.GET.get('page')
-        paginator = Paginator(patients, 2)  # Show 10 patients per page
+        paginator = Paginator(patients, 10)  # Show 10 patients per page
 
         try:
             patients = paginator.page(page)
@@ -257,6 +257,16 @@ def detail(request):
 
 def appoinments(request):
     appoinments=Appointment.objects.all()
+    
+    page = request.GET.get('page')
+    paginator = Paginator(appoinments, 10)  # Show 10 tasks per page
+
+    try:
+        appoinments = paginator.page(page)
+    except PageNotAnInteger:
+        appoinments = paginator.page(1)
+    except EmptyPage:
+        appoinments = paginator.page(paginator.num_pages)
     return render(request,'dashboard/appoinments.html',{'appoinments':appoinments})
 
 class AppointmentEditView(View):
