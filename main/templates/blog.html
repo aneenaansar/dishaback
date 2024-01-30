@@ -33,6 +33,9 @@
     .hover-transform:hover {
         transform: translateX(-10px); /* Adjust the value as needed for the desired leftward transformation */
     }
+    .txt{
+        color:white;
+    }
 </style>
 
 
@@ -76,7 +79,7 @@
                 <h5 class="font-montserrat text-base my-8 text-white ipad_min:my-3 mobile:my-3">Featured</h5>
                 <h1 class="font-montserrat text-4xl font-semibold text-white ipad_min:text-sm mobile:text-sm phone_max:text-xl">{{ featured_blog.title }}</h1>
                 <div class="flex justify-between gap-20 my-8 hover-transform">
-                    <p class="font-montserrat ipad_min:hidden mobile:hidden phone_max:hidden ipad:hidden" style="color:white;">{{ featured_blog.content|slice:":255" | safe }}</p>
+                    <h6 class="font-montserrat ipad_min:hidden mobile:hidden phone_max:hidden ipad:hidden txt" style="color:white;">{{ featured_blog.content|slice:":255" | safe }}</h6>
                     <a href="{% url 'main:single' pk=featured_blog.pk %}">
                         <img src="{% static 'image/Arrow.svg' %}" alt="">
                     </a>

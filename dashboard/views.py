@@ -11,6 +11,7 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.db.models import Q
 from main.forms import *
 from django.forms import modelformset_factory
+from django.urls import reverse
 
 def login(request):
     if request.method == 'POST':
@@ -152,82 +153,47 @@ class PatientDetailsView(View):
 
         return redirect('dashboard:patient')
     
-class PatientEditView(View):
-    template_name = 'dashboard/patient_edit.html'
+def patient_edit(request, patient_id):
+    patient = get_object_or_404(Patient, id=patient_id)
+    remarks = Remark.objects.filter(patient=patient).order_by('date')
+    
 
-    def get(self, request, patient_id, *args, **kwargs):
-        search_month = request.GET.get('month', '')
-        search_day = request.GET.get('day', '')
-        search_year = request.GET.get('year', '')
-        patient = get_object_or_404(Patient, pk=patient_id)
-        remarks_list = Remark.objects.filter(patient=patient).order_by('-date')
-
-        if search_month and search_day and search_year:
-            # Filter remarks by month, day, and year
-            remarks_list = remarks_list.filter(
-                date__month=search_month,
-                date__day=search_day,
-                date__year=search_year
-            )
-
-        # Pagination
-        page = request.GET.get('page', 1)
-        paginator = Paginator(remarks_list, 3)  # Show 3 remarks per page
-        try:
-            remarks = paginator.page(page)
-        except PageNotAnInteger:
-            remarks = paginator.page(1)
-        except EmptyPage:
-            remarks = paginator.page(paginator.num_pages)
-
-        form = PatientEditForm(instance=patient)
-        RemarkFormSet = modelformset_factory(Remark, form=RemarkForm, extra=1, can_delete=True)
-        remark_forms = RemarkFormSet(queryset=remarks_list, prefix='remarks')
-
-        context = {
-            'patient': patient,
-            'remarks': remarks,
-            'form': form,
-            'remark_forms': remark_forms,
-        }
-
-        return render(request, self.template_name, context)
-
-    def post(self, request, patient_id, *args, **kwargs):
-        patient = get_object_or_404(Patient, pk=patient_id)
+    if request.method == 'POST':
+        # Update patient details
         form = PatientEditForm(request.POST, instance=patient)
-        RemarkFormSet = modelformset_factory(Remark, form=RemarkForm, extra=1, can_delete=True)
-        remark_forms = RemarkFormSet(request.POST, queryset=Remark.objects.filter(patient=patient), prefix='remarks')
 
-        # Handle dynamic fields
-        dynamic_dates = request.POST.getlist('dynamic_dates')
-        dynamic_remarks = request.POST.getlist('dynamic_remarks')
-
-        # Validate the forms
-        if form.is_valid() and remark_forms.is_valid():
+        # Save patient details if valid
+        if form.is_valid():
             form.save()
 
-            for remark_form in remark_forms:
-                remark_form.instance.patient = patient
-                remark_form.save()
+        # Handle dynamically added fields
+        for key, value in request.POST.items():
+            if key.startswith('dynamic_dates_'):
+                remark_id = int(key.split('_')[-1])
 
-            # Save dynamic dates and remarks
-            for date, remark_text in zip(dynamic_dates, dynamic_remarks):
-                Remark.objects.create(patient=patient, date=date, remarks=remark_text)
+                # Check if the remark_id corresponds to an existing remark
+                remark = remarks.filter(id=remark_id).first()
 
-            return redirect('dashboard:patient_list')
+                # Save the dynamically added date and remarks as a single entry
+                if remark:
+                    remark.date = value
+                    remarks_text = request.POST.get(f'dynamic_remarks_{remark_id}', '')
+                    remark.remarks = remarks_text
+                    remark.save()
+                else:
+                    date = value
+                    remarks_text = request.POST.get(f'dynamic_remarks_{remark_id}', '')
+                    Remark.objects.create(patient=patient, date=date, remarks=remarks_text)
 
-        # If the form is not valid, handle this case appropriately
-        print("Form errors:", form.errors, remark_forms.errors)
+        return redirect(reverse('dashboard:patient_edit', args=[patient_id]))
 
-        context = {
-            'patient': patient,
-            'remarks': Remark.objects.filter(patient=patient),
-            'form': form,
-            'remark_forms': remark_forms,
-        }
-
-        return render(request, self.template_name, context)
+    # For GET requests or if there are validation errors, render the template
+    form = PatientEditForm(instance=patient)
+    return render(request, 'dashboard/patient_edit.html', {
+        'patient': patient,
+        'remarks': remarks,
+        'form': form,
+    })
 
 def index(request):
      # Retrieve counts

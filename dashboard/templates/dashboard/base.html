@@ -131,7 +131,7 @@
                 <img id="user-icon" src="{% static 'image/Vector (1).svg' %}" alt="User Icon">
             </div>
             <div class="dropdown-content">
-                <span>{{ user.username }}</span>
+                {% comment %} <span>{{ user.username }}</span> {% endcomment %}
                 <a href="{% url 'dashboard:logout' %}">Logout</a>
             </div>
         </div>

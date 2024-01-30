@@ -249,12 +249,12 @@
         </div> {% endcomment %}
 
         <h3>Additional Remarks</h3>
-        <div class="patient-actions">
+        {% comment %} <div class="patient-actions">
             <form method="get" action="{% url 'dashboard:patient_edit' patient.id %}" class="search-form">
                 <input type="date" name="dateSearch" class="search-field" placeholder="Search by Date">
                 <button type="submit" class="add-details-btn" style="margin-left:1rem;height:3rem;margin-top:-1rem;">Search</button>
             </form>
-        </div>
+        </div> {% endcomment %}
         
         <!-- Style the search field -->
         {% comment %} <input type="date" id="dateSearch" class="search-field" placeholder="Search by Date"> {% endcomment %}
