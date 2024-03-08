@@ -32,6 +32,19 @@
         border-radius: 4px;
         font-size: 16px;
     }
+    .vec{
+        display:block;
+    }
+    @media (min-width: 700px) and (max-width: 1200px) {
+        .vec{
+            display:none;
+        }
+        .card1{
+            display:none;
+
+        }
+        
+    }
 
     
 </style>
@@ -79,8 +92,8 @@
         <div class="flex justify-center animate__animated animate__fadeInUp">
             <img src="{% static 'image/4328704_11 1.png' %}" alt="">
         </div>
-        <div class="absolute left-[86rem] top-[34rem] ipad_min:hidden mobile:hidden animate__animated animate__fadeInUp">
-            <img src="{% static 'image/Subtract.svg' %}" alt="">
+        <div class="absolute left-[86rem] top-[34rem] ipad_min:hidden mobile:hidden vec animate__animated animate__fadeInUp">
+            <img src="{% static 'image/Subtract.svg' %}" alt="" class="vec">
             <img class="my-4 mx-2" src="{% static 'image/Union-2.svg' %}" alt="">
             <img class="mx-3" src="{% static 'image/Union-3.svg' %}" alt="">
         </div>
@@ -97,48 +110,48 @@
     <!-- spotlight ends here -->
 
     <!-- grid starts here -->
-    <section class="ipad_min:hidden mobile:hidden phone_max:hidden ipad:hidden ">
+    <section class="ipad_min:hidden mobile:hidden phone_max:hidden ipad:hidden card1">
         <div class="flex flex-wrap justify-between gap-7">
-            <div class=" w-[30%] bg-primary items-start h-40 p-8 rounded-xl font-montasorrat hover:bg-baseprimary transition-transform transform hover:scale-105">
+            <div class=" w-[30%] bg-primary items-start h-40 p-6 rounded-xl font-montasorrat hover:bg-baseprimary transition-transform transform hover:scale-105">
                 <h1 class="font-semibold">Pre-Marital Counselling</h1>
-                <p class="my-3">Marriage made easy with our counselling service.</p>
+                <p class="my-3">Preparation for a married life.</p>
             </div>
-            <div class="w-[30%] bg-baseprimary items-start h-40 p-8 rounded-xl font-montasorrat hover:bg-primary transition-transform transform hover:scale-105">
+            <div class="w-[30%] bg-baseprimary items-start h-40 p-6 rounded-xl font-montasorrat hover:bg-primary transition-transform transform hover:scale-105">
                 <h1 class="font-semibold">Family Counselling [Therapy-for ALL ages]</h1>
-                <p class="my-3">Child & adolescent growth with our counselling service.</p>
+                <p class="my-3">To develop and maintain healthy and functional family relationship.</p>
             </div>
             
-            <div class=" w-[30%] bg-primary items-start h-40 p-8 rounded-xl font-montasorrat hover:bg-baseprimary transition-transform transform hover:scale-105 ">
+            <div class=" w-[30%] bg-primary items-start h-40 p-6 rounded-xl font-montasorrat hover:bg-baseprimary transition-transform transform hover:scale-105 ">
                 <h1 class="font-semibold">Children and Adolescents [Teenagers] Counselling</h1>
-                <p class="my-3">School success with our counselling service.</p>
+                <p class="my-3">Mental well being during their growth and development.</p>
             </div>
-            <div class=" w-[23%] bg-baseprimary items-start h-40 p-8 rounded-xl font-montasorrat hover:bg-primary transition-transform transform hover:scale-105  ">
+            <div class=" w-[23%] bg-baseprimary items-start h-40 p-6 rounded-xl font-montasorrat hover:bg-primary transition-transform transform hover:scale-105  ">
                 <h1 class="font-semibold">School Counselling Programs</h1>
-                <p class="my-3">School success with our counselling service.</p>
+                <p class="my-3">To address the emotional,social and behavioural needs of the students.</p>
             </div>
-            <div class=" w-[23%] bg-primary items-start h-40 p-8 rounded-xl font-montasorrat hover:bg-baseprimary transition-transform transform hover:scale-105 ">
+            <div class=" w-[23%] bg-primary items-start h-40 p-6 rounded-xl font-montasorrat hover:bg-baseprimary transition-transform transform hover:scale-105 ">
                 <h1 class="font-semibold">Group Counselling</h1>
-                <p class="my-3">Group support with our counselling service.</p>
+                <p class="my-3">For guidance and support.</p>
             </div>
-            <div class=" w-[23%] bg-baseprimary items-start h-40 p-8 rounded-xl font-montasorrat hover:bg-primary transition-transform transform hover:scale-105 ">
+            <div class=" w-[23%] bg-baseprimary items-start h-40 p-6 rounded-xl font-montasorrat hover:bg-primary transition-transform transform hover:scale-105 ">
                 <h1 class="font-semibold">Grief Therapy</h1>
-                <p class="my-3">Heal from your loss with our therapy.</p>
+                <p class="my-3">Help to cope and heal for a loss.</p>
             </div>
-            <div class="w-[23%] bg-primary items-start h-40 p-8 rounded-xl font-montasorrat ipad:h-52 hover:bg-baseprimary transition-transform transform hover:scale-105 ">
+            <div class="w-[23%] bg-primary items-start h-40 p-6 rounded-xl font-montasorrat ipad:h-52 hover:bg-baseprimary transition-transform transform hover:scale-105 ">
                 <h1 class="font-semibold">Motivational Sessions</h1>
-                <p class="my-3">Boost your motivation with our motivational sessions</p>
+                <p class="my-3">To provide you with goals to work towards.</p>
             </div>
-            <div class=" w-[30%] bg-baseprimary items-start h-40 p-8 rounded-xl font-montasorrat hover:bg-primary transition-transform transform hover:scale-105 ">
+            <div class=" w-[30%] bg-baseprimary items-start h-40 p-6 rounded-xl font-montasorrat hover:bg-primary transition-transform transform hover:scale-105 ">
                 <h1 class="font-semibold">Teacher Development/Awareness Programs</h1>
-                <p class="my-3">Teach better with our programmes</p>
+                <p class="my-3">For the professional development.</p>
             </div>
-            <div class=" w-[30%] bg-primary items-start h-40 p-8 rounded-xl font-montasorrat hover:bg-baseprimary transition-transform transform hover:scale-105 ">
+            <div class=" w-[30%] bg-primary items-start h-40 p-6 rounded-xl font-montasorrat hover:bg-baseprimary transition-transform transform hover:scale-105 ">
                 <h1 class="font-semibold">Awareness Programs</h1>
-                <p class="my-3">Learn more about mental health with our awareness programs.</p>
+                <p class="my-3">For an insight into our beliefs.</p>
             </div>
-            <div class=" w-[30%] bg-baseprimary items-start h-40 p-8 rounded-xl font-montasorrat hover:bg-primary transition-transform transform hover:scale-105 ">
+            <div class=" w-[30%] bg-baseprimary items-start h-40 p-6 rounded-xl font-montasorrat hover:bg-primary transition-transform transform hover:scale-105 ">
                 <h1 class="font-semibold">Career Guidance</h1>
-                <p class="my-3">Find your career path with our career guidance service.</p>
+                <p class="my-3">For vocational guidance.</p>
             </div>
         </div>
     </section>
@@ -146,9 +159,9 @@
 
     <!-- About us start here -->
     <section>
-        <div class="flex gap-14 my-24 ipad_min:grid ipad_min:my-14 mobile:grid mobile:my-14 phone_max:grid phone_max:my-7 ipad:grid">
+        <div class="flex gap-12 my-24 ipad_min:grid ipad_min:my-14 mobile:grid mobile:my-14 phone_max:grid phone_max:my-7 ipad:grid">
             <div>
-                <div class="ipad_min:w-full mobile:w-full ipad:flex ipad:justify-center"><img src="{% static 'image/pp03 (1).jpg' %}" alt="" style="border-radius:3rem 0;"></div>
+                <div class="ipad_min:w-full mobile:w-full ipad:flex ipad:justify-center img2"><img src="{% static 'image/pp03 (1).jpg' %}" alt="" style="border-radius:3rem 0;"></div>
                 <div class="ipad_min:hidden mobile:hidden">
                     <button class="bor w-[25rem] h-[3rem] my-6 ipad_min:w-full hover:bg-primary hover:border-none ipad:hidden">
                         <a href="{% url 'main:about' %}">READ MORE</a>
@@ -158,8 +171,8 @@
             <div>
                 <h1 class="font-artifika text-4xl ipad_min:text-xl mobile:text-xl">Rema Devi A</h1>
                 <h2 class="font-montserrat text-xl my-1 text-gray-600 ipad_min:text-lg mobile:text-lg">Counselling Psychologist</h2>
-                <p class="font-montserrat text-lg my-8 ipad_min:text-sm mobile:text-sm">Hello,<br><br>Welcome to New Disha Counselling Centre. With many years of teaching and Counselling in and Outside KERALA, I am there to help people to achieve their personal and professional goals…</p>
-                <p class="font-montserrat text-lg ipad_min:hidden mobile:hidden ">I started my counselling centre at home in 2014, and since then I have been providing professional and compassionate counselling services for individuals, couples, families, and groups. I offer a range of counselling services, including pre-marital counselling, family counselling/therapy, child & adolescent counselling, school counselling, group counselling, awareness programs, motivational sessions, career guidance, teacher  development programmes, and grief therapy.</p>
+                <p class="font-montserrat text-lg my-8 ipad_min:text-sm mobile:text-sm">Welcome to New Disha Counselling Centre. With many years of teaching and Counselling in and Outside KERALA, I am there to help people to achieve their personal and professional goals…</p>
+                <p class="font-montserrat text-lg ipad_min:hidden mobile:hidden ">Started this counselling centre at home in 2014, and since then I have been providing professional and compassionate counselling services for individuals, couples, families, and groups. Here we do offer a range of counselling services, including pre-marital counselling, family counselling/therapy, child & adolescent counselling, school counselling, group counselling, awareness programs, motivational sessions, career guidance, teacher  development programmes, and grief therapy.</p>
                 <div class="flex gap-12 my-8">
                     <div class="flex items-center gap-4">
                         <div class="bg-light p-3 rounded-xl ipad_min:hidden mobile:hidden"><img src="{% static 'image/Idea.svg' %}" alt=""></div>
@@ -243,7 +256,7 @@
             </div> {% endcomment %}
         </div>
     </section>
-    <section class="my-8 review-section">
+    {% comment %} <section class="my-8 review-section">
         <h2 class="font-artifika text-2xl mb-4">Write a Review</h2>
         <form method="post" class="review-form" action="{% url 'main:review' %}">
             {% csrf_token %}
@@ -259,6 +272,6 @@
                 Submit Review
             </button>
         </form>
-    </section>
+    </section> {% endcomment %}
     <!-- clients ends here -->
 {% endblock %}

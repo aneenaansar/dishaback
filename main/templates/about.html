@@ -6,7 +6,31 @@
 
 {% load static %}
 
-   
+ <style>
+    .img1{
+        height: 32rem;
+        width: 25rem;
+        border-radius:3rem 0;
+    }
+    @media (max-width: 767px) {
+        .img1{
+            height: 27rem;
+            width: 23rem;
+            
+        }
+    }
+    @media (min-width: 700px) and (max-width: 1200px) {
+        .im{
+            display:none;
+        }
+        .img1 {
+            height: 28rem;
+            width: 25rem;
+            border-radius: 3rem 0;
+        }
+
+    }
+ </style>  
 
     <!-- menu bar starts here -->
     <div id="slidemenu" class="slidediv py-8 items-center text-center right-0 top-0 fixed h-full bg-black z-[9999999]">
@@ -34,27 +58,27 @@
     <!-- about stats here -->
     <section>
         <div class="flex gap-8 ipad_min:grid mobile:grid phone_max:grid">
-            <div class="animate__animated animate__fadeInLeft">
-                <div><img src="{% static 'image/5x7 001 (1).jpg' %}" alt="" style="height:32rem;width:25rem;border-radius:3rem 0;"></div>
+            <div class="">
+                <div><img src="{% static 'image/5x7 001 (1).jpg' %}" alt="" class="img1"></div>
                 <div class="cor bg-baseprimary p-6 font-montasorrat my-10 ipad_min:hidden mobile:hidden phone_max:hidden">
-                    <p>My counselling approach is based on the principles of humanistic psychology, which emphasizes the inherent worth and potential of every person. I believe that everyone has the ability to grow and change, given the right environment and support. I use various techniques such as active listening, empathy, unconditional positive regard, goal setting, problem solving, cognitive restructuring, relaxation training, mindfulness meditation, and positive affirmations to help my clients cope with their challenges and achieve their goals.</p>
-                    <p class="my-4">What makes me different from other counsellors is that I treat every client as a unique individual with their own strengths and needs. I do not use a one-size-fits-all approach or a fixed set of rules or methods. Instead, I tailor my counselling sessions according to the specific situation and preferences of each client. I also respect the cultural and religious backgrounds of my clients, and do not impose my own values or beliefs on them.</p>
+                    <p>The counselling approach is based on the principles of humanistic psychology, which emphasizes the inherent worth and potential of every person. I believe that everyone has the ability to grow and change, given the right environment and support. Various techniques such as active listening, empathy, unconditional positive regard, goal setting, problem solving, cognitive restructuring, relaxation training, mindfulness meditation, and positive affirmations are used to help my clients to cope with their challenges and achieve their goals.</p>
+                    <p class="my-4">Every client is treated as a unique individual with their own strengths and weakness. Counselling sessions are according to the specific situation and preferences for each client care is taken to respect the culture and religious background of my clients.  I also respect the cultural and religious backgrounds of my clients, and do not impose my own values or beliefs on them.</p>
                 </div>
                 <div class="ipad_min:hidden mobile:hidden phone_max:hidden"><img src="{% static 'image/Frame 34523.svg' %}" alt=""></div>
             </div>
-            <div class="animate__animated animate__fadeInDown">
+            <div class="">
                 <h1 class="font-artifika text-4xl my-2 ipad_min:text-2xl mobile:text-2xl">Rema Devi A</h1>
                 <h2 class="font-montasorrat text-xl text-gray-500 ipad_min:text-lg mobile:text-lg">Counselling Psychologist</h2>
                 <p class="font-montasorrat my-6">A leading COUNSELLING PSYCHOLOGIST & AN EDUCATOR in Kodungallur, Thrissur District of Kerala.</p>
-                <p class="font-montasorrat my-6">God’s   Blessings come as Surprises.  Blessed  to  have born  and  brought up by  my  Parents, Late Chandra Varma Thampan and Malathy Kunjamma in  a  Middle  Class  Family  in  Kodungallur. Graduated from  St. Joseph’s  College in  Zoology, did  B.Ed  and  M.Ed. with Guidance  and  Counselling  was  Optional Subject.  Got married to Adv. A.S.R. Nair, shifted  to  Belgaum District  of  Karnataka  and from  there to  Mumbai. During the Life in Mumbai about 20 years, worked as a High School Teacher in  Maths  and  Science. Along with  the  profession , I  could  do School Counsellor’s  Course,  M.Sc  Psychology  and  an  International  Commonwealth Diploma in ‘Youth  in  Development’. Won ‘Best Teacher Award’ thrice.  Returned  to  Kerala and  settled  here  in  2008 and continued  the  Profession  as  Principal in  Charge  and  Professor in Educational  Psychology  in  a  B.Ed.  College.   During this  period  of  10 years,  did M.Sc  in  Counselling  and  Family  Therapy and  M.Phil  in  Counselling  Psychology.</p>
+                <p class="font-montasorrat my-6">God’s   Blessings come as Surprises.  Blessed  to  have born  and  brought up by  my  Parents, Late Chandra Varma Thampan and Malathy Kunjamma in  a  Middle  Class  Family  in  Kodungallur. Graduated from  St. Joseph’s  College in  Zoology, did  B.Ed  and  M.Ed. with Guidance  and  Counselling  was  Optional Subject.  Got married to Adv. A.S.Rajendran Nair [Kerala High Court Present and a Patent Attorney], shifted  to  Belgaum District  of  Karnataka  and from  there to  Mumbai. During the Life in Mumbai about 20 years, worked as a High School Teacher in  Maths  and  Science. Along with  the  profession , I  could  do School Counsellor’s  Course,  M.Sc  Psychology  and  an  International  Commonwealth Diploma in ‘Youth  in  Development’. Won ‘Best Teacher Award’ thrice.  Returned  to  Kerala and  settled  here  in  2008 and continued  the  Profession  as  Principal in  Charge  and  Professor in Educational  Psychology  in  a  B.Ed.  College.   During this  period  of  10 years,  did M.Sc  in  Counselling  and  Family  Therapy and  M.Phil  in  Counselling  Psychology.</p>
                 <div class="flex my-6 ipad_min:grid mobile:grid mobile:w-full ipad:grid">
                     <img src="{% static 'image/Rectangle 1549-2(1).png' %}" alt="">
-                    <img src="{% static 'image/Rectangle 1549-3(1).png' %}" alt="">
+                    <img src="{% static 'image/Rectangle 1549-3(1).png' %}" alt="" class="im">
                 </div>
-                <p class="font-montasorrat my-10">Started “Disha” Counselling Centre at home, and Conducting Awareness programs Teacher development programs, Counselling  classes, Motivation  classes, Parenting  Sessions  etc. Till Date. Blessed to  have  an  Opportunity  to be  a Psychology  Professor  for P.G classes  in  St. Joseph’s   College Irinjalakuda.</p>
+                <p class="font-montasorrat my-10">Started “Disha” Counselling Centre at home, and Conducting Awareness programs Teacher development programs, Counselling  Sessions, Motivation  classes, Parenting  Sessions  etc. Till Date. Blessed to  have  an  Opportunity  to be  a Psychology  Professor  for P.G classes  in  St. Joseph’s   College Irinjalakuda.</p>
                 <div class="cor bg-baseprimary p-6 font-montasorrat my-10 hidden ipad_min:block mobile:block">
                     <p>My counselling approach is based on the principles of humanistic psychology, which emphasizes the inherent worth and potential of every person. I believe that everyone has the ability to grow and change, given the right environment and support. I use various techniques such as active listening, empathy, unconditional positive regard, goal setting, problem solving, cognitive restructuring, relaxation training, mindfulness meditation, and positive affirmations to help my clients cope with their challenges and achieve their goals.</p>
-                    <p class="my-4">What makes me different from other counsellors is that I treat every client as a unique individual with their own strengths and needs. I do not use a one-size-fits-all approach or a fixed set of rules or methods. Instead, I tailor my counselling sessions according to the specific situation and preferences of each client. I also respect the cultural and religious backgrounds of my clients, and do not impose my own values or beliefs on them.</p>
+                    <p class="my-4">What makes me different from other counsellors is that I treat every client as a unique individual with their own strengths and needs. Counselling sessions are according to the specific situation and preferences for each client care is taken to respect the culture and religious background of my clients. I also respect the cultural and religious backgrounds of my clients, and do not impose my own values or beliefs on them.</p>
                 </div>
                 <div class="flex gap-6 ipad_min:grid mobile:grid ipad:grid">
                     <img src="{% static 'image/Rectangle 1549-4(1).png' %}" alt="">

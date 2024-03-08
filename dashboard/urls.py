@@ -29,6 +29,7 @@ urlpatterns = [
     path('blogs/<int:pk>/delete/', BlogDeleteView.as_view(), name='delete_blog'),
 
     path('review/',views.review, name='review'),
+    path('addreview/', ReviewAddView.as_view(), name='addreview'),
     path('review/<int:pk>/delete/', ReviewDeleteView.as_view(), name='delete_review'),
 
 

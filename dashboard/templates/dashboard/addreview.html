@@ -1,0 +1,72 @@
+{% extends 'dashboard/base.html' %}
+
+{% block title %} Rema devi | Dashboard {% endblock %}
+{% block content %}
+
+
+{% load static %}
+
+   
+   <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .dashboard-form {
+            padding: 20px;
+            margin: auto;
+            box-sizing: border-box;
+            display: flex;
+            justify-content: center;
+        }
+
+        .dashboard-form input,
+        .dashboard-form textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .dashboard-form button {
+            width: 100%;
+            padding: 10px;
+            background-color: #ff9c80;
+            color: black;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin-top: 15px;
+            margin-bottom: 50px;
+        }
+
+        .dashboard-form button:hover {
+            background-color: #b85236;
+            color: white;
+        }
+        .dashboard-form input[type="checkbox"]{
+            width:3rem;
+        }
+    </style>
+    {{ form.media }}
+
+    <div class="dashboard-form">
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <h2>Add review</h2>
+            <label>Name</label>
+            {{ form.name }}
+            <label>Review</label>
+            {{ form.review }}
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+</body>
+</html>
+
+{% endblock %}

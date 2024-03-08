@@ -42,6 +42,21 @@ class BlogAddView(View):
             return redirect('dashboard:bloglist')  # Adjust the URL name as needed
         else:
             return render(request, self.template_name, {'form': form})
+class ReviewAddView(View):
+    template_name = 'dashboard/addreview.html'
+
+    def get(self, request):
+        form = ReviewForm()
+        return render(request, self.template_name, {'form': form})
+
+    def post(self, request):
+        form = ReviewForm(request.POST, request.FILES)
+
+        if form.is_valid():
+            form.save()
+            return redirect('dashboard:review')  # Adjust the URL name as needed
+        else:
+            return render(request, self.template_name, {'form': form})        
 
 class BlogEditView(View):
     template_name = 'dashboard/edit.html'

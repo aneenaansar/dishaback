@@ -14,6 +14,14 @@ class BlogForm(forms.ModelForm):
             'content': forms.Textarea(attrs={'class': 'ckeditor'}),
             
         }
+class ReviewForm(forms.ModelForm):
+    class Meta:
+        model = Review
+        fields = ['name','review']
+        widgets = {
+            'review': forms.Textarea(attrs={'class': 'ckeditor'}),
+            
+        }
 class PatientForm(forms.ModelForm):
     class Meta:
         model = Patient

@@ -39,7 +39,7 @@ class Blog(models.Model):
         return self.title
 
 class Review(models.Model):
-    review=models.CharField(max_length=500)
+    review=RichTextField(null=True)
     name = models.CharField(max_length=100)
 
 
