@@ -35,6 +35,11 @@
     .vec{
         display:block;
     }
+    @media (max-width: 900px) {
+        .vec{
+            display:none;
+        }
+    }
     @media (min-width: 700px) and (max-width: 1200px) {
         .vec{
             display:none;
@@ -92,7 +97,7 @@
         <div class="flex justify-center animate__animated animate__fadeInUp">
             <img src="{% static 'image/4328704_11 1.png' %}" alt="">
         </div>
-        <div class="absolute left-[86rem] top-[34rem] ipad_min:hidden mobile:hidden vec animate__animated animate__fadeInUp">
+        <div class="absolute left-[86rem] top-[34rem] ipad_min:hidden mobile:hidden vec animate__animated animate__fadeInUp" class="vec">
             <img src="{% static 'image/Subtract.svg' %}" alt="" class="vec">
             <img class="my-4 mx-2" src="{% static 'image/Union-2.svg' %}" alt="">
             <img class="mx-3" src="{% static 'image/Union-3.svg' %}" alt="">
@@ -171,6 +176,7 @@
             <div>
                 <h1 class="font-artifika text-4xl ipad_min:text-xl mobile:text-xl">Rema Devi A</h1>
                 <h2 class="font-montserrat text-xl my-1 text-gray-600 ipad_min:text-lg mobile:text-lg">Counselling Psychologist</h2>
+                <p style="font-size:13.5px;">M.Sc (Psychology), M.Ed., School Counselling,<br> International Common Wealth P.G. Diploma,<br> M.Sc.Counselling & Family Therapy(IGNOU),<br> M.Phil (Counselling Psychology)</p>
                 <p class="font-montserrat text-lg my-8 ipad_min:text-sm mobile:text-sm">Welcome to New Disha Counselling Centre. With many years of teaching and Counselling in and Outside KERALA, I am there to help people to achieve their personal and professional goals…</p>
                 <p class="font-montserrat text-lg ipad_min:hidden mobile:hidden ">Started this counselling centre at home in 2014, and since then I have been providing professional and compassionate counselling services for individuals, couples, families, and groups. Here we do offer a range of counselling services, including pre-marital counselling, family counselling/therapy, child & adolescent counselling, school counselling, group counselling, awareness programs, motivational sessions, career guidance, teacher  development programmes, and grief therapy.</p>
                 <div class="flex gap-12 my-8">
@@ -192,7 +198,7 @@
                         <div class="bg-light p-3 rounded-xl ipad_min:hidden mobile:hidden"><img src="{% static 'image/Medal.svg' %}" alt=""></div>
                         <div>
                             <h1 class="text-4xl font-semibold font-montserrat ipad_min:text-lg mobile:text-lg">3</h1>
-                            <p class="font-montserrat text-lg ipad_min:text-base mobile:text-base">Award gained</p>
+                            <p class="font-montserrat text-lg ipad_min:text-base mobile:text-base">Awards gained</p>
                         </div>
                     </div>
                 </div>
@@ -210,7 +216,7 @@
     <section>
         <div class="bg-baseprimary flex items-center gap-6 rounded-xl px-10 py-10 ipad_min:grid mobile:grid phone_max:grid ipad_min:px-5 ipad_min:py-5 mobile:px-5 mobile:py-5 phone_max:p-7 ">
             <div>
-                <img class="h-72 phone_max:w-full phone_max:h-full ipad:w-[100rem]" style="width:82rem;" src="{% static 'image/image6 1.png' %}" alt="">
+                <img class="h-72 phone_max:w-full phone_max:h-full ipad:w-[100rem]" style="width:82rem;" src="{% static 'image/WhatsApp Image 2024-03-13 at 17.25.05_dbf3b6de.jpg' %}" alt="">
             </div>
             <div>
                 <h1 class="font-artifika text-3xl my-2 ipad_min:text-xl mobile:text-xl">New Disha</h1>
